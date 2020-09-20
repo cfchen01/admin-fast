@@ -81,15 +81,6 @@ public class SysLoginController extends AbstractController {
 		return r;
 	}
 
-	/**
-	 * 登录
-	 */
-	@GetMapping("/sys/user")
-	public Map<String, Object> userInfo()throws IOException {
-		SysUserEntity user = this.getUser();
-		return R.ok().put("user", user);
-	}
-
 
 	/**
 	 * 退出

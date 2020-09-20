@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/admin-fast/admin-fast.iml" filepath="$PROJECT_DIR$/admin-fast/admin-fast.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-fast/dfjinxin-fast.iml" filepath="$PROJECT_DIR$/springboot-fast/dfjinxin-fast.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lxl-server.iml" filepath="$PROJECT_DIR$/.idea/lxl-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/renren-generator/renren-generator.iml" filepath="$PROJECT_DIR$/renren-generator/renren-generator.iml" />
     </modules>
   </component>
 </project>

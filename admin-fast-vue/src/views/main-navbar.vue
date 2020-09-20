@@ -2,8 +2,8 @@
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
     <div class="site-navbar__header">
       <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
-        <a class="site-navbar__brand-lg" href="javascript:;">东方金信权限管理</a>
-        <a class="site-navbar__brand-mini" href="javascript:;">金信</a>
+        <a class="site-navbar__brand-lg" href="javascript:;">后台管理系统</a>
+        <a class="site-navbar__brand-mini" href="javascript:;">fast</a>
       </h1>
     </div>
     <div class="site-navbar__body clearfix">
@@ -24,16 +24,6 @@
             </el-badge>
           </template>
         </el-menu-item>
-        <el-menu-item index="2">
-          <el-badge value="hot">
-            <a href="//www.seaboxdata.com/" target="_blank">东方金信官方官网</a>
-          </el-badge>
-        </el-menu-item>
-        <el-submenu index="3">
-          <template slot="title">产品</template>
-          <el-menu-item index="2-1"><a href="//www.seaboxdata.com/about-us/toCompanyIntroduce/" target="_blank">关于我们</a></el-menu-item>
-          <el-menu-item index="2-2"><a href="//www.seaboxdata.com/product/toProduct?OrderNo=2" target="_blank">海盒大数据平台</a></el-menu-item>
-        </el-submenu>
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
