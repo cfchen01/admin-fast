@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.os.modules.exp.dao.ExpOrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.os.modules.exp.entity.ExpOrderEntity" id="expOrderMap">
+        <result property="id" column="id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="ordCode" column="ord_code"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="ordNum" column="ord_num"/>
+        <result property="packingId" column="packing_id"/>
+        <result property="freight" column="freight"/>
+        <result property="advance" column="advance"/>
+        <result property="advanceIn" column="advance_in"/>
+        <result property="settleId" column="settle_id"/>
+        <result property="delivery" column="delivery"/>
+        <result property="remark" column="remark"/>
+        <result property="userId" column="user_id"/>
+        <result property="shipper" column="shipper"/>
+        <result property="shipperTel" column="shipper_tel"/>
+        <result property="receiver" column="receiver"/>
+        <result property="receiverTel" column="receiver_tel"/>
+        <result property="status" column="status"/>
+        <result property="deliverDate" column="deliver_date"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

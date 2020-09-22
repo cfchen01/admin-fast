@@ -1,17 +1,63 @@
 <template>
   <div class="mod-home">
-    <h3>项目介绍</h3>
-    <ul>
-      <li>admin-fast-vue基于vue、element-ui构建开发，实现admin-fast后台管理前端功能，提供一套更优的前端解决方案</li>
-      <li>前后端分离，通过token进行数据交互，可独立部署</li>
-      <li>主题定制，通过scss变量统一一站式定制</li>
-      <li>动态菜单，通过菜单管理统一管理访问路由</li>
-    </ul>
+    <div v-if="_isMobile()">
+      <van-search
+              v-model="ordCode"
+              shape="round"
+              background="#17B3A3"
+              placeholder="请输入订单号"
+              @search="onSearch"
+      />
+      <van-cell v-for="item in menuList" :title="item.name" is-link @click="clickLink(item)" />
+    </div>
+    <el-input v-else placeholder="请输入订单号" v-model="ordCode">
+      <el-button slot="append" @click="onSearch" icon="el-icon-search"></el-button>
+    </el-input>
+
   </div>
 </template>
 
 <script>
   export default {
+    data(){
+      return{
+        ordCode:''
+      }
+    },
+    computed: {
+      userName: {
+        get () { return this.$store.state.user.name }
+      },
+      menuList: {
+        get () { return this.$store.state.common.menuList },
+        set (val) { this.$store.commit('common/updateMenuList', val) }
+      },
+      menuActiveName: {
+        get () { return this.$store.state.common.menuActiveName },
+        set (val) { this.$store.commit('common/updateMenuActiveName', val) }
+      }
+    },
+    created(){
+      this.menuList = JSON.parse(sessionStorage.getItem('menuList') || '[]')
+    },
+    methods:{
+      onSearch(){
+        this.$http({
+          url: this.$http.adornUrl('/sys/menu/select'),
+          method: 'get',
+          params: this.$http.adornParams()
+        }).then(({data}) => {
+        })
+      },
+      clickLink(item){
+        if (item == null || item.url == null) {
+          return '/home'
+        }
+        this.menuActiveName = item.name
+        console.log('this.menuActiveName=',this.menuActiveName)
+        this.$router.push(item.url.replace('/', '-'))
+      }
+    }
   }
 </script>
 

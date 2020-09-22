@@ -65,14 +65,14 @@
           <element id="library" level="project" name="Maven: io.netty:netty-resolver:4.1.45.Final" />
           <element id="library" level="project" name="Maven: io.projectreactor:reactor-core:3.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.reactivestreams:reactive-streams:1.0.3" />
-          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-boot-starter:3.3.1" />
-          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus:3.3.1" />
-          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-extension:3.3.1" />
-          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-core:3.3.1" />
-          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-annotation:3.3.1" />
-          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:3.1" />
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.3" />
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.3" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-boot-starter:3.2.0" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus:3.2.0" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-extension:3.2.0" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-core:3.2.0" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-annotation:3.2.0" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:2.1" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.2" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.2" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.2.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.2.4.RELEASE" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.4.2" />
@@ -81,8 +81,8 @@
           <element id="library" level="project" name="Maven: com.oracle:ojdbc6:11.2.0.3" />
           <element id="library" level="project" name="Maven: com.microsoft.sqlserver:sqljdbc4:4.0" />
           <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.2.9" />
-          <element id="library" level="project" name="Maven: com.alibaba:druid-spring-boot-starter:1.1.13" />
-          <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.13" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid-spring-boot-starter:1.1.21" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.21" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
           <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz:2.3.0" />
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />

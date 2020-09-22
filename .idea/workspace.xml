@@ -1,72 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a2d086e-28c8-4009-b9b5-1cb1ea50db30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/admin_fast_war.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/admin_fast_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_60.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_10_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_10_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_10_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_33.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_33.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_33.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_velocity_velocity_1_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongo_java_driver_3_11_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_1_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_1_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_42_2_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/renren-generator/renren-generator.iml" afterDir="false" />
+    <list default="true" id="1f5c9952-1c62-4ef8-8687-f7507b1402dd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/admin-fast-vue/src/utils/helper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/mobile-navbar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/enums/OrderStatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/enums/SettleStatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/UserUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/admin_fast_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/admin_fast_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_spring_boot_starter_1_1_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_3_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/main-navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/main-navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/main-sidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/main-sidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/common/home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/common/home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/common/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/common/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/main.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/config.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/config.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/menu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/role.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/role.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user-add-or-update.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user-add-or-update.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin-fast/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/MapUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/MapUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/entity/SysUserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/entity/SysUserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/impl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/impl/SysUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renren-generator/renren-generator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/renren-generator/src/main/resources/template/Controller.java.vm" beforeDir="false" afterPath="$PROJECT_DIR$/renren-generator/src/main/resources/template/Controller.java.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renren-generator/src/main/resources/template/ServiceImpl.java.vm" beforeDir="false" afterPath="$PROJECT_DIR$/renren-generator/src/main/resources/template/ServiceImpl.java.vm" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/springboot-fast/target/" />
-    <ignored path="$PROJECT_DIR$/admin-fast/target/" />
+    <ignored path="$PROJECT_DIR$/admin-fast-vue/node_modules/" />
     <ignored path="$PROJECT_DIR$/renren-generator/target/" />
+    <ignored path="$PROJECT_DIR$/admin-fast/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,94 +50,150 @@
       <executable />
     </execution>
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/renren-generator/pom.xml">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/renren-generator/src/main/resources/application.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-410">
-              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+            <state relative-caret-position="131">
+              <caret line="168" column="13" selection-start-line="168" selection-start-column="4" selection-end-line="168" selection-end-column="13" />
+              <folding>
+                <element signature="n#style#0;n#van-button#1;n#template#0;n#van-search#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#template#0;n#van-cell#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#template#1;n#van-cell#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#van-pagination#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#el-form#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#el-table#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/renren-generator/src/main/resources/generator.properties">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user-add-or-update.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-522">
-              <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+            <state relative-caret-position="275">
+              <caret line="131" column="7" selection-start-line="131" selection-start-column="7" selection-end-line="131" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#van-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-form-item#8;n#el-form#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin-fast/pom.xml">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="241" column="18" selection-start-line="241" selection-start-column="18" selection-end-line="241" selection-end-column="18" />
+            <state relative-caret-position="-1436">
+              <caret line="39" column="149" selection-start-line="39" selection-start-column="149" selection-end-line="39" selection-end-column="149" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/renren-generator/src/main/java/io/renren/RenrenApplication.java">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/common/login.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="414">
+              <caret line="77" column="3" lean-forward="true" selection-start-line="77" selection-start-column="3" selection-end-line="77" selection-end-column="3" />
+              <folding>
+                <element signature="n#style#0;n#van-nav-bar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/common/home.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="45" column="55" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/mobile-navbar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="61" column="7" lean-forward="true" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/utils/helper.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="25" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysUserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/entity/SysUserEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-132">
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/menu.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-864">
+              <caret line="80" selection-start-line="80" selection-end-line="80" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>io.dfjinxin</find>
-      <find>dfjinxin</find>
-      <find>io.renren</find>
-      <find>renren</find>
-      <find>人人</find>
-      <find>menu/list</find>
-      <find>treeDataTranslate</find>
-      <find>邮箱不能为空</find>
-      <find>user/info</find>
-      <find>loading</find>
-      <find>mainPath</find>
-      <find>moduleName</find>
+      <find>selectionChangeHandle</find>
+      <find>mony</find>
+      <find>Mony</find>
+      <find>userId</find>
+      <find>mybatisplus.version</find>
+      <find>userName</find>
+      <find>dynamicMenuRoutes</find>
+      <find>documentClientHeight</find>
+      <find>mainTabsActiveName</find>
+      <find>menuActiveName</find>
+      <find>sidebarFold</find>
+      <find>menuList</find>
+      <find>_isMobile</find>
+      <find>isAuth</find>
+      <find>mod-user</find>
+      <find>roleIdList</find>
+      <find>resetFields</find>
+      <find>roleList</find>
+      <find>password</find>
+      <find>addOrUpdate</find>
     </findStrings>
-    <replaceStrings>
-      <replace>com.os</replace>
-      <replace />
-      <replace>admin</replace>
-    </replaceStrings>
     <dirStrings>
-      <dir>D:\workspace\osCode\lxl-server\springboot-fast</dir>
+      <dir>D:\workspace\osCode\lxl-server\admin-fast-vue</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -174,51 +202,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/springboot-fast-vue/.env.development" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/public/index.html" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/src/views/modules/oss/oss-config.vue" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/src/views/common/login.vue" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/.env.production" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/src/views/common/home.vue" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/java/com/os/SpringbootFastApplication.java" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/package.json" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/README.md" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/package-lock.json" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/resources/banner.txt" />
-        <option value="$PROJECT_DIR$/springboot-fast/db/oracle.sql" />
-        <option value="$PROJECT_DIR$/springboot-fast/README.md" />
-        <option value="$PROJECT_DIR$/springboot-fast/pom.xml" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/java/com/os/modules/app/utils/JwtUtils.java" />
-        <option value="$PROJECT_DIR$/springboot-fast/docker-compose.yml" />
-        <option value="$PROJECT_DIR$/springboot-fast/Dockerfile" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/java/com/os/config/SwaggerConfig.java" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/resources/application-test.yml" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/resources/application-prod.yml" />
-        <option value="$PROJECT_DIR$/springboot-fast/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/springboot-fast/db/postgresql.sql" />
-        <option value="$PROJECT_DIR$/springboot-fast-vue/vue.config.js" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/public/index.html" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/SysUserRoleService.java" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/SysRoleService.java" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/resources/banner.txt" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/resources/application-prod.yml" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/resources/application-test.yml" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/.env.development" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/.env.production" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysMenuController.java" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user-add-or-update.vue" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/entity/SysUserEntity.java" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/main.vue" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/main-navbar.vue" />
-        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysLoginController.java" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/src/router/index.js" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/main-sidebar.vue" />
-        <option value="$PROJECT_DIR$/renren-generator/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/entity/ExpComDaySettleEntity.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/entity/ExpOrderEntity.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpComDaySettleController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpDepartmentController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpDepDaySettleController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpExpensesDetailController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpGoodsController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpPackingController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpSettleController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpUserMoneyController.java" />
+        <option value="$PROJECT_DIR$/renren-generator/src/main/resources/template/Controller.java.vm" />
         <option value="$PROJECT_DIR$/admin-fast/pom.xml" />
-        <option value="$PROJECT_DIR$/renren-generator/src/main/resources/generator.properties" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/IPUtils.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/MapUtils.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/enums/OderStatusEnum.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpDepDaySettleService.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpDepDaySettleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/enums/SettleStatusEnum.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/enums/OrderStatusEnum.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpOrderController.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/UserUtils.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpComDaySettleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpComDaySettleService.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpUserMoneyService.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpUserMoneyServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpOrderService.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpOrderServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/role.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/menu.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expusermoney.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettle.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exppacking.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expgoods.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expexpensesdetail.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expdepdaysettle.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expdepartment.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expcomdaysettle.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/config.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/main.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/utils/index.js" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/common/home.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/main.js" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/entity/SysUserEntity.java" />
+        <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/impl/SysUserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/utils/helper.js" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/common/login.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/router/index.js" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/mobile-navbar.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user-add-or-update.vue" />
       </list>
     </option>
   </component>
@@ -236,31 +270,7 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="admin-fast" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="admin-fast" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="admin-fast" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="renren-generator" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="renren-generator" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
+      <expand />
       <select />
     </treeState>
   </component>
@@ -269,13 +279,13 @@
     <option name="width" value="1308" />
     <option name="height" value="775" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -286,13 +296,271 @@
             <path>
               <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
-              <item name="renren-generator" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="exp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="exp" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="exp" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="exp" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="exp" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="sys" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="sys" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="os" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="sys" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+              <item name="sys" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lxl-server" type="462c0819:PsiDirectoryNode" />
+              <item name="admin-fast-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="sys" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lxl-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -303,23 +571,32 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/renren-generator/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/admin-fast-vue/src/utils" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="ts.external.directory.path" value="D:\program\JetBrains\IntelliJ IDEA 2019.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.os.common.enums" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\workspace\osCode\lxl-server\admin-fast\src\main\resources" />
-      <recent name="D:\workspace\osCode\lxl-server\admin-fast\src\main\java\com\os" />
+      <recent name="D:\workspace\osCode\lxl-server\admin-fast-vue\src\utils" />
+      <recent name="D:\workspace\osCode\lxl-server\admin-fast-vue\src\views" />
+      <recent name="D:\workspace\osCode\lxl-server\admin-fast-vue\src\views\modules" />
+      <recent name="D:\workspace\osCode\lxl-server\admin-fast\src\main\java\com\os\modules" />
+      <recent name="D:\workspace\osCode\lxl-server\admin-fast\src\main\resources\mapper\exp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -334,129 +611,153 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.RenrenApplication">
-    <configuration name="AdminFastApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <component name="RunManager" selected="Spring Boot.AdminFastApplication">
+    <configuration name="AdminFastApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="admin-fast" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.os.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.os.AdminFastApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RenrenApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="RenrenApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="renren-generator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.renren.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="io.renren.RenrenApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.AdminFastApplication" />
+      <item itemvalue="Spring Boot.RenrenApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.AdminFastApplication" />
+        <item itemvalue="Spring Boot.RenrenApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0a2d086e-28c8-4009-b9b5-1cb1ea50db30" name="Default Changelist" comment="" />
-      <created>1600601556087</created>
+      <changelist id="1f5c9952-1c62-4ef8-8687-f7507b1402dd" name="Default Changelist" comment="" />
+      <created>1600651814491</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1600601556087</updated>
-      <workItem from="1600601559462" duration="598000" />
-      <workItem from="1600602296532" duration="40000" />
-      <workItem from="1600602387941" duration="189000" />
-      <workItem from="1600602634063" duration="549000" />
-      <workItem from="1600603256112" duration="44000" />
-      <workItem from="1600603332421" duration="5448000" />
+      <updated>1600651814491</updated>
+      <workItem from="1600651815959" duration="6858000" />
+      <workItem from="1600658721866" duration="30258000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6868000" />
+    <option name="totallyTimeSpent" value="37116000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1310" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3968" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Alibaba Cloud Explorer" order="7" />
-      <window_info id="Web" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
-      <window_info anchor="bottom" id="MyBatis Log" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4536741" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.65335464" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="GraphQL" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.6054313" />
-      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Sequence" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" id="Alibaba Cloud View" order="14" />
-      <window_info anchor="bottom" id="Spring" order="15" />
-      <window_info anchor="bottom" id="Java Enterprise" order="16" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.2496" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.328" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Alibaba Function Compute" order="6" />
-      <window_info anchor="right" id="Database" order="7" weight="0.3296" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Alibaba Log Console" order="10" />
-      <window_info anchor="right" id="Bean Validation" order="11" />
+      <window_info id="Image Layers" order="0" />
+      <window_info id="UI Designer" order="1" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Alibaba Cloud Explorer" order="4" weight="0.3296" />
+      <window_info id="Web" order="5" side_tool="true" />
+      <window_info id="Designer" order="6" />
+      <window_info content_ui="combo" id="Project" order="7" weight="0.3168" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="TypeScript" order="0" />
+      <window_info anchor="bottom" id="GraphQL" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="2" weight="0.39456868" />
+      <window_info anchor="bottom" id="Sequence" order="3" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="6" weight="0.3290735" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Alibaba Cloud View" order="10" />
+      <window_info anchor="bottom" id="MyBatis Log" order="11" />
+      <window_info anchor="bottom" id="Spring" order="12" />
+      <window_info anchor="bottom" id="Message" order="13" />
+      <window_info anchor="bottom" id="Find" order="14" />
+      <window_info anchor="bottom" id="Run" order="15" weight="0.3290735" />
+      <window_info anchor="bottom" id="Debug" order="16" weight="0.6996805" />
+      <window_info anchor="bottom" id="Cvs" order="17" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="18" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="19" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Alibaba Function Compute" order="2" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Alibaba Log Console" order="6" />
+      <window_info anchor="right" id="Bean Validation" order="7" />
+      <window_info anchor="right" id="Maven" order="8" weight="0.3296" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="9" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="10" weight="0.2496" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="11" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3968" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Alibaba Cloud Explorer" order="7" />
-      <window_info id="Web" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" />
-      <window_info anchor="bottom" id="MyBatis Log" order="1" />
-      <window_info anchor="bottom" id="Message" order="2" />
-      <window_info anchor="bottom" id="Find" order="3" />
-      <window_info anchor="bottom" id="Run" order="4" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.65335464" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="8" />
-      <window_info anchor="bottom" id="GraphQL" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.6054313" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Sequence" order="12" />
-      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="14" />
-      <window_info anchor="bottom" id="Version Control" order="15" />
-      <window_info anchor="bottom" id="Alibaba Cloud View" order="16" />
-      <window_info anchor="bottom" id="Spring" order="17" />
-      <window_info anchor="bottom" id="Java Enterprise" order="18" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.2496" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.328" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Alibaba Function Compute" order="6" />
-      <window_info anchor="right" id="Database" order="7" weight="0.3296" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Alibaba Log Console" order="10" />
-      <window_info anchor="right" id="Bean Validation" order="11" />
+      <window_info id="Image Layers" order="0" />
+      <window_info id="UI Designer" order="1" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Alibaba Cloud Explorer" order="4" weight="0.3296" />
+      <window_info id="Web" order="5" side_tool="true" />
+      <window_info id="Designer" order="6" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.3168" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="TypeScript" order="0" />
+      <window_info anchor="bottom" id="GraphQL" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="2" weight="0.39456868" />
+      <window_info anchor="bottom" id="Sequence" order="3" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="6" weight="0.3290735" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Alibaba Cloud View" order="10" />
+      <window_info anchor="bottom" id="MyBatis Log" order="11" />
+      <window_info anchor="bottom" id="Spring" order="12" />
+      <window_info anchor="bottom" id="Message" order="13" />
+      <window_info anchor="bottom" id="Find" order="14" />
+      <window_info anchor="bottom" id="Run" order="15" weight="0.3290735" />
+      <window_info anchor="bottom" id="Debug" order="16" weight="0.6996805" />
+      <window_info anchor="bottom" id="Cvs" order="17" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="18" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="19" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Alibaba Function Compute" order="2" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Alibaba Log Console" order="6" />
+      <window_info anchor="right" id="Bean Validation" order="7" />
+      <window_info anchor="right" id="Maven" order="8" weight="0.3296" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="9" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="10" weight="0.2496" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="11" weight="0.25" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -467,300 +768,385 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/springboot-fast/src/main/java/com/os/SpringbootFastApplication.java" />
-    <entry file="file://$PROJECT_DIR$/springboot-fast/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/springboot-fast-vue/.env.development">
+    <entry file="jar://D:/java/repository/com/baomidou/mybatis-plus-extension/3.2.0/mybatis-plus-extension-3.2.0.jar!/com/baomidou/mybatisplus/extension/service/IService.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="200">
+          <caret line="70" column="6" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/mvnw">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/public/index.html">
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpComDaySettleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="8" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/job/service/impl/ScheduleJobServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/SysUserService.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/validator/group/AliyunGroup.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/form/SysLoginForm.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/MapUtils.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/config/KaptchaConfig.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/validator/group/AddGroup.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/impl/ShiroServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/SysConfigService.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/babel.config.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/mapper/app/UserDao.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/SysUserRoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/SysRoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/annotation/SysLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/banner.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/logback-spring.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="7" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/application-prod.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/application-test.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/.env.production">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        <state relative-caret-position="1242">
+          <caret line="83" column="48" lean-forward="true" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/AbstractController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="27" />
+          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="23" selection-end-column="5" />
           <folding>
             <element signature="e#396#397#0" expanded="true" />
             <element signature="e#467#468#0" expanded="true" />
+            <element signature="e#498#499#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/.env.development">
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/common/utils/UserUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="44" selection-start-column="44" selection-end-column="44" />
+        <state relative-caret-position="198">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#98#99#0" expanded="true" />
+            <element signature="e#169#170#0" expanded="true" />
+            <element signature="e#200#201#0" expanded="true" />
+            <element signature="e#235#236#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/common/home.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpOrderController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+        <state relative-caret-position="468">
+          <caret line="74" column="28" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpExpensesDetailService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="15" column="82" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpComDaySettleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="28" column="121" selection-start-line="28" selection-start-column="121" selection-end-line="28" selection-end-column="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/entity/ExpComDaySettleEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpComDaySettleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/entity/ExpUserMoneyEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpUserMoneyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/ExpOrderService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-702" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpOrderServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="84" column="53" lean-forward="true" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
+          <folding>
+            <element signature="e#3837#3838#0" expanded="true" />
+            <element signature="e#3864#3865#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-sidebar-sub-menu.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="18">
+          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/node_modules/@types/node/os.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/store/modules/user.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/store/modules/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-content.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-661">
+          <caret line="58" column="8" lean-forward="true" selection-start-line="55" selection-start-column="6" selection-end-line="58" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-sidebar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="86" column="29" lean-forward="true" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-navbar-update-password.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-navbar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="94" column="50" lean-forward="true" selection-start-line="94" selection-start-column="14" selection-end-line="94" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/role.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+        <state relative-caret-position="162">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/menu.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expusermoney.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1944" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="46" column="41" lean-forward="true" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+        <state relative-caret-position="72">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/role-add-or-update.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettle.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+        <state relative-caret-position="234">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/entity/SysUserEntity.java">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exppacking.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="72">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-content.vue">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="155" column="38" lean-forward="true" selection-start-line="155" selection-start-column="38" selection-end-line="155" selection-end-column="38" />
+        <state relative-caret-position="18">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user-add-or-update.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expgoods.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="102" column="24" lean-forward="true" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
+        <state relative-caret-position="180">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysLoginController.java">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expexpensesdetail.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
+        <state relative-caret-position="342">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysUserController.java">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expdepdaysettle.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-178">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        <state relative-caret-position="180">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expdepartment.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expcomdaysettle.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/config.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="80" column="7" selection-start-line="80" selection-start-column="7" selection-end-line="80" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/utils/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        <state relative-caret-position="126">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="25" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-navbar.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/resources/mapper/sys/SysUserDao.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+        <state relative-caret-position="432">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpUserMoneyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="34" column="53" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/service/impl/SysUserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-278">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/menu.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-864">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/utils/helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/controller/SysUserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/sys/entity/SysUserEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-132">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/node_modules/vue/types/vue.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="36" column="100" selection-start-line="36" selection-start-column="100" selection-end-line="38" selection-end-column="137" />
+        <state relative-caret-position="-1436">
+          <caret line="39" column="149" selection-start-line="39" selection-start-column="149" selection-end-line="39" selection-end-column="149" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/renren-generator/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/main-sidebar.vue">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/common/login.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+        <state relative-caret-position="414">
+          <caret line="77" column="3" lean-forward="true" selection-start-line="77" selection-start-column="3" selection-end-line="77" selection-end-column="3" />
+          <folding>
+            <element signature="n#style#0;n#van-nav-bar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/renren-generator/pom.xml">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/common/home.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        <state relative-caret-position="252">
+          <caret line="45" column="55" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/renren-generator/src/main/resources/application.yml">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/mobile-navbar.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-410">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        <state relative-caret-position="396">
+          <caret line="61" column="7" lean-forward="true" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast/pom.xml">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="241" column="18" selection-start-line="241" selection-start-column="18" selection-end-line="241" selection-end-column="18" />
+        <state relative-caret-position="131">
+          <caret line="168" column="13" selection-start-line="168" selection-start-column="4" selection-end-line="168" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#van-button#1;n#template#0;n#van-search#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#template#0;n#van-cell#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#template#1;n#van-cell#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#van-pagination#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-form#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#el-table#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/renren-generator/src/main/java/io/renren/RenrenApplication.java">
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user-add-or-update.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/renren-generator/src/main/resources/generator.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-522">
-          <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        <state relative-caret-position="275">
+          <caret line="131" column="7" selection-start-line="131" selection-start-column="7" selection-end-line="131" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#van-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-form-item#8;n#el-form#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

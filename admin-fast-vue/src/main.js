@@ -7,7 +7,10 @@ import '@/element-ui'                         // api: https://github.com/ElemeFE
 import '@/icons'                              // api: http://www.iconfont.cn/
 import '@/element-ui-theme'
 import '@/assets/scss/index.scss'
+import Vant from 'vant';
+import 'vant/lib/index.css';
 // import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/axios
+import { _isMobile } from '@/utils'
 import { isAuth } from '@/utils'
 import common from '@/utils/common'
 import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/axios
@@ -17,11 +20,13 @@ import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/a
 // Vue.use(vueResource)
 Vue.use(VueCookie)
 Vue.use(common)
+Vue.use(Vant);
 
 Vue.config.productionTip = false
 
 // 挂载全局
 Vue.prototype.$http = httpRequest // ajax请求方法
+Vue.prototype._isMobile = _isMobile     // 判断移动端
 Vue.prototype.isAuth = isAuth     // 权限方法
 
 // 保存整站vuex本地储存初始状态

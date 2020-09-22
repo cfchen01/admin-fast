@@ -9,7 +9,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/springboot-fast/pom.xml" />
         <option value="$PROJECT_DIR$/admin-fast/pom.xml" />
         <option value="$PROJECT_DIR$/renren-generator/pom.xml" />
       </list>

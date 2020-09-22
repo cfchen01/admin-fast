@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.os.modules.exp.dao.ExpDepDaySettleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.os.modules.exp.entity.ExpDepDaySettleEntity" id="expDepDaySettleMap">
+        <result property="id" column="id"/>
+        <result property="expComDayId" column="exp_com_day_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="paidMoney" column="paid_money"/>
+        <result property="paidMoneyIn" column="paid_money_in"/>
+        <result property="arrivalMoney" column="arrival_money"/>
+        <result property="arrivalMoneyIn" column="arrival_money_in"/>
+        <result property="comMoneyIn" column="com_money_in"/>
+        <result property="deliverDate" column="deliver_date"/>
+        <result property="monthMoney" column="month_money"/>
+        <result property="monthMoneyIn" column="month_money_in"/>
+        <result property="income" column="income"/>
+        <result property="userId" column="user_id"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+</mapper>

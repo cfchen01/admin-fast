@@ -3,6 +3,14 @@ import router from '@/router'
 import store from '@/store'
 
 /**
+ * 判断是否是移动端
+ */
+export function _isMobile() {
+  let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+  return flag;
+}
+
+/**
  * 获取uuid
  */
 export function getUUID () {
@@ -16,7 +24,8 @@ export function getUUID () {
  * @param {*} key
  */
 export function isAuth (key) {
-  return JSON.parse(sessionStorage.getItem('permissions') || '[]').indexOf(key) !== -1 || false
+  // return JSON.parse(sessionStorage.getItem('permissions') || '[]').indexOf(key) !== -1 || false
+  return true;
 }
 
 /**

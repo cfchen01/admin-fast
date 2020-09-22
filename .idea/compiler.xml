@@ -6,21 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="admin-fast" />
-        <module name="dfjinxin-fast" />
         <module name="renren-generator" />
+        <module name="admin-fast" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="admin-fast" target="1.8" />
-      <module name="dfjinxin-fast" target="1.8" />
       <module name="renren-generator" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="admin-fast" options="-parameters" />
-      <module name="dfjinxin-fast" options="-parameters" />
       <module name="renren-generator" options="-parameters" />
     </option>
   </component>

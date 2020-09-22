@@ -1,19 +1,17 @@
 <template>
-  <div
+  <div v-if="_isMobile()" v-loading.fullscreen.lock="loading" element-loading-text="拼命加载中">
+    <MobileNavbar></MobileNavbar>
+  </div>
+  <div v-else
     class="site-wrapper"
     :class="{ 'site-sidebar--fold': sidebarFold }"
     v-loading.fullscreen.lock="loading"
     element-loading-text="拼命加载中">
     <template v-if="!loading">
-      <div v-if="_isMobile()">
-        手机端
-      </div>
-      <div v-else>
-        <main-navbar />
-        <main-sidebar />
-        <div class="site-content__wrapper" :style="{ 'min-height': documentClientHeight + 'px' }">
-          <main-content />
-        </div>
+      <main-navbar />
+      <main-sidebar />
+      <div class="site-content__wrapper" :style="{ 'min-height': documentClientHeight + 'px' }">
+        <main-content />
       </div>
     </template>
   </div>
@@ -21,6 +19,7 @@
 
 <script>
   import MainNavbar from './main-navbar'
+  import MobileNavbar from './mobile-navbar'
   import MainSidebar from './main-sidebar'
   import MainContent from './main-content'
   export default {
@@ -31,6 +30,7 @@
     },
     components: {
       MainNavbar,
+      MobileNavbar,
       MainSidebar,
       MainContent
     },
@@ -78,11 +78,7 @@
             this.userName = data.user.username
           }
         })
-      },
-      _isMobile() {
-        let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-        return flag;
-      },
+      }
     }
   }
 </script>

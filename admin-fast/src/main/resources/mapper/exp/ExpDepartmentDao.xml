@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.os.modules.exp.dao.ExpDepartmentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.os.modules.exp.entity.ExpDepartmentEntity" id="expDepartmentMap">
+        <result property="id" column="id"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="deptSuperId" column="dept_super_id"/>
+    </resultMap>
+
+
+</mapper>
