@@ -3,6 +3,7 @@ package com.os.modules.exp.controller;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.os.modules.sys.controller.AbstractController;
@@ -43,6 +44,17 @@ public class ExpExpensesDetailController extends AbstractController {
         PageUtils page = expExpensesDetailService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/all")
+//    @RequiresPermissions("exp:expexpensesdetail:list")
+    public R all(@RequestParam Map<String, Object> params){
+        List<ExpExpensesDetailEntity> list = expExpensesDetailService.getExpExpensesDetailList(params);
+
+        return R.ok().put("list", list);
     }
 
 

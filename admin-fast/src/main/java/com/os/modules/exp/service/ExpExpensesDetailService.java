@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.os.common.utils.PageUtils;
 import com.os.modules.exp.entity.ExpExpensesDetailEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface ExpExpensesDetailService extends IService<ExpExpensesDetailEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<ExpExpensesDetailEntity> getExpExpensesDetailList(Map<String, Object> params);
 }
 

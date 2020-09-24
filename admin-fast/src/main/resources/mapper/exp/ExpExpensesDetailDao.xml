@@ -12,5 +12,16 @@
         <result property="createTime" column="create_time"/>
     </resultMap>
 
+    <select id="getMonthList" resultMap="expExpensesDetailMap">
+        SELECT
+            eep.id, SUM(eep.money) AS money, eep.user_id, eep.create_date, eep.create_time
+        FROM
+            exp_expenses_detail eep
+        WHERE
+            eep.create_date BETWEEN #{sDate} and #{eDate}
+        GROUP BY
+            create_date
+    </select>
+
 
 </mapper>

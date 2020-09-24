@@ -17,5 +17,20 @@
         <result property="status" column="status"/>
     </resultMap>
 
+    <select id="getMonthSettle" resultMap="expComDaySettleMap">
+        SELECT
+            SUM(ecd.daily_expenses) daily_expenses,
+            SUM(ecd.freight_income) freight_income,
+            SUM(ecd.com_advance) com_advance,
+            SUM(ecd.total_expenses) total_expenses,
+            SUM(ecd.total_income) total_income,
+            SUM(ecd.profit) profit,
+            ecd.deliver_month
+        FROM
+            exp_com_day_settle ecd
+        WHERE ecd.`status` = 1 and ecd.deliver_month = #{keyword}
+        GROUP BY
+            ecd.deliver_month
+    </select>
 
 </mapper>

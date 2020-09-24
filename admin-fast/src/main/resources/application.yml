@@ -61,6 +61,9 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
 
+exp:
+  file:
+    path: D:\udf\tmp\
 
 admin:
   redis:

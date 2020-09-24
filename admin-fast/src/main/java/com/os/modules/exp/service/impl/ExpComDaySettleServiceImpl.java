@@ -47,6 +47,19 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
         return this.lambdaQuery().eq(ExpComDaySettleEntity::getDeliverDate, deliverDate).one();
     }
 
+    @Override
+    public ExpComDaySettleEntity getByDeliverType(Map<String, Object> params) {
+        ExpComDaySettleEntity expComDaySettleEntity = new ExpComDaySettleEntity();
+        Integer type = MapUtils.mint(params, "type");
+        String keyword = MapUtils.mstr(params, "keyword");
+        if (0 == type) {
+            expComDaySettleEntity = this.lambdaQuery().eq(ExpComDaySettleEntity::getDeliverDate, keyword).one();
+        } else if (1 == type) {
+            expComDaySettleEntity = baseMapper.getMonthSettle(params);
+        }
+        return expComDaySettleEntity;
+    }
+
     @Transactional
     @Override
     public Boolean updateDailyExpenses(LocalDate deliverDate, Integer money) {

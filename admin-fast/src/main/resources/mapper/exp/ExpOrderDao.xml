@@ -14,6 +14,7 @@
         <result property="freight" column="freight"/>
         <result property="advance" column="advance"/>
         <result property="advanceIn" column="advance_in"/>
+        <result property="settleCode" column="settle_code"/>
         <result property="settleId" column="settle_id"/>
         <result property="delivery" column="delivery"/>
         <result property="remark" column="remark"/>
@@ -25,7 +26,38 @@
         <result property="status" column="status"/>
         <result property="deliverDate" column="deliver_date"/>
         <result property="createTime" column="create_time"/>
+        <result property="goods_name" column="goodsName"/>
+        <result property="dept_name" column="deptName"/>
+        <result property="settle_name" column="settleName"/>
+        <result property="packing_name" column="packingName"/>
+        <result property="realname" column="realname"/>
     </resultMap>
+
+    <select id="selectOrderPage" resultMap="expOrderMap">
+        SELECT
+            eo.*, eg.goods_name,
+            ed.dept_name,
+            es.settle_name,
+            ep.packing_name,
+            su.realname
+        FROM
+            exp_order eo
+        LEFT JOIN exp_goods eg ON eo.goods_id = eg.id
+        LEFT JOIN exp_packing ep ON eo.packing_id = ep.id
+        LEFT JOIN exp_department ed ON eo.dept_id = ed.id
+        LEFT JOIN exp_settle es ON eo.settle_code = es.settle_code
+        LEFT JOIN sys_user su ON eo.user_id = su.user_id
+        WHERE 1 = 1
+        <if test="param.deliverDate!=null and param.deliverDate.length>0">
+            and eo.deliver_date = #{param.deliverDate}
+        </if>
+        <if test="param.status!=null and param.status.length>0">
+            and eo.status = #{param.status}
+        </if>
+        <if test="param.settleCode!=null and param.settleCode.length>0">
+            and eo.settle_code = #{param.settleCode}
+        </if>
+    </select>
 
 
 </mapper>

@@ -1,11 +1,14 @@
 package com.os.modules.exp.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -58,6 +61,11 @@ public class ExpOrderEntity implements Serializable {
 	 */
 	private Integer advanceIn;
 	/**
+	 * 结算方式代码
+	 */
+	private String settleCode;
+
+	/**
 	 * 结算方式id
 	 */
 	private Integer settleId;
@@ -101,5 +109,34 @@ public class ExpOrderEntity implements Serializable {
 	 * 创建时间
 	 */
 	private Date createTime;
+
+	@TableField(exist = false)
+	private List<ExpFileEntity> fileList;
+
+	/**
+	 * 货物名称
+	 */
+	@TableField(exist = false)
+	private String goodsName;
+	/**
+	 * 网点名称
+	 */
+	@TableField(exist = false)
+	private String deptName;
+	/**
+	 * 结算方式名称
+	 */
+	@TableField(exist = false)
+	private String settleName;
+	/**
+	 * 包装名称
+	 */
+	@TableField(exist = false)
+	private String packingName;
+	/**
+	 * 开单员
+	 */
+	@TableField(exist = false)
+	private String realname;
 
 }

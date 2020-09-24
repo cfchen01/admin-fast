@@ -58,6 +58,10 @@ public class ExpDepDaySettleEntity implements Serializable {
 	 */
 	private LocalDate deliverDate;
 	/**
+	 * 结算月份
+	 */
+	private String deliverMonth;
+	/**
 	 * 月结订单总费用
 	 */
 	private Integer monthMoney;

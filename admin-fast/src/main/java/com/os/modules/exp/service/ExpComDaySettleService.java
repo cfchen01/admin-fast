@@ -18,7 +18,19 @@ public interface ExpComDaySettleService extends IService<ExpComDaySettleEntity> 
 
     PageUtils queryPage(Map<String, Object> params);
 
+    /**
+     * 根据结算日期查询报表
+     * @param deliverDate
+     * @return
+     */
     ExpComDaySettleEntity getByDeliverDate(LocalDate deliverDate);
+
+    /**
+     * 根据结算类型查询报表
+     * @param params
+     * @return
+     */
+    ExpComDaySettleEntity getByDeliverType(Map<String, Object> params);
 
     /**
      * 修改公司日常支出

@@ -55,6 +55,20 @@ public class ExpComDaySettleController {
     }
 
     /**
+     * 信息
+     */
+    @RequestMapping("/detail")
+//    @RequiresPermissions("exp:expcomdaysettle:info")
+    public R detail(@RequestParam Map<String, Object> params){
+		ExpComDaySettleEntity expComDaySettle = expComDaySettleService.getByDeliverType(params);
+
+		if (expComDaySettle == null) {
+		    return R.error(403, "当前时间尚未结算");
+        }
+        return R.ok().put("expComDaySettle", expComDaySettle);
+    }
+
+    /**
      * 保存
      */
     @RequestMapping("/save")

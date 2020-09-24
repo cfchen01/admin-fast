@@ -1,269 +1,107 @@
 <template>
-  <div class="mod-config">
-    <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
-      <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('exp:exporder:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('exp:exporder:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
-      </el-form-item>
-    </el-form>
-    <el-table
-      :data="dataList"
-      border
-      v-loading="dataListLoading"
-      @selection-change="selectionChangeHandle"
-      style="width: 100%;">
-      <el-table-column
-        type="selection"
-        header-align="center"
-        align="center"
-        width="50">
-      </el-table-column>
-      <el-table-column
-        prop="id"
-        header-align="center"
-        align="center"
-        label="">
-      </el-table-column>
-      <el-table-column
-        prop="deptId"
-        header-align="center"
-        align="center"
-        label="网点id">
-      </el-table-column>
-      <el-table-column
-        prop="ordCode"
-        header-align="center"
-        align="center"
-        label="订单码">
-      </el-table-column>
-      <el-table-column
-        prop="goodsId"
-        header-align="center"
-        align="center"
-        label="货物id">
-      </el-table-column>
-      <el-table-column
-        prop="ordNum"
-        header-align="center"
-        align="center"
-        label="货物件数">
-      </el-table-column>
-      <el-table-column
-        prop="packingId"
-        header-align="center"
-        align="center"
-        label="包装id">
-      </el-table-column>
-      <el-table-column
-        prop="freight"
-        header-align="center"
-        align="center"
-        label="运费">
-      </el-table-column>
-      <el-table-column
-        prop="advance"
-        header-align="center"
-        align="center"
-        label="垫付费">
-      </el-table-column>
-      <el-table-column
-        prop="advanceIn"
-        header-align="center"
-        align="center"
-        label="已收垫付费">
-      </el-table-column>
-      <el-table-column
-        prop="settleId"
-        header-align="center"
-        align="center"
-        label="结算方式id">
-      </el-table-column>
-      <el-table-column
-        prop="delivery"
-        header-align="center"
-        align="center"
-        label="送货费">
-      </el-table-column>
-      <el-table-column
-        prop="remark"
-        header-align="center"
-        align="center"
-        label="备注">
-      </el-table-column>
-      <el-table-column
-        prop="userId"
-        header-align="center"
-        align="center"
-        label="开单员">
-      </el-table-column>
-      <el-table-column
-        prop="shipper"
-        header-align="center"
-        align="center"
-        label="托运方">
-      </el-table-column>
-      <el-table-column
-        prop="shipperTel"
-        header-align="center"
-        align="center"
-        label="托运方电话">
-      </el-table-column>
-      <el-table-column
-        prop="receiver"
-        header-align="center"
-        align="center"
-        label="收货方">
-      </el-table-column>
-      <el-table-column
-        prop="receiverTel"
-        header-align="center"
-        align="center"
-        label="收货方电话">
-      </el-table-column>
-      <el-table-column
-        prop="status"
-        header-align="center"
-        align="center"
-        label="订单状态">
-      </el-table-column>
-      <el-table-column
-        prop="deliverDate"
-        header-align="center"
-        align="center"
-        label="发货日期">
-      </el-table-column>
-      <el-table-column
-        prop="createTime"
-        header-align="center"
-        align="center"
-        label="创建时间">
-      </el-table-column>
-      <el-table-column
-        header-align="center"
-        align="center"
-        width="150"
-        label="操作">
-        <template slot-scope="scope">
-          <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-          <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
+  <div v-if="_isMobile()">
+    <van-form @submit="onSubmit">
+      <van-field name="div" label="订单状态" placeholder="订单状态">
+        <template #input>
+          <el-select v-model="dataForm.status" placeholder="订单状态" size="mini" clearable>
+            <el-option label="未确认" :value="0">未确认</el-option>
+            <el-option label="已确认" :value="1">已确认</el-option>
+            <el-option label="返单" :value="2">返单</el-option>
+          </el-select>
         </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      @size-change="sizeChangeHandle"
-      @current-change="currentChangeHandle"
-      :current-page="pageIndex"
-      :page-sizes="[10, 20, 50, 100]"
-      :page-size="pageSize"
-      :total="totalPage"
-      layout="total, sizes, prev, pager, next, jumper">
-    </el-pagination>
-    <!-- 弹窗, 新增 / 修改 -->
-    <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
+      </van-field>
+      <van-field name="div" label="结算方式" placeholder="结算方式">
+        <template #input>
+          <el-select v-model="dataForm.settleCode" placeholder="请选择" size="mini" clearable>
+            <el-option
+                    v-for="item in settleList"
+                    :key="item.settleCode"
+                    :label="item.settleName"
+                    :value="item.settleCode">
+            </el-option>
+          </el-select>
+        </template>
+      </van-field>
+      <van-field
+              readonly
+              clickable
+              name="calendar"
+              :value="dataForm.deliverDate"
+              label="发货日期"
+              placeholder="点击选择日期"
+              @click="showCalendar = true"
+      />
+      <van-calendar v-model="showCalendar" @confirm="onConfirm" :show-confirm="false" :min-date="minDate" :max-date="maxDate"/>
+      <div style="margin: 20px;">
+        <van-button round block type="info" size="small" native-type="submit">
+          查询
+        </van-button>
+      </div>
+    </van-form>
+    <div style="margin: 20px;">
+      <van-button round block type="primary" size="small" @click="addOrder()">
+        录单
+      </van-button>
+    </div>
+  </div>
+  <div v-else>
+    <exporder-index/>
   </div>
 </template>
 
 <script>
-  import AddOrUpdate from './exporder-add-or-update'
+  import ExporderIndex from './exporderindex'
+  import helper from '@/utils/helper'
   export default {
     data () {
       return {
+        showCalendar:false,
+        settleList:[],
         dataForm: {
-          key: ''
+          status: '',
+          settleCode:'',
+          deliverDate: new Date().format('yyyy-MM-dd')
         },
-        dataList: [],
-        pageIndex: 1,
-        pageSize: 10,
-        totalPage: 0,
-        dataListLoading: false,
-        dataListSelections: [],
-        addOrUpdateVisible: false
+        minDate: new Date('2020-09-01'),
+        maxDate: new Date()
       }
     },
     components: {
-      AddOrUpdate
+      ExporderIndex
     },
-    activated () {
-      this.getDataList()
+    computed: {
+      menuActiveName: {
+        get () { return this.$store.state.common.menuActiveName },
+        set (val) { this.$store.commit('common/updateMenuActiveName', val) }
+      }
+    },
+    created () {
+      this.getSettleList()
+      this.menuActiveName = '订单管理'
     },
     methods: {
-      // 获取数据列表
-      getDataList () {
-        this.dataListLoading = true
+      getSettleList () {
         this.$http({
-          url: this.$http.adornUrl('/exp/exporder/list'),
+          url: this.$http.adornUrl('/exp/expsettle/all'),
           method: 'get',
-          params: this.$http.adornParams({
-            'page': this.pageIndex,
-            'limit': this.pageSize,
-            'key': this.dataForm.key
-          })
+          params: this.$http.adornParams({})
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = data.page.list
-            this.totalPage = data.page.totalCount
+            this.settleList = data.list
           } else {
-            this.dataList = []
-            this.totalPage = 0
+            this.settleList = []
           }
-          this.dataListLoading = false
         })
       },
-      // 每页数
-      sizeChangeHandle (val) {
-        this.pageSize = val
-        this.pageIndex = 1
-        this.getDataList()
+      onConfirm(date) {
+        this.dataForm.deliverDate = date.format('yyyy-MM-dd')
+        this.showCalendar = false;
       },
-      // 当前页
-      currentChangeHandle (val) {
-        this.pageIndex = val
-        this.getDataList()
+      onSubmit(){
+        this.$router.push({path: '/order-index',query: {status: this.dataForm.status, deliverDate:this.dataForm.deliverDate,settleCode:this.dataForm.settleCode}})
       },
-      // 多选
-      selectionChangeHandle (val) {
-        this.dataListSelections = val
-      },
-      // 新增 / 修改
-      addOrUpdateHandle (id) {
-        this.addOrUpdateVisible = true
-        this.$nextTick(() => {
-          this.$refs.addOrUpdate.init(id)
-        })
-      },
-      // 删除
-      deleteHandle (id) {
-        var ids = id ? [id] : this.dataListSelections.map(item => {
-          return item.id
-        })
-        this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$http({
-            url: this.$http.adornUrl('/exp/exporder/delete'),
-            method: 'post',
-            data: this.$http.adornData(ids, false)
-          }).then(({data}) => {
-            if (data && data.code === 0) {
-              this.$message({
-                message: '操作成功',
-                type: 'success',
-                duration: 1500,
-                onClose: () => {
-                  this.getDataList()
-                }
-              })
-            } else {
-              this.$message.error(data.msg)
-            }
-          })
-        })
+      addOrder(){
+        this.$router.push({path: '/order-add-update'})
       }
     }
   }

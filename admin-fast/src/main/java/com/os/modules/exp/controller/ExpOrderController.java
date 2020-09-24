@@ -3,6 +3,7 @@ package com.os.modules.exp.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.os.modules.exp.vo.OrderObjVo;
 import com.os.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class ExpOrderController extends AbstractController {
     @RequestMapping("/info/{id}")
 //    @RequiresPermissions("exp:exporder:info")
     public R info(@PathVariable("id") Integer id){
-		ExpOrderEntity expOrder = expOrderService.getById(id);
+		ExpOrderEntity expOrder = expOrderService.getDetailById(id);
 
         return R.ok().put("expOrder", expOrder);
     }
@@ -89,6 +90,17 @@ public class ExpOrderController extends AbstractController {
     }
 
     /**
+     * 修改状态
+     */
+    @RequestMapping("/status")
+//    @RequiresPermissions("exp:exporder:update")
+    public R status(@RequestParam Map<String, Object> params){
+        expOrderService.updateStatus(params);
+
+        return R.ok();
+    }
+
+    /**
      * 删除
      */
     @RequestMapping("/delete")
@@ -97,6 +109,15 @@ public class ExpOrderController extends AbstractController {
 		expOrderService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
+    }
+
+
+    @RequestMapping("/orderVo")
+//    @RequiresPermissions("exp:exporder:delete")
+    public R getOrderObjVo(){
+        OrderObjVo orderObjVo = expOrderService.getOrderObjVo();
+
+        return R.ok().put("orderObjVo", orderObjVo);
     }
 
 }

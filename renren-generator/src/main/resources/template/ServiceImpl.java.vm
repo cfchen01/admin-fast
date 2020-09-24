@@ -1,5 +1,6 @@
 package ${package}.${moduleName}.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.os.common.utils.MapUtils;

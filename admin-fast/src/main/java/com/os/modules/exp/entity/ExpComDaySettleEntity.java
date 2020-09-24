@@ -54,6 +54,10 @@ public class ExpComDaySettleEntity implements Serializable {
 	 */
 	private LocalDate deliverDate;
 	/**
+	 * 结算月份
+	 */
+	private String deliverMonth;
+	/**
 	 * 结算人
 	 */
 	private Long userId;

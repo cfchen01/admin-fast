@@ -8,9 +8,7 @@ import { clearLoginInfo } from '@/utils'
 const http = axios.create({
   timeout: 1000 * 30,
   withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8'
-  }
+  headers: {'Content-Type': 'application/json; charset=utf-8'}
 })
 
 /**
@@ -37,7 +35,7 @@ http.interceptors.response.use(response => {
             clearLoginInfo()
             router.push({ name: 'login' })
 
-        } else { //其余为500, 404...等异常
+        } else if (resCode === 500) { //其余为500, 404...等异常
             var resMsg = response.data.msg
             if(resMsg){
               Vue.prototype.$message.error(resMsg)

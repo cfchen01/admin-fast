@@ -95,7 +95,7 @@ public class SysOssController {
 	 * 上传文件
 	 */
 	@PostMapping("/upload")
-	@RequiresPermissions("sys:oss:all")
+//	@RequiresPermissions("sys:oss:all")
 	public R upload(@RequestParam("file") MultipartFile file) throws Exception {
 		if (file.isEmpty()) {
 			throw new RRException("上传文件不能为空");

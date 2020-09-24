@@ -37,7 +37,9 @@ const mainRoutes = {
         { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
         { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
         { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
-        { path: '/user-add-update', component: _import('modules/sys/user-add-or-update'), name: 'user-edit', meta: { title: 'user-edit', isTab: false } }
+        { path: '/user-add-update', component: _import('modules/sys/user-add-or-update'), name: 'user-edit', meta: { title: 'user-edit', isTab: false } },
+        { path: '/order-index', component: _import('modules/exp/exporderindex'), name: 'order-index', meta: { title: 'order-index', isTab: false } },
+        { path: '/order-add-update', component: _import('modules/exp/exporder-add-or-update'), name: 'order-edit', meta: { title: 'order-edit', isTab: false } }
     ],
     beforeEnter (to, from, next) {
         let token = Vue.cookie.get('token')

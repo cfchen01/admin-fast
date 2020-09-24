@@ -42,12 +42,7 @@
     },
     methods:{
       onSearch(){
-        this.$http({
-          url: this.$http.adornUrl('/sys/menu/select'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-        })
+        this.$router.push({path: '/order-add-update',query: {isView:'true',id:this.ordCode}})
       },
       clickLink(item){
         if (item == null || item.url == null) {

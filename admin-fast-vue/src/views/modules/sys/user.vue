@@ -166,9 +166,16 @@
     components: {
       Dialog
     },
+    computed: {
+      menuActiveName: {
+        get () { return this.$store.state.common.menuActiveName },
+        set (val) { this.$store.commit('common/updateMenuActiveName', val) }
+      }
+    },
     activated () {
       this.getDataList()
       this.isShow = false
+      this.menuActiveName = '用户管理'
     },
     methods: {
       // 获取数据列表
@@ -261,12 +268,12 @@
             title: '系统提示',
             message: `确定对[${this.userItem.realname}]删除操作?`,
           })
-              .then(() => {
-                this.deleteActoion(userIds)
-              })
-              .catch(() => {
-                // on cancel
-              });
+          .then(() => {
+            this.deleteActoion(userIds)
+          })
+          .catch(() => {
+            // on cancel
+          });
 
         }
       }

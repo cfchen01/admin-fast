@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.os.modules.exp.dao.ExpFileDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.os.modules.exp.entity.ExpFileEntity" id="expFileMap">
+        <result property="id" column="id"/>
+        <result property="path" column="path"/>
+        <result property="url" column="url"/>
+        <result property="name" column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+    <select id="selectPicByOrder" parameterType="int" resultMap="expFileMap">
+        SELECT
+            ef.*
+        FROM
+            exp_file ef
+        LEFT JOIN exp_order_pic eop ON ef.id = eop.file_id
+        LEFT JOIN exp_order eo ON eo.id = eop.order_id
+        WHERE eo.id = #{orderId}
+    </select>
+
+</mapper>

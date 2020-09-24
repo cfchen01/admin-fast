@@ -1,0 +1,326 @@
+<template>
+  <div>
+    <div v-if="_isMobile()">
+      <van-cell :value="dataForm.deliverDate" />
+      <van-swipe-cell v-for="item in dataList">
+        <van-card
+                :num="item.ordNum"
+                :price="Number(item.advance)+Number(item.freight)+Number(item.delivery)"
+                :desc="'备注：'+item.remark"
+                @click="viewHandle(item.id)"
+        >
+          <template #title>
+            <div>
+              <span>订单号：{{item.id}}</span>
+              <span style="float: right">{{item.receiver + '/' + item.receiverTel}}</span>
+            </div>
+          </template>
+          <template #tags>
+            <div>
+              <span>
+                <van-tag plain v-if="item.status == 0" type="warning">未确认</van-tag>
+                <van-tag plain v-else-if="item.status == 1" type="success">已确认</van-tag>
+                <van-tag plain v-else type="danger">返单</van-tag>
+              </span>
+              <span style="float: right">
+                <van-button size="mini" type="danger" :disabled="item.status != 0" @click="updateStatus(item.id, 2)">返单</van-button>
+                <van-button size="mini" type="info" :disabled="item.status != 0" @click="updateStatus(item.id, 1)">确认</van-button>
+              </span>
+            </div>
+          </template>
+<!--          <template #footer>-->
+<!--            <van-button size="mini" type="danger">返单</van-button>-->
+<!--            <van-button size="mini" type="info">确认</van-button>-->
+<!--          </template>-->
+        </van-card>
+        <template #right>
+          <van-button square text="修改" type="info" class="delete-button" :disabled="item.status != 0" @click="addOrUpdateHandle(item.id)"/>
+        </template>
+        <van-divider />
+      </van-swipe-cell>
+      <van-empty v-if="dataList.length == 0" description="暂无记录"></van-empty>
+    </div>
+    <div v-else class="mod-config">
+      <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
+        <el-form-item>
+          <div class="block">
+            <el-date-picker
+                    v-model="dataForm.deliverDate"
+                    align="right"
+                    type="date"
+                    placeholder="选择日期"
+                    value-format="yyyy-MM-dd"
+                    :clearable="false"
+                    :default-value="dataForm.deliverDate"
+                    :picker-options="pickerOptions">
+            </el-date-picker>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <div class="block">
+            <el-select v-model="dataForm.status" placeholder="订单状态" clearable>
+              <el-option label="未确认" :value="0">未确认</el-option>
+              <el-option label="已确认" :value="1">已确认</el-option>
+              <el-option label="返单" :value="2">返单</el-option>
+            </el-select>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="getDataList()">查询</el-button>
+          <el-button v-if="isAuth('exp:exporder:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+<!--          <el-button v-if="isAuth('exp:exporder:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
+        </el-form-item>
+      </el-form>
+      <el-table
+              :data="dataList"
+              border
+              size="small"
+              v-loading="dataListLoading"
+              @selection-change="selectionChangeHandle"
+              style="width: 100%;">
+        <el-table-column
+                prop="id"
+                header-align="center"
+                align="center"
+                label="订单号">
+        </el-table-column>
+        <el-table-column
+                prop="deptName"
+                header-align="center"
+                align="center"
+                label="网点">
+        </el-table-column>
+        <el-table-column
+                prop="ordCode"
+                header-align="center"
+                align="center"
+                label="订单码">
+        </el-table-column>
+        <el-table-column
+                prop="goodsName"
+                header-align="center"
+                align="center"
+                label="货物">
+        </el-table-column>
+        <el-table-column
+                prop="settleName"
+                header-align="center"
+                align="center"
+                label="结算方式">
+        </el-table-column>
+        <el-table-column
+                prop="status"
+                header-align="center"
+                align="center"
+                label="订单状态">
+          <template slot-scope="scope">
+            <span>{{showStatus(scope.row.status)}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+                prop="deliverDate"
+                header-align="center"
+                align="center"
+                label="发货日期">
+        </el-table-column>
+        <el-table-column
+                header-align="center"
+                align="center"
+                width="160"
+                label="操作">
+          <template slot-scope="scope">
+            <el-button type="text" size="small" :disabled="scope.row.status != 0" @click="updateStatus(scope.row.id, 1)">确认</el-button>
+            <el-button type="text" size="small" :disabled="scope.row.status != 0" @click="updateStatus(scope.row.id, 2)">返单</el-button>
+            <el-button type="text" size="small" :disabled="scope.row.status != 0" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+            <el-button type="text" size="small" @click="viewHandle(scope.row.id)">详情</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+              @size-change="sizeChangeHandle"
+              @current-change="currentChangeHandle"
+              :current-page="pageIndex"
+              :page-sizes="[10, 20, 50, 100]"
+              :page-size="pageSize"
+              :total="totalPage"
+              layout="total, sizes, prev, pager, next, jumper">
+      </el-pagination>
+      <!-- 弹窗, 新增 / 修改 -->
+      <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
+    </div>
+  </div>
+
+</template>
+
+<script>
+  import AddOrUpdate from './exporder-add-or-update'
+  import helper from '@/utils/helper'
+  import { Dialog } from 'vant'
+  import { Toast } from 'vant'
+  export default {
+    data () {
+      return {
+        dataForm: {
+          status: '',
+          settleCode:'',
+          deliverDate: ''
+        },
+        dataList: [],
+        pageIndex: 1,
+        pageSize: 10,
+        totalPage: 0,
+        dataListLoading: false,
+        dataListSelections: [],
+        addOrUpdateVisible: false,
+        pickerOptions: {
+          disabledDate(time)
+          {
+            return time.getTime() > Date.now();
+          }
+        }
+      }
+    },
+    components: {
+      AddOrUpdate,
+      Toast,
+      Dialog
+    },
+    activated () {
+      this.dataForm.status = this.$route.query.status || ''
+      this.dataForm.settleCode = this.$route.query.settleCode || ''
+      this.dataForm.deliverDate = this.$route.query.deliverDate || new Date().format('yyyy-MM-dd')
+      this.getDataList()
+    },
+    methods: {
+      // 获取数据列表
+      getDataList () {
+        this.dataListLoading = true
+        this.$http({
+          url: this.$http.adornUrl('/exp/exporder/list'),
+          method: 'get',
+          params: this.$http.adornParams({
+            'page': this.pageIndex,
+            'limit': this.pageSize,
+            'status': this.dataForm.status,
+            'settleCode': this.dataForm.settleCode,
+            'deliverDate': this.dataForm.deliverDate
+          })
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+            this.dataList = data.page.list
+            this.totalPage = data.page.totalCount
+          } else {
+            this.dataList = []
+            this.totalPage = 0
+          }
+          this.dataListLoading = false
+        })
+      },
+      updateStatus(id, status){
+        let msg = ''
+        if (status == 1) {
+          msg = '确认'
+        } else if (status == 2) {
+          msg = '返单'
+        }
+        Dialog.confirm({
+          title: '系统提示',
+          message: `确定对订单[${id}]进行[${msg}]操作?`,
+        })
+        .then(() => {
+          this.$http({
+            url: this.$http.adornUrl('/exp/exporder/status'),
+            method: 'post',
+            params: this.$http.adornParams({
+              'id': id,
+              'status': status
+            })
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              this.getDataList();
+              Toast('修改成功')
+            } else {
+              Toast(data.msg)
+            }
+          })
+        })
+        .catch(() => {
+          // on cancel
+        });
+      },
+      // 每页数
+      sizeChangeHandle (val) {
+        this.pageSize = val
+        this.pageIndex = 1
+        this.getDataList()
+      },
+      // 当前页
+      currentChangeHandle (val) {
+        this.pageIndex = val
+        this.getDataList()
+      },
+      // 多选
+      selectionChangeHandle (val) {
+        this.dataListSelections = val
+      },
+      // 新增 / 修改
+      viewHandle (id) {
+        this.$router.push({path: '/order-add-update', query:{isView:'1',id:id}})
+      },
+      // 新增 / 修改
+      addOrUpdateHandle (id) {
+        this.$router.push({path: '/order-add-update', query:{id:id}})
+      },
+      // 删除
+      deleteHandle (id) {
+        var ids = id ? [id] : this.dataListSelections.map(item => {
+          return item.id
+        })
+        this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http({
+            url: this.$http.adornUrl('/exp/exporder/delete'),
+            method: 'post',
+            data: this.$http.adornData(ids, false)
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              this.$message({
+                message: '操作成功',
+                type: 'success',
+                duration: 1500,
+                onClose: () => {
+                  this.getDataList()
+                }
+              })
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
+        })
+      },
+      showStatus(status){
+        if (status == 0) {
+          return '未确认'
+        }
+        if (status == 1) {
+          return '已确认'
+        }
+        if (status == 0) {
+          return '返单'
+        }
+        return ''
+      }
+    }
+  }
+</script>
+<style>
+  .delete-button {
+    height: 100% !important;
+  }
+  .van-divider{
+    margin: 0 !important;
+  }
+</style>
