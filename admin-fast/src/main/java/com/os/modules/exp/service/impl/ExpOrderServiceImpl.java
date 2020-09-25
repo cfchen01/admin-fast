@@ -1,11 +1,10 @@
 package com.os.modules.exp.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.os.common.enums.OrderStatusEnum;
 import com.os.common.enums.SettleStatusEnum;
 import com.os.common.exception.RRException;
-import com.os.common.utils.UserUtils;
+import com.os.common.utils.*;
 import com.os.modules.exp.dao.ExpFileDao;
 import com.os.modules.exp.dao.ExpOrderPicDao;
 import com.os.modules.exp.entity.*;
@@ -13,21 +12,21 @@ import com.os.modules.exp.service.*;
 import com.os.modules.exp.vo.OrderObjVo;
 import com.os.modules.sys.dao.SysUserDao;
 import com.os.modules.sys.entity.SysUserEntity;
-import com.os.modules.sys.service.SysUserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.os.common.utils.MapUtils;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.os.common.utils.PageUtils;
-import com.os.common.utils.Query;
 
 import com.os.modules.exp.dao.ExpOrderDao;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +71,14 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
 //                    .eq(StringUtils.isNotEmpty(MapUtils.mstr(params, "deliverDate")), ExpOrderEntity::getDeliverDate, MapUtils.mstr(params, "deliverDate"))
 //
 //        );
+        //日期肖燏10位位按月查询
+        String deliverDate = MapUtils.mstr(params, "deliverDate");
+        if (StringUtils.isNotEmpty(deliverDate) && deliverDate.length()<10) {
+            params.put("sDate", DateUtils.getFirstDayOfMonth(deliverDate).toString());
+            params.put("eDate", DateUtils.getLastDayOfMonth(deliverDate).toString());
+            params.remove("deliverDate");
+        }
+
         SysUserEntity entity = sysUserDao.queryUserDetail(UserUtils.getUserId());
         //网点角色只能看到当前网点订单
         if (3 == entity.getRoleId()) {
@@ -200,6 +207,11 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
 
     @Override
     public Integer getResume(Map<String, Object> params) {
+        String deliverDate = MapUtils.mstr(params, "deliverDate");
+        //日期是月不查询
+        if (StringUtils.isNotEmpty(deliverDate) && deliverDate.length()<10) {
+            return 0;
+        }
         return baseMapper.getResume(params);
     }
 }

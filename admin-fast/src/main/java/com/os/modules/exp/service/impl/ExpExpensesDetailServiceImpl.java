@@ -1,6 +1,7 @@
 package com.os.modules.exp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.os.common.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -44,12 +45,9 @@ public class ExpExpensesDetailServiceImpl extends ServiceImpl<ExpExpensesDetailD
         if ("day".equals(type)) {
             list = this.lambdaQuery().eq(ExpExpensesDetailEntity::getCreateDate, keyword).list();
         } else if ("month".equals(type)){
-            LocalDate date = LocalDate.parse(keyword + "-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            LocalDate firstday = date.with(TemporalAdjusters.firstDayOfMonth());
-            LocalDate lastDay  = date.with(TemporalAdjusters.lastDayOfMonth());
             Map map = new HashMap();
-            map.put("sDate", firstday);
-            map.put("eDate", lastDay);
+            map.put("sDate", DateUtils.getFirstDayOfMonth(keyword));
+            map.put("eDate", DateUtils.getLastDayOfMonth(keyword));
             list = baseMapper.getMonthList(map);
         }
         return list;

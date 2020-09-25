@@ -13,11 +13,11 @@
         />
         <van-calendar v-model="showPicker" @confirm="onConfirm" :show-confirm="false" :min-date="minDate" :max-date="maxDate"/>
         <van-grid clickable :column-num="2">
-          <van-grid-item @click="clickDay()">
+          <van-grid-item @click="clickDayOut">
             <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
             <span slots="text" style="padding: 5px">日支出金额</span>
           </van-grid-item>
-          <van-grid-item>
+          <van-grid-item @click="clickDayIn">
             <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
             <span slots="text" style="padding: 5px">日收入金额</span>
           </van-grid-item>
@@ -52,11 +52,11 @@
           />
         </van-popup>
         <van-grid clickable :column-num="2">
-          <van-grid-item @click="clickMonth">
+          <van-grid-item @click="clickMonthOut">
             <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
             <span slots="text" style="padding: 5px">月支出金额</span>
           </van-grid-item>
-          <van-grid-item>
+          <van-grid-item @click="clickMonthIn">
             <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
             <span slots="text" style="padding: 5px">月收入金额</span>
           </van-grid-item>
@@ -155,17 +155,23 @@
         this.showMonthPicker = false;
         this.getComSettle()
       },
-      clickDay(){
+      clickDayOut(){
         this.showDay = true;
         this.$nextTick(() => {
           this.$refs.dayCard.init(this.deliverDate, 'day')
         })
       },
-      clickMonth(){
+      clickDayIn(){
+        this.$router.push({path: '/order-index',query: {status: '1', deliverDate:this.deliverDate}})
+      },
+      clickMonthOut(){
         this.showMonth = true;
         this.$nextTick(() => {
           this.$refs.monthCard.init(this.deliverMonth, 'month')
         })
+      },
+      clickMonthIn(){
+        this.$router.push({path: '/order-index',query: {status: '1', deliverDate:this.deliverMonth}})
       }
     }
   }

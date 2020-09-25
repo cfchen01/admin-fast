@@ -16,6 +16,7 @@
         <template #tags>
           <div>
               <span>
+                <span style="margin-right: 5px">{{item.deliverDate}}</span>
                 <van-tag plain v-if="item.status == 0" type="warning">未确认</van-tag>
                 <van-tag plain v-else-if="item.status == 1" type="success">已确认</van-tag>
                 <van-tag plain v-else-if="item.status == 2" type="danger">返单</van-tag>
@@ -51,6 +52,15 @@
       dataList:Array
     },
     methods: {
+      updateStatus(id, status){
+        this.$emit('updateStatus', id, status)
+      },
+      addOrUpdateHandle(id){
+        this.$emit('addOrUpdateHandle', id)
+      }
+      ,viewHandle(id){
+        this.$emit('viewHandle', id)
+      }
     }
   }
 </script>

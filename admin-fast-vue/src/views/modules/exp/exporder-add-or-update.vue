@@ -79,7 +79,10 @@
       <van-cell-group title="备注信息">
         <van-field v-model="dataForm.remark" label="备注" placeholder="备注（选填）" type="textarea" :maxlength="255" :readonly="isView"/>
         <van-field name="uploader" label="图片" >
-          <template #input>
+          <template v-if="uploader.length == 0" #input>
+            <span>无</span>
+          </template>
+          <template v-else #input>
             <van-uploader v-model="uploader" :max-count="3"
                           :after-read="uploadImg"
                           :before-delete="beforeDelete"

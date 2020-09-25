@@ -9,6 +9,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 /**
@@ -156,5 +157,27 @@ public class DateUtils {
     public static Date addDateYears(Date date, int years) {
         DateTime dateTime = new DateTime(date);
         return dateTime.plusYears(years).toDate();
+    }
+
+    public static java.time.LocalDate getFirstDayOfMonth(String month){
+        if (StringUtils.isEmpty(month) || month.length() != 7) {
+            return java.time.LocalDate.now();
+        }
+        java.time.LocalDate date = java.time.LocalDate.parse(month + "-01", java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        java.time.LocalDate firstDay = date.with(TemporalAdjusters.firstDayOfMonth());
+
+        return firstDay;
+
+    }
+
+    public static java.time.LocalDate getLastDayOfMonth(String month){
+        if (StringUtils.isEmpty(month) || month.length() != 7) {
+            return java.time.LocalDate.now();
+        }
+        java.time.LocalDate date = java.time.LocalDate.parse(month + "-01", java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        java.time.LocalDate lastDay = date.with(TemporalAdjusters.lastDayOfMonth());
+
+        return lastDay;
+
     }
 }

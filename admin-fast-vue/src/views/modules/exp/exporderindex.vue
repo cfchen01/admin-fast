@@ -2,46 +2,10 @@
   <div class="ord-index">
     <div v-if="_isMobile()">
       <van-cell :value="dataForm.deliverDate" />
-      <van-swipe-cell v-for="item in dataList">
-        <van-card
-                :num="item.ordNum"
-                :price="Number(item.advance)+Number(item.freight)+Number(item.delivery)"
-                :desc="'备注：'+item.remark"
-                @click="viewHandle(item.id)"
-        >
-          <template #title>
-            <div>
-              <span>订单号：{{item.id}}</span>
-              <span style="float: right">{{item.receiver + '/' + item.receiverTel}}</span>
-            </div>
-          </template>
-          <template #tags>
-            <div>
-              <span>
-                <van-tag plain v-if="item.status == 0" type="warning">未确认</van-tag>
-                <van-tag plain v-else-if="item.status == 1" type="success">已确认</van-tag>
-                <van-tag plain v-else-if="item.status == 2" type="danger">返单</van-tag>
-                <van-tag plain v-else="item.status == 3" type="danger">作废</van-tag>
-              </span>
-              <span style="float: right" v-if="isAuth('exp:exporder:status')">
-                <van-button size="mini" type="danger" :disabled="item.status != 0" @click="updateStatus(item.id, 2)">返单</van-button>
-                <van-button size="mini" type="info" :disabled="item.status != 0" @click="updateStatus(item.id, 1)">确认</van-button>
-              </span>
-            </div>
-          </template>
-<!--          <template #footer>-->
-<!--            <van-button size="mini" type="danger">返单</van-button>-->
-<!--            <van-button size="mini" type="info">确认</van-button>-->
-<!--          </template>-->
-        </van-card>
-        <template #right v-if="isAuth('exp:exporder:edit')">
-          <van-button square text="修改" type="info" class="delete-button" :disabled="item.status != 0" @click="addOrUpdateHandle(item.id)"/>
-          <van-button square text="作废" type="warning" class="delete-button" :disabled="item.status != 0" @click="updateStatus(item.id, 3)"/>
-        </template>
-        <van-divider />
-      </van-swipe-cell>
+        <ExporderCard :dataList="dataList" @updateStatus="updateStatus" @addOrUpdateHandle="addOrUpdateHandle" @viewHandle="viewHandle"></ExporderCard>
       <van-empty v-if="dataList.length == 0" description="暂无记录"></van-empty>
       <van-pagination
+              v-if="dataList.length > 0"
               style="margin: 10px 0"
               v-model="pageIndex"
               :total-items="totalPage"
@@ -49,7 +13,7 @@
               force-ellipses
               @change="currentChangeHandle"
       />
-      <van-grid v-if="isAuth('order:list:dept') && dataList.length > 0" clickable :column-num="3">
+      <van-grid v-if="isAuth('exp:exporder:resume') && dataList.length > 0" clickable :column-num="3">
         <van-grid-item>
           <span slots="icon" style="color: green">{{resumeN}}</span>
           <span slots="text" style="font-size: 12px">当天未收费用</span>
@@ -187,6 +151,7 @@
 
 <script>
   import AddOrUpdate from './exporder-add-or-update'
+  import ExporderCard from './common/exporder-card'
   import helper from '@/utils/helper'
   import { Dialog } from 'vant'
   import { Toast } from 'vant'
@@ -220,7 +185,8 @@
     components: {
       AddOrUpdate,
       Toast,
-      Dialog
+      Dialog,
+      ExporderCard
     },
     activated () {
       this.dataForm.status = this.$route.query.status || ''

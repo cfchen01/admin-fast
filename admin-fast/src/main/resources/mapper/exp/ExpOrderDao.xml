@@ -63,6 +63,9 @@
         <if test="param.userId!=null and param.userId!= ''">
             and eo.user_id = #{param.userId}
         </if>
+        <if test="param.sDate!=null and param.sDate!= ''">
+            and eo.deliver_date BETWEEN #{param.sDate} and #{param.eDate}
+        </if>
     </select>
 
     <select id="getResume" resultType="int">
