@@ -4,20 +4,19 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 公司支出明细表
+ * 用户网点关系表
  *
  * @author ccf
  * @email sunlightcs@gmail.com
- * @date 2020-09-21 11:23:42
+ * @date 2020-09-24 19:17:49
  */
 @Data
-@TableName("exp_expenses_detail")
-public class ExpExpensesDetailEntity implements Serializable {
+@TableName("exp_user_dept")
+public class ExpUserDeptEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -26,24 +25,12 @@ public class ExpExpensesDetailEntity implements Serializable {
 	@TableId
 	private Integer id;
 	/**
-	 * 支出金额
-	 */
-	private Integer money;
-	/**
-	 * 支出描述
-	 */
-	private String expDesc;
-	/**
-	 * 操作人
+	 * 用户id
 	 */
 	private Long userId;
 	/**
-	 * 支出日期
+	 * 网点ID
 	 */
-	private LocalDate createDate;
-	/**
-	 * 操作时间
-	 */
-	private Date createTime;
+	private Integer deptId;
 
 }

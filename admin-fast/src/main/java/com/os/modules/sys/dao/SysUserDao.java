@@ -5,6 +5,7 @@ package com.os.modules.sys.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.os.modules.sys.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @author Mark sunlightcs@gmail.com
  */
 @Mapper
+@Repository
 public interface SysUserDao extends BaseMapper<SysUserEntity> {
 
 	/**
@@ -31,5 +33,7 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 	 * 根据用户名，查询系统用户
 	 */
 	SysUserEntity queryByUserName(String username);
+
+	SysUserEntity queryUserDetail(Long userId);
 
 }

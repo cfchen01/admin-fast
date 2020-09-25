@@ -9,6 +9,7 @@ import com.os.common.exception.RRException;
 import com.os.common.utils.Constant;
 import com.os.common.utils.PageUtils;
 import com.os.common.utils.Query;
+import com.os.modules.exp.service.ExpUserDeptService;
 import com.os.modules.sys.dao.SysUserDao;
 import com.os.modules.sys.entity.SysUserEntity;
 import com.os.modules.sys.service.SysRoleService;
@@ -38,6 +39,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
+	@Autowired
+	private ExpUserDeptService expUserDeptService;
 
 	@Override
 	public PageUtils queryPage(Map<String, Object> params) {
@@ -78,11 +81,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		user.setSalt(salt);
 		this.save(user);
 
+		expUserDeptService.saveOrUpdate(user.getUserId(), user.getDeptId());
+
 		//检查角色是否越权
 		checkRole(user);
 
 		//保存用户与角色关系
-		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
+		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleId());
 	}
 
 	@Override
@@ -95,11 +100,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		}
 		this.updateById(user);
 
+		expUserDeptService.saveOrUpdate(user.getUserId(), user.getDeptId());
+
 		//检查角色是否越权
 		checkRole(user);
 
 		//保存用户与角色关系
-		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
+		sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleId());
 	}
 
 	@Override
@@ -119,7 +126,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	 * 检查角色是否越权
 	 */
 	private void checkRole(SysUserEntity user){
-		if(user.getRoleIdList() == null || user.getRoleIdList().size() == 0){
+		if(user.getRoleId() == null){
 			return;
 		}
 		//如果不是超级管理员，则需要判断用户的角色是否自己创建
@@ -131,7 +138,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		List<Long> roleIdList = sysRoleService.queryRoleIdList(user.getCreateUserId());
 
 		//判断是否越权
-		if(!roleIdList.containsAll(user.getRoleIdList())){
+		if(!roleIdList.contains(user.getRoleId())){
 			throw new RRException("新增用户所选角色，不是本人创建");
 		}
 	}

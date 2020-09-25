@@ -10,10 +10,13 @@ import com.os.common.validator.Assert;
 import com.os.common.validator.ValidatorUtils;
 import com.os.common.validator.group.AddGroup;
 import com.os.common.validator.group.UpdateGroup;
+import com.os.modules.exp.entity.ExpUserDeptEntity;
+import com.os.modules.exp.service.ExpUserDeptService;
 import com.os.modules.sys.entity.SysUserEntity;
 import com.os.modules.sys.form.PasswordForm;
 import com.os.modules.sys.service.SysUserRoleService;
 import com.os.modules.sys.service.SysUserService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -35,6 +38,8 @@ public class SysUserController extends AbstractController {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
+	@Autowired
+	private ExpUserDeptService expUserDeptService;
 
 
 	/**
@@ -92,7 +97,10 @@ public class SysUserController extends AbstractController {
 
 		//获取用户所属的角色列表
 		List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
-		user.setRoleIdList(roleIdList);
+		user.setRoleId(CollectionUtils.isEmpty(roleIdList)?null:roleIdList.get(0));
+
+		List<ExpUserDeptEntity> list = expUserDeptService.queryByUser(userId);
+		user.setDeptId(CollectionUtils.isEmpty(list)?null:list.get(0).getDeptId());
 
 		return R.ok().put("user", user);
 	}

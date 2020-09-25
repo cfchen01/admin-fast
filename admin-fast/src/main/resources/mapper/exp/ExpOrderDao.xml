@@ -48,16 +48,46 @@
         LEFT JOIN exp_settle es ON eo.settle_code = es.settle_code
         LEFT JOIN sys_user su ON eo.user_id = su.user_id
         WHERE 1 = 1
-        <if test="param.deliverDate!=null and param.deliverDate.length>0">
+        <if test="param.deliverDate!=null and param.deliverDate != ''">
             and eo.deliver_date = #{param.deliverDate}
         </if>
-        <if test="param.status!=null and param.status.length>0">
+        <if test="param.status!=null and param.status != ''">
             and eo.status = #{param.status}
         </if>
-        <if test="param.settleCode!=null and param.settleCode.length>0">
+        <if test="param.settleCode!=null and param.settleCode != ''">
             and eo.settle_code = #{param.settleCode}
+        </if>
+        <if test="param.deptId !=null and param.deptId != ''">
+            and eo.dept_id = #{param.deptId}
+        </if>
+        <if test="param.userId!=null and param.userId!= ''">
+            and eo.user_id = #{param.userId}
         </if>
     </select>
 
+    <select id="getResume" resultType="int">
+        SELECT
+            SUM(t.advance + t.freight + t.delivery)
+        FROM
+            (
+                SELECT
+                    SUM(eo.advance) advance,
+                    SUM(eo.freight) freight,
+                    SUM(delivery) delivery
+                FROM
+                    exp_order eo
+                WHERE
+                    eo.`status` = #{param.status}
+                    and eo.deliver_date = #{param.deliverDate}
+                <if test="param.deptId !=null and param.deptId != ''">
+                    and eo.dept_id = #{param.deptId}
+                </if>
+                <if test="param.userId!=null and param.userId!= ''">
+                    and eo.user_id = #{param.userId}
+                </if>
+                GROUP BY
+                    eo.deliver_date
+            ) t
+    </select>
 
 </mapper>

@@ -21,4 +21,6 @@ public interface ExpOrderDao extends BaseMapper<ExpOrderEntity> {
 
     IPage<ExpOrderEntity> selectOrderPage(Page pager, @Param("param") Map<String, Object> param);
 
+    Integer getResume(@Param("param") Map<String, Object> param);
+
 }

@@ -1,6 +1,7 @@
 package com.os.modules.exp.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -40,6 +41,17 @@ public class ExpDepartmentController {
         PageUtils page = expDepartmentService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/all")
+//    @RequiresPermissions("exp:expdepartment:list")
+    public R all(){
+        List<ExpDepartmentEntity> list = expDepartmentService.queryAll();
+
+        return R.ok().put("list", list);
     }
 
 

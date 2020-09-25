@@ -21,4 +21,14 @@
 		select * from sys_user where username = #{username}
 	</select>
 
+	<select id="queryUserDetail" resultType="com.os.modules.sys.entity.SysUserEntity">
+		SELECT
+			su.*, sur.role_id, eud.dept_id
+		FROM
+			sys_user su
+		LEFT JOIN sys_user_role sur ON su.user_id = sur.user_id
+		LEFT JOIN exp_user_dept eud on su.user_id = eud.user_id
+		WHERE su.user_id = #{userId}
+	</select>
+
 </mapper>

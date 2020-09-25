@@ -11,6 +11,9 @@ import com.os.modules.exp.dao.ExpOrderPicDao;
 import com.os.modules.exp.entity.*;
 import com.os.modules.exp.service.*;
 import com.os.modules.exp.vo.OrderObjVo;
+import com.os.modules.sys.dao.SysUserDao;
+import com.os.modules.sys.entity.SysUserEntity;
+import com.os.modules.sys.service.SysUserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +57,8 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
     private ExpFileDao expFileDao;
     @Autowired
     private ExpOrderPicDao expOrderPicDao;
+    @Autowired
+    private SysUserDao sysUserDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -67,6 +72,15 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
 //                    .eq(StringUtils.isNotEmpty(MapUtils.mstr(params, "deliverDate")), ExpOrderEntity::getDeliverDate, MapUtils.mstr(params, "deliverDate"))
 //
 //        );
+        SysUserEntity entity = sysUserDao.queryUserDetail(UserUtils.getUserId());
+        //网点角色只能看到当前网点订单
+        if (3 == entity.getRoleId()) {
+            params.put("deptId", entity.getDeptId());
+        }
+        //业务员只能查看自己的订单
+        if (5 == entity.getRoleId()) {
+            params.put("userId", entity.getUserId());
+        }
         IPage<ExpOrderEntity> page = baseMapper.selectOrderPage(getPager(params), params);
         return new PageUtils(page);
     }
@@ -182,5 +196,10 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
         }
         record.setStatus(status);
         return this.updateById(record);
+    }
+
+    @Override
+    public Integer getResume(Map<String, Object> params) {
+        return baseMapper.getResume(params);
     }
 }

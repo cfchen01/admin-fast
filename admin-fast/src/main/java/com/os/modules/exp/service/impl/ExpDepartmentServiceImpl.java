@@ -3,6 +3,8 @@ package com.os.modules.exp.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.os.common.utils.MapUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -30,4 +32,8 @@ public class ExpDepartmentServiceImpl extends ServiceImpl<ExpDepartmentDao, ExpD
         return new PageUtils(page);
     }
 
+    @Override
+    public List<ExpDepartmentEntity> queryAll() {
+        return this.lambdaQuery().list();
+    }
 }

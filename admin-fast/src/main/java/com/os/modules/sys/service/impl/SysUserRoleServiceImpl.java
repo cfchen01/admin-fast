@@ -21,22 +21,20 @@ import java.util.List;
 public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleDao, SysUserRoleEntity> implements SysUserRoleService {
 
 	@Override
-	public void saveOrUpdate(Long userId, List<Long> roleIdList) {
+	public void saveOrUpdate(Long userId, Long roleId) {
 		//先删除用户与角色关系
 		this.removeByMap(new MapUtils().put("user_id", userId));
 
-		if(roleIdList == null || roleIdList.size() == 0){
+		if(roleId == null){
 			return ;
 		}
 
 		//保存用户与角色关系
-		for(Long roleId : roleIdList){
-			SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity();
-			sysUserRoleEntity.setUserId(userId);
-			sysUserRoleEntity.setRoleId(roleId);
+		SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity();
+		sysUserRoleEntity.setUserId(userId);
+		sysUserRoleEntity.setRoleId(roleId);
 
-			this.save(sysUserRoleEntity);
-		}
+		this.save(sysUserRoleEntity);
 	}
 
 	@Override

@@ -2,7 +2,7 @@
   <div>
     <div v-if="_isMobile()">
       <van-form validate-first @submit="doSubmit">
-        <van-field required v-model="dataForm.userName" label="用户名" name="validatorName" placeholder="用户名" :rules="[{ required: true, message: '请填写用户名' }]" />
+        <van-field required v-model="dataForm.userName" label="用户名" :readonly="this.dataForm.id != 0" name="validatorName" placeholder="用户名" :rules="[{ required: true, message: '请填写用户名' }]" />
         <van-field v-model="dataForm.password" label="密码" name="validator" type="password" placeholder="密码" :rules="[{ validator: passwordValidator, message: '请填写密码' }]" />
         <van-field v-model="dataForm.comfirmPassword" label="确认密码" name="asyncValidator" type="password" placeholder="确认密码" :rules="[{ validator: asyncValidator, message: '两次输入密码不一致' }]"/>
         <van-field v-model="dataForm.realname" label="真实姓名" placeholder="真实姓名"/>
@@ -10,12 +10,24 @@
         <van-field v-model="dataForm.mobile" label="手机号" placeholder="手机号"/>
         <van-field name="div"  label="角色" placeholder="角色">
           <template #input>
-            <el-select v-model="dataForm.roleIdList" multiple placeholder="请选择" size="mini">
+            <el-select v-model="dataForm.roleId" placeholder="请选择" size="mini" @change="onChange">
               <el-option
                       v-for="item in roleList"
                       :key="item.roleId"
                       :label="item.roleName"
                       :value="item.roleId">
+              </el-option>
+            </el-select>
+          </template>
+        </van-field>
+        <van-field name="div"  label="网点" placeholder="网点" v-if="dataForm.roleId == 3">
+          <template #input>
+            <el-select v-model="dataForm.deptId" placeholder="请选择" size="mini">
+              <el-option
+                      v-for="item in deptList"
+                      :key="item.id"
+                      :label="item.deptName"
+                      :value="item.id">
               </el-option>
             </el-select>
           </template>
@@ -38,7 +50,7 @@
     <div v-else>
       <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
         <el-form-item label="用户名" prop="userName">
-          <el-input v-model="dataForm.userName" placeholder="登录帐号"></el-input>
+          <el-input v-model="dataForm.userName" :readonly="this.dataForm.id != 0" placeholder="登录帐号"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password" :class="{ 'is-required': !dataForm.id }">
           <el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
@@ -56,9 +68,14 @@
           <el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
         </el-form-item>
         <el-form-item label="角色" size="mini" prop="roleIdList">
-          <el-checkbox-group v-model="dataForm.roleIdList">
-            <el-checkbox v-for="role in roleList" :key="role.roleId" :label="role.roleId">{{ role.roleName }}</el-checkbox>
-          </el-checkbox-group>
+          <el-radio-group v-model="dataForm.roleId" @change="onChange">
+            <el-radio :label="item.roleId" v-for="item in roleList">{{ item.roleName }}</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="网点" size="mini" prop="deptList" v-if="dataForm.roleId == 3">
+          <el-radio-group v-model="dataForm.deptId">
+            <el-radio :label="item.id" v-for="item in deptList">{{ item.deptName }}</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="状态" size="mini" prop="status">
           <el-radio-group v-model="dataForm.status">
@@ -78,6 +95,7 @@
 </template>
 
 <script>
+  import { Toast } from 'vant';
   export default {
     data () {
       var validatePassword = (rule, value, callback) => {
@@ -98,6 +116,7 @@
       }
       return {
         roleList: [],
+        deptList: [],
         dataForm: {
           id: 0,
           userName: '',
@@ -107,7 +126,8 @@
           salt: '',
           email: '',
           mobile: '',
-          roleIdList: [],
+          roleId: '',
+          deptId:'',
           status: 1
         },
         dataRule: {
@@ -126,9 +146,13 @@
         columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
       }
     },
+    components: {
+      Toast
+    },
     activated(){
       // if (this._isMobile()) {
       this.initForm();
+      this.getDeptList();
       this.init(this.$route.query.id);
       // }
     },
@@ -154,10 +178,24 @@
                 this.dataForm.salt = data.user.salt
                 this.dataForm.email = data.user.email
                 this.dataForm.mobile = data.user.mobile
-                this.dataForm.roleIdList = data.user.roleIdList
+                this.dataForm.roleId = data.user.roleId
+                this.dataForm.deptId = data.user.deptId
                 this.dataForm.status = data.user.status
               }
             })
+          }
+        })
+      },
+      getDeptList () {
+        this.$http({
+          url: this.$http.adornUrl('/exp/expdepartment/all'),
+          method: 'get',
+          params: this.$http.adornParams({})
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+            this.deptList = data.list
+          } else {
+            this.deptList = []
           }
         })
       },
@@ -171,7 +209,8 @@
           salt: '',
           email: '',
           mobile: '',
-          roleIdList: [],
+          roleId: '',
+          deptId: '',
           status: 1
         }
       },
@@ -197,7 +236,8 @@
             'email': this.dataForm.email,
             'mobile': this.dataForm.mobile,
             'status': this.dataForm.status,
-            'roleIdList': this.dataForm.roleIdList
+            'deptId': this.dataForm.deptId,
+            'roleId': this.dataForm.roleId
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
@@ -229,6 +269,13 @@
           return false
         } else {
           return true
+        }
+      },
+      onChange(val){
+        console.log('====-----',val)
+        console.log('====',this.dataForm.deptId)
+        if (val != 3) {
+          this.dataForm.deptId = ''
         }
       }
     }

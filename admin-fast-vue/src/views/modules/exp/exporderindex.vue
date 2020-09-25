@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ord-index">
     <div v-if="_isMobile()">
       <van-cell :value="dataForm.deliverDate" />
       <van-swipe-cell v-for="item in dataList">
@@ -20,9 +20,10 @@
               <span>
                 <van-tag plain v-if="item.status == 0" type="warning">未确认</van-tag>
                 <van-tag plain v-else-if="item.status == 1" type="success">已确认</van-tag>
-                <van-tag plain v-else type="danger">返单</van-tag>
+                <van-tag plain v-else-if="item.status == 2" type="danger">返单</van-tag>
+                <van-tag plain v-else="item.status == 3" type="danger">作废</van-tag>
               </span>
-              <span style="float: right">
+              <span style="float: right" v-if="isAuth('exp:exporder:status')">
                 <van-button size="mini" type="danger" :disabled="item.status != 0" @click="updateStatus(item.id, 2)">返单</van-button>
                 <van-button size="mini" type="info" :disabled="item.status != 0" @click="updateStatus(item.id, 1)">确认</van-button>
               </span>
@@ -33,12 +34,35 @@
 <!--            <van-button size="mini" type="info">确认</van-button>-->
 <!--          </template>-->
         </van-card>
-        <template #right>
+        <template #right v-if="isAuth('exp:exporder:edit')">
           <van-button square text="修改" type="info" class="delete-button" :disabled="item.status != 0" @click="addOrUpdateHandle(item.id)"/>
+          <van-button square text="作废" type="warning" class="delete-button" :disabled="item.status != 0" @click="updateStatus(item.id, 3)"/>
         </template>
         <van-divider />
       </van-swipe-cell>
       <van-empty v-if="dataList.length == 0" description="暂无记录"></van-empty>
+      <van-pagination
+              style="margin: 10px 0"
+              v-model="pageIndex"
+              :total-items="totalPage"
+              :items-per-page="pageSize"
+              force-ellipses
+              @change="currentChangeHandle"
+      />
+      <van-grid v-if="isAuth('order:list:dept') && dataList.length > 0" clickable :column-num="3">
+        <van-grid-item>
+          <span slots="icon" style="color: green">{{resumeN}}</span>
+          <span slots="text" style="font-size: 12px">当天未收费用</span>
+        </van-grid-item>
+        <van-grid-item>
+          <span slots="icon" style="color: red">{{resumeY}}</span>
+          <span slots="text" style="font-size: 12px">当天已收费用</span>
+        </van-grid-item>
+        <van-grid-item>
+          <span slots="icon">{{Number(resumeY)+Number(resumeN)}}</span>
+          <span slots="text" style="font-size: 12px">当天总费用</span>
+        </van-grid-item>
+      </van-grid>
     </div>
     <div v-else class="mod-config">
       <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
@@ -62,13 +86,21 @@
               <el-option label="未确认" :value="0">未确认</el-option>
               <el-option label="已确认" :value="1">已确认</el-option>
               <el-option label="返单" :value="2">返单</el-option>
+              <el-option label="作废" :value="3">作废</el-option>
+            </el-select>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <div class="block">
+            <el-select v-model="dataForm.deptId" placeholder="网点" clearable>
+              <el-option v-for="item in deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
             </el-select>
           </div>
         </el-form-item>
         <el-form-item>
           <el-button @click="getDataList()">查询</el-button>
-          <el-button v-if="isAuth('exp:exporder:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-<!--          <el-button v-if="isAuth('exp:exporder:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
+          <el-button type="primary" @click="addOrUpdateHandle()" v-if="isAuth('exp:exporder:edit')">新增</el-button>
+<!--          <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
         </el-form-item>
       </el-form>
       <el-table
@@ -126,12 +158,13 @@
         <el-table-column
                 header-align="center"
                 align="center"
-                width="160"
+                width="180"
                 label="操作">
           <template slot-scope="scope">
-            <el-button type="text" size="small" :disabled="scope.row.status != 0" @click="updateStatus(scope.row.id, 1)">确认</el-button>
-            <el-button type="text" size="small" :disabled="scope.row.status != 0" @click="updateStatus(scope.row.id, 2)">返单</el-button>
-            <el-button type="text" size="small" :disabled="scope.row.status != 0" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+            <el-button v-if="isAuth('exp:exporder:status')" type="text" size="small" :disabled="scope.row.status != 0" @click="updateStatus(scope.row.id, 1)">确认</el-button>
+            <el-button v-if="isAuth('exp:exporder:status')" type="text" size="small" :disabled="scope.row.status != 0" @click="updateStatus(scope.row.id, 2)">返单</el-button>
+            <el-button v-if="isAuth('exp:exporder:edit')" type="text" size="small" :disabled="scope.row.status != 0" @click="updateStatus(scope.row.id, 3)">作废</el-button>
+            <el-button v-if="isAuth('exp:exporder:edit')" type="text" size="small" :disabled="scope.row.status != 0" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
             <el-button type="text" size="small" @click="viewHandle(scope.row.id)">详情</el-button>
           </template>
         </el-table-column>
@@ -163,7 +196,8 @@
         dataForm: {
           status: '',
           settleCode:'',
-          deliverDate: ''
+          deliverDate: '',
+          deptId: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -177,7 +211,10 @@
           {
             return time.getTime() > Date.now();
           }
-        }
+        },
+        deptList:[],
+        resumeY:0,
+        resumeN:0
       }
     },
     components: {
@@ -190,6 +227,8 @@
       this.dataForm.settleCode = this.$route.query.settleCode || ''
       this.dataForm.deliverDate = this.$route.query.deliverDate || new Date().format('yyyy-MM-dd')
       this.getDataList()
+      this.getDeptList()
+      this.getResume()
     },
     methods: {
       // 获取数据列表
@@ -202,6 +241,7 @@
             'page': this.pageIndex,
             'limit': this.pageSize,
             'status': this.dataForm.status,
+            'deptId': this.dataForm.deptId,
             'settleCode': this.dataForm.settleCode,
             'deliverDate': this.dataForm.deliverDate
           })
@@ -216,12 +256,39 @@
           this.dataListLoading = false
         })
       },
+      getDeptList () {
+        this.$http({
+          url: this.$http.adornUrl('/exp/expdepartment/all'),
+          method: 'get',
+          params: this.$http.adornParams({})
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+            this.deptList = data.list
+          } else {
+            this.deptList = []
+          }
+        })
+      },
+      getResume () {
+        this.$http({
+          url: this.$http.adornUrl('/exp/exporder/resume'),
+          method: 'get',
+          params: this.$http.adornParams({'deliverDate': this.dataForm.deliverDate})
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+            this.resumeY = data.value1
+            this.resumeN = data.value2
+          }
+        })
+      },
       updateStatus(id, status){
         let msg = ''
         if (status == 1) {
           msg = '确认'
         } else if (status == 2) {
           msg = '返单'
+        } else if (status == 3) {
+          msg = '作废'
         }
         Dialog.confirm({
           title: '系统提示',
@@ -311,16 +378,25 @@
         if (status == 0) {
           return '返单'
         }
+        if (status == 3) {
+          return '作废'
+        }
         return ''
       }
     }
   }
 </script>
-<style>
-  .delete-button {
-    height: 100% !important;
+<style lang="scss">
+  .ord-index{
+    .van-grid-item__content{
+      padding: 4px;
+    }
+    .delete-button {
+      height: 100% !important;
+    }
+    .van-divider{
+      margin: 0 !important;
+    }
   }
-  .van-divider{
-    margin: 0 !important;
-  }
+
 </style>

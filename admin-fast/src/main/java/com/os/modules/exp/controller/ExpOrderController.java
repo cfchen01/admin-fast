@@ -44,6 +44,20 @@ public class ExpOrderController extends AbstractController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 列表
+     */
+    @RequestMapping("/resume")
+//    @RequiresPermissions("exp:exporder:list")
+    public R resume(@RequestParam Map<String, Object> params){
+        params.put("status", 1);
+        Integer value1 = expOrderService.getResume(params);
+        params.put("status", 0);
+        Integer value2 = expOrderService.getResume(params);
+
+        return R.ok().put("value1", value1==null?0:value1).put("value2",value2==null?0:value2);
+    }
+
 
     /**
      * 信息

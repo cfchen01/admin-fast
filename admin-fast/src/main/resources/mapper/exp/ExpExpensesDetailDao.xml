@@ -8,13 +8,14 @@
         <result property="id" column="id"/>
         <result property="money" column="money"/>
         <result property="userId" column="user_id"/>
+        <result property="expDesc" column="exp_desc"/>
         <result property="createDate" column="create_date"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 
     <select id="getMonthList" resultMap="expExpensesDetailMap">
         SELECT
-            eep.id, SUM(eep.money) AS money, eep.user_id, eep.create_date, eep.create_time
+            eep.id, eep.exp_desc, SUM(eep.money) AS money, eep.user_id, eep.create_date, eep.create_time
         FROM
             exp_expenses_detail eep
         WHERE

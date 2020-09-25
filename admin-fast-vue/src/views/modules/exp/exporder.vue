@@ -7,6 +7,7 @@
             <el-option label="未确认" :value="0">未确认</el-option>
             <el-option label="已确认" :value="1">已确认</el-option>
             <el-option label="返单" :value="2">返单</el-option>
+            <el-option label="作废" :value="3">作废</el-option>
           </el-select>
         </template>
       </van-field>
@@ -38,7 +39,7 @@
         </van-button>
       </div>
     </van-form>
-    <div style="margin: 20px;">
+    <div style="margin: 20px;" v-if="isAuth('exp:exporder:edit')">
       <van-button round block type="primary" size="small" @click="addOrder()">
         录单
       </van-button>

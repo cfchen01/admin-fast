@@ -5,6 +5,7 @@ import com.os.common.utils.PageUtils;
 import com.os.modules.exp.entity.ExpOrderEntity;
 import com.os.modules.exp.entity.ExpUserMoneyEntity;
 import com.os.modules.exp.vo.OrderObjVo;
+import io.swagger.models.auth.In;
 
 import java.util.Map;
 
@@ -33,6 +34,8 @@ public interface ExpOrderService extends IService<ExpOrderEntity> {
     OrderObjVo getOrderObjVo();
 
     Boolean updateStatus(Map<String, Object> params);
+
+    Integer getResume(Map<String, Object> params);
 
 
 }

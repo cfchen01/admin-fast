@@ -6,14 +6,17 @@
             left-text="退出"
             :right-text="realName"
             @click-left="onQuit"
+             fixed
            @click-right="onClickRight"
     />
     <van-nav-bar v-else
             :title="menuActiveName"
             left-text="返回"
             left-arrow
+             fixed
             @click-left="onClickLeft"
     />
+    <div style="margin-top: 46px"></div>
     <keep-alive>
       <router-view />
     </keep-alive>
