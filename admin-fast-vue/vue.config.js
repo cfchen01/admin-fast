@@ -32,7 +32,8 @@ module.exports = {
     },
 
     // 输出文件目录
-    outputDir: '../admin-fast/src/main/resources/static/',
+    outputDir: './fastapp' +
+        '',
     assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
 
     // alias 配置

@@ -1,5 +1,6 @@
 package com.os.modules.exp.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -38,6 +39,10 @@ public class ExpComDaySettleEntity implements Serializable {
 	 */
 	private Integer comAdvance;
 	/**
+	 * 公司送货费
+	 */
+	private Integer comDelivery;
+	/**
 	 * 总支出
 	 */
 	private Integer totalExpenses;
@@ -65,5 +70,11 @@ public class ExpComDaySettleEntity implements Serializable {
 	 * 结算状态--0、未结算，1、已结算
 	 */
 	private Integer status;
+
+	/**
+	 * 是否可以核算
+	 */
+	@TableField(exist = false)
+	private Boolean canSubmit;
 
 }

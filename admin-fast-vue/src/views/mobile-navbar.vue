@@ -12,9 +12,11 @@
     <van-nav-bar v-else
             :title="menuActiveName"
             left-text="返回"
+             right-text="首页"
             left-arrow
              fixed
             @click-left="onClickLeft"
+           @click-right="toHome"
     />
     <div style="margin-top: 46px"></div>
     <keep-alive>
@@ -93,6 +95,9 @@
       },
       onClickLeft() {
         this.$router.go(-1)
+      },
+      toHome(){
+        this.$router.replace({ name: 'home' })
       },
       onClickRight(){
         console.log('========')

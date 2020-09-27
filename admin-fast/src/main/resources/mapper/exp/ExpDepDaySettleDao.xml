@@ -22,4 +22,19 @@
     </resultMap>
 
 
+    <select id="getDeptMonthSettle" resultMap="expDepDaySettleMap">
+        SELECT
+            SUM(ecd.income) income,
+            ecd.deliver_month,
+            ecd.status
+        FROM
+            exp_dep_day_settle ecd
+        WHERE
+            ecd.`status` = 1
+        AND ecd.deliver_month = #{deliverDate}
+        and ecd.dept_id = #{deptId}
+        GROUP BY
+            ecd.deliver_month
+    </select>
+
 </mapper>

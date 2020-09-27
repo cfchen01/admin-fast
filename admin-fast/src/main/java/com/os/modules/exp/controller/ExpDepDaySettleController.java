@@ -1,8 +1,10 @@
 package com.os.modules.exp.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.os.modules.exp.dto.SettleDto;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +54,17 @@ public class ExpDepDaySettleController {
 		ExpDepDaySettleEntity expDepDaySettle = expDepDaySettleService.getById(id);
 
         return R.ok().put("expDepDaySettle", expDepDaySettle);
+    }
+
+    /**
+     * 信息
+     */
+    @RequestMapping("/settle/list")
+//    @RequiresPermissions("exp:expdepdaysettle:info")
+    public R settleList(@RequestBody SettleDto settleDto){
+        List<ExpDepDaySettleEntity> list = expDepDaySettleService.getSettleList(settleDto);
+
+        return R.ok().put("list", list);
     }
 
     /**

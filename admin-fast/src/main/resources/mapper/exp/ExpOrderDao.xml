@@ -66,6 +66,15 @@
         <if test="param.sDate!=null and param.sDate!= ''">
             and eo.deliver_date BETWEEN #{param.sDate} and #{param.eDate}
         </if>
+        <if test="param.advance!=null and param.advance!= ''">
+            and eo.advance > 0
+        </if>
+        <if test="param.delivery!=null and param.delivery!= ''">
+            and eo.delivery > 0
+        </if>
+        <if test="param.freight!=null and param.freight!= ''">
+            and eo.freight > 0
+        </if>
     </select>
 
     <select id="getResume" resultType="int">
@@ -91,6 +100,23 @@
                 GROUP BY
                     eo.deliver_date
             ) t
+    </select>
+
+    <select id="getOrderResume" resultType="map">
+        SELECT
+        SUM(eo.freight) freight, SUM(eo.delivery) delivery, SUM(eo.advance) advance, SUM(eo.advance_in) advanceIn
+        FROM
+        exp_order eo
+        WHERE
+        eo.deliver_date = #{deliverDate}
+        and eo.`status` in (0, 1)
+        <if test="deptId !=null and deptId != ''">
+            and eo.dept_id = #{deptId}
+        </if>
+        <if test="settleCode !=null and settleCode != ''">
+            and eo.settle_code = #{settleCode}
+        </if>
+        GROUP BY eo.deliver_date
     </select>
 
 </mapper>

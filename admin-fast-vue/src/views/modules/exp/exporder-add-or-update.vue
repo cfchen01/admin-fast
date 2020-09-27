@@ -79,13 +79,15 @@
       <van-cell-group title="备注信息">
         <van-field v-model="dataForm.remark" label="备注" placeholder="备注（选填）" type="textarea" :maxlength="255" :readonly="isView"/>
         <van-field name="uploader" label="图片" >
-          <template v-if="uploader.length == 0" #input>
+          <template v-if="uploader.length == 0 && isView" #input>
             <span>无</span>
           </template>
           <template v-else #input>
             <van-uploader v-model="uploader" :max-count="3"
                           :after-read="uploadImg"
                           :before-delete="beforeDelete"
+                          :max-size="2 * 1024 * 1024"
+                          @oversize="onOversize"
                           :deletable="!isView" :show-upload="!isView"/>
           </template>
         </van-field>
@@ -236,7 +238,7 @@
         }).then(({data}) => {
           if (data && data.code === 0) {
             Toast('操作成功');
-            this.$router.push({path: '/order-index'})
+            this.$router.go(-1)
           } else {
             this.$message.error(data.msg)
           }
@@ -258,6 +260,10 @@
       },
       doBack(){
         this.$router.go(-1)
+      },
+      onOversize(file) {
+        console.log(file);
+        Toast('文件大小不能超过 2M');
       },
       beforeDelete(file, detail){
         this.dataForm.fileList.splice(detail.index ,1)

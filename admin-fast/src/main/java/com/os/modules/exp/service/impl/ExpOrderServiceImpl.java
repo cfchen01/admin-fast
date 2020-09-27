@@ -17,9 +17,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +68,7 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
 //                    .eq(StringUtils.isNotEmpty(MapUtils.mstr(params, "deliverDate")), ExpOrderEntity::getDeliverDate, MapUtils.mstr(params, "deliverDate"))
 //
 //        );
-        //日期肖燏10位位按月查询
+        //日期小于10位位按月查询
         String deliverDate = MapUtils.mstr(params, "deliverDate");
         if (StringUtils.isNotEmpty(deliverDate) && deliverDate.length()<10) {
             params.put("sDate", DateUtils.getFirstDayOfMonth(deliverDate).toString());

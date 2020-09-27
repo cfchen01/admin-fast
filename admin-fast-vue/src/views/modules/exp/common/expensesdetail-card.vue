@@ -8,7 +8,7 @@
             <span style="color: #999999">{{item.createTime}}</span>
           </template>
           <template #label>
-            <span style="color: #999999">{{item.expDesc}}</span>
+            <span style="color: #999999">描述：{{item.expDesc}}</span>
           </template>
         </van-cell>
         <van-empty v-if="dataList.length == 0" description="暂无记录" />

@@ -3,6 +3,7 @@ package com.os.modules.exp.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.os.modules.exp.dto.SettleDto;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,16 +56,24 @@ public class ExpComDaySettleController {
     }
 
     /**
-     * 信息
+     * 获取已经结算的账单
      */
     @RequestMapping("/detail")
 //    @RequiresPermissions("exp:expcomdaysettle:info")
-    public R detail(@RequestParam Map<String, Object> params){
-		ExpComDaySettleEntity expComDaySettle = expComDaySettleService.getByDeliverType(params);
+    public R detail(@RequestBody SettleDto settleDto){
+		ExpComDaySettleEntity expComDaySettle = expComDaySettleService.getSettleDetail(settleDto);
 
-		if (expComDaySettle == null) {
-		    return R.error(403, "当前时间尚未结算");
-        }
+        return R.ok().put("expComDaySettle", expComDaySettle);
+    }
+
+    /**
+     * 获取账单
+     */
+    @RequestMapping("/settle")
+//    @RequiresPermissions("exp:expcomdaysettle:info")
+    public R settle(@RequestBody SettleDto settleDto){
+        ExpComDaySettleEntity expComDaySettle = expComDaySettleService.getDeliverSettle(settleDto);
+
         return R.ok().put("expComDaySettle", expComDaySettle);
     }
 
@@ -74,10 +83,33 @@ public class ExpComDaySettleController {
     @RequestMapping("/save")
 //    @RequiresPermissions("exp:expcomdaysettle:save")
     public R save(@RequestBody ExpComDaySettleEntity expComDaySettle){
-		expComDaySettleService.save(expComDaySettle);
+        expComDaySettleService.save(expComDaySettle);
 
         return R.ok();
     }
+
+    /**
+     * 修改结算状态
+     */
+    @RequestMapping("/update/settle")
+//    @RequiresPermissions("exp:expcomdaysettle:update")
+    public R updateSettle(@RequestBody SettleDto settleDto){
+        expComDaySettleService.updateSettle(settleDto);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改日常支出
+     */
+    @RequestMapping("/update/expenses")
+//    @RequiresPermissions("exp:expcomdaysettle:update")
+    public R updateDailyExpenses(@RequestParam Map<String, Object> params){
+        expComDaySettleService.updateDailyExpenses(params);
+
+        return R.ok();
+    }
+
 
     /**
      * 修改

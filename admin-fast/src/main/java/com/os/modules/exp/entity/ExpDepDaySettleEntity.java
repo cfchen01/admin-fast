@@ -1,5 +1,6 @@
 package com.os.modules.exp.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -81,5 +82,10 @@ public class ExpDepDaySettleEntity implements Serializable {
 	 * 结算状态--0、未结算，1、已结算
 	 */
 	private Integer status;
+	/**
+	 * 网点名称
+	 */
+	@TableField(exist = false)
+	private String deptName;
 
 }

@@ -12,25 +12,30 @@
                 @click="showPicker = true"
         />
         <van-calendar v-model="showPicker" @confirm="onConfirm" :show-confirm="false" :min-date="minDate" :max-date="maxDate"/>
-        <van-grid clickable :column-num="2">
-          <van-grid-item @click="clickDayOut">
-            <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
-            <span slots="text" style="padding: 5px">日支出金额</span>
-          </van-grid-item>
-          <van-grid-item @click="clickDayIn">
-            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
-            <span slots="text" style="padding: 5px">日收入金额</span>
-          </van-grid-item>
-        </van-grid>
-        <van-grid clickable :column-num="1">
-          <van-grid-item>
-            <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">{{dataForm.profit}}</span>
-            <span slots="text" style="padding: 5px">公司日盈利</span>
-          </van-grid-item>
-        </van-grid>
-        <van-dialog v-model="showDay" show-cancel-button>
-          <ExpensesdetailCard ref="dayCard"></ExpensesdetailCard>
-        </van-dialog>
+        <div v-if="dataForm.status == 1" v-loading="onLoading">
+          <van-grid clickable :column-num="2">
+            <van-grid-item @click="clickDayOut">
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
+              <span slots="text" style="padding: 5px">日支出金额</span>
+            </van-grid-item>
+            <van-grid-item @click="clickDayIn">
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
+              <span slots="text" style="padding: 5px">日收入金额</span>
+            </van-grid-item>
+          </van-grid>
+          <van-grid clickable :column-num="1">
+            <van-grid-item>
+              <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">{{dataForm.profit}}</span>
+              <span slots="text" style="padding: 5px">公司日盈利</span>
+            </van-grid-item>
+          </van-grid>
+          <van-dialog v-model="showDay" show-cancel-button>
+            <ExpensesdetailCard ref="dayCard"></ExpensesdetailCard>
+          </van-dialog>
+        </div>
+        <div v-else style="margin-top: 60px">
+          <van-empty image="error" description="当前时间尚未结算" />
+        </div>
       </van-tab>
       <van-tab title="按月查询">
         <van-field
@@ -51,25 +56,30 @@
                   @cancel="showMonthPicker = false"
           />
         </van-popup>
-        <van-grid clickable :column-num="2">
-          <van-grid-item @click="clickMonthOut">
-            <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
-            <span slots="text" style="padding: 5px">月支出金额</span>
-          </van-grid-item>
-          <van-grid-item @click="clickMonthIn">
-            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
-            <span slots="text" style="padding: 5px">月收入金额</span>
-          </van-grid-item>
-        </van-grid>
-        <van-grid clickable :column-num="1">
-          <van-grid-item>
-            <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">{{dataForm.profit}}</span>
-            <span slots="text" style="padding: 5px">公司月盈利</span>
-          </van-grid-item>
-        </van-grid>
-        <van-dialog v-model="showMonth" show-cancel-button>
-          <ExpensesdetailCard ref="monthCard"></ExpensesdetailCard>
-        </van-dialog>
+        <div v-if="dataForm.status == 1"  v-loading="onLoading">
+          <van-grid clickable :column-num="2">
+            <van-grid-item @click="clickMonthOut">
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
+              <span slots="text" style="padding: 5px">月支出金额</span>
+            </van-grid-item>
+            <van-grid-item @click="clickMonthIn">
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
+              <span slots="text" style="padding: 5px">月收入金额</span>
+            </van-grid-item>
+          </van-grid>
+          <van-grid clickable :column-num="1">
+            <van-grid-item>
+              <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">{{dataForm.profit}}</span>
+              <span slots="text" style="padding: 5px">公司月盈利</span>
+            </van-grid-item>
+          </van-grid>
+          <van-dialog v-model="showMonth" show-cancel-button>
+            <ExpensesdetailCard ref="monthCard"></ExpensesdetailCard>
+          </van-dialog>
+        </div>
+        <div v-else style="margin-top: 60px">
+          <van-empty image="error" description="当前时间尚未结算" />
+        </div>
       </van-tab>
     </van-tabs>
   </div>
@@ -105,6 +115,7 @@
         },
         showDay:false,
         showMonth:false,
+        onLoading:false
       }
     },
     components: {
@@ -123,14 +134,15 @@
     },
     methods: {
       getComSettle(){
+        this.onLoading = true
         var keyword = this.deliverDate
         if (this.curTab) {
           keyword = this.deliverMonth
         }
         this.$http({
           url: this.$http.adornUrl(`/exp/expcomdaysettle/detail`),
-          method: 'get',
-          params: this.$http.adornParams({'keyword':keyword, 'type':this.curTab})
+          method: 'post',
+          data: this.$http.adornData({'deliverDate':keyword, 'type':this.curTab})
         }).then(({data}) => {
           if (data && data.code === 0) {
             this.dataForm = data.expComDaySettle
@@ -138,6 +150,7 @@
             this.dataForm = []
             Toast(data.msg);
           }
+          this.onLoading = false
         })
       },
       onClick(name, title){

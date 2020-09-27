@@ -41,11 +41,26 @@ http.interceptors.response.use(response => {
               Vue.prototype.$message.error(resMsg)
             }
         }
-    }
+    } esl
 
     return response
 }, error => {
-  return Promise.reject(error)
+    let resMsg = "连接服务器异常"
+    console.log(error)
+    if(error.response && error.response.data){
+        if(error.response.data.code === '401'){
+            toAuthLogin()
+            return
+        }else if(error.response.data.message){
+            resMsg = error.response.data.message
+            if("用户未登录" === resMsg){
+                toAuthLogin()
+                return
+            }
+        }
+    }
+    Vue.prototype.$message.error(resMsg)
+    return Promise.reject(error)
 })
 
 /**

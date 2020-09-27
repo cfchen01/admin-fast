@@ -9,6 +9,7 @@
         <result property="dailyExpenses" column="daily_expenses"/>
         <result property="freightIncome" column="freight_income"/>
         <result property="comAdvance" column="com_advance"/>
+        <result property="comDelivery" column="com_delivery"/>
         <result property="totalExpenses" column="total_expenses"/>
         <result property="totalIncome" column="total_income"/>
         <result property="profit" column="profit"/>
@@ -25,10 +26,11 @@
             SUM(ecd.total_expenses) total_expenses,
             SUM(ecd.total_income) total_income,
             SUM(ecd.profit) profit,
+            ecd.status,
             ecd.deliver_month
         FROM
             exp_com_day_settle ecd
-        WHERE ecd.`status` = 1 and ecd.deliver_month = #{keyword}
+        WHERE ecd.`status` = 1 and ecd.deliver_month = #{deliverDate}
         GROUP BY
             ecd.deliver_month
     </select>

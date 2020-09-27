@@ -272,8 +272,6 @@
         }
       },
       onChange(val){
-        console.log('====-----',val)
-        console.log('====',this.dataForm.deptId)
         if (val != 3) {
           this.dataForm.deptId = ''
         }

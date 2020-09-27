@@ -20,7 +20,7 @@
               placeholder="密码"
               :rules="[{ required: true, message: '请填写密码' }]"
       />
-      <div style="margin: 16px;">
+      <div style="margin-top: 30px; padding: 16px">
         <van-button round block type="info" native-type="submit" size="small">
           登 录
         </van-button>

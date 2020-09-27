@@ -14,5 +14,17 @@
         <result property="deliverDate" column="deliver_date"/>
     </resultMap>
 
+    <select id="getUserSettle" resultType="map">
+        SELECT
+            SUM(eum.money_all) moneyAll, SUM(eum.money_in) moneyIn
+        FROM
+            exp_user_money eum
+        WHERE eum.deliver_date = #{deliverDate}
+        <if test="deptId !=null and deptId != ''">
+            and eum.dept_id = #{deptId}
+        </if>
+        GROUP BY eum.deliver_date
+    </select>
+
 
 </mapper>
