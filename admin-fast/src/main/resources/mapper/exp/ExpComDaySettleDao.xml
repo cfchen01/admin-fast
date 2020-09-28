@@ -23,6 +23,7 @@
             SUM(ecd.daily_expenses) daily_expenses,
             SUM(ecd.freight_income) freight_income,
             SUM(ecd.com_advance) com_advance,
+            SUM(ecd.com_delivery) com_delivery ,
             SUM(ecd.total_expenses) total_expenses,
             SUM(ecd.total_income) total_income,
             SUM(ecd.profit) profit,

@@ -8,7 +8,8 @@
     />
     <van-form validate-first @submit="dataFormSubmit">
       <van-cell-group title="录单人">
-        <van-field readonly :value="realName"></van-field>
+        <van-field v-if="!isView" readonly :value="realName"></van-field>
+        <van-field v-else readonly :value="dataForm.realname"></van-field>
       </van-cell-group>
       <van-field readonly name="calendar" :value="dataForm.deliverDate" required label="发货日期" placeholder="点击选择日期" @click="selectDate"/>
       <van-calendar v-model="showCalendar" @confirm="onConfirm" :show-confirm="false" :min-date="minDate" :disabled="isView"/>
@@ -130,6 +131,10 @@
       realName: {
         get () { return this.$store.state.user.nick },
         set (val) { this.$store.commit('user/updateNick', val) }
+      },
+      menuActiveName: {
+        get () { return this.$store.state.common.menuActiveName },
+        set (val) { this.$store.commit('common/updateMenuActiveName', val) }
       },
       totalMoney:{
         get () {

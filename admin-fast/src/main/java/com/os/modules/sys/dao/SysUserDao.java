@@ -36,4 +36,6 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 
 	SysUserEntity queryUserDetail(Long userId);
 
+	List<SysUserEntity> getUserByRole(Long roleId);
+
 }

@@ -122,6 +122,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 				new QueryWrapper<SysUserEntity>().eq("user_id", userId).eq("password", password));
 	}
 
+	@Override
+	public List<SysUserEntity> getUserAll() {
+		return baseMapper.getUserByRole(3L);
+	}
+
 	/**
 	 * 检查角色是否越权
 	 */

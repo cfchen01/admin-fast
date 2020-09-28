@@ -100,7 +100,9 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
     public ExpOrderEntity getDetailById(Integer id) {
         ExpOrderEntity expOrderEntity = this.getById(id);
         List<ExpFileEntity> list = expFileDao.selectPicByOrder(id);
+        SysUserEntity sysUserEntity = sysUserDao.selectById(expOrderEntity.getUserId());
         expOrderEntity.setFileList(list);
+        expOrderEntity.setRealname(sysUserEntity.getRealname());
         return expOrderEntity;
     }
 

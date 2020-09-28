@@ -57,6 +57,14 @@ public class SysUserController extends AbstractController {
 		return R.ok().put("page", page);
 	}
 
+	@GetMapping("/all")
+//	@RequiresPermissions("sys:user:list")
+	public R all(){
+		List<SysUserEntity> list = sysUserService.getUserAll();
+
+		return R.ok().put("list", list);
+	}
+
 	/**
 	 * 获取登录的用户信息
 	 */

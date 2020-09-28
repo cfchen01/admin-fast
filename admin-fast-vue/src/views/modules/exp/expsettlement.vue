@@ -84,15 +84,15 @@
             <el-row style="margin: 10px 0;" :gutter="20">
                 <el-col :span="4" style="text-align: center">
                     <van-grid clickable :border="false" :column-num="1">
-                        <van-grid-item>
+                        <van-grid-item @click="showExpOdrList('freight')">
                             <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.freightIncome}}</span>
                             <span slots="text" style="padding: 5px">公司运费收入</span>
                         </van-grid-item>
                     </van-grid>
                 </el-col>
                 <el-col :span="4" style="text-align: center">
-                    <van-grid :border="false" :column-num="1">
-                        <van-grid-item>
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item @click="showExpOdrList('advance')">
                             <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.comAdvance}}</span>
                             <span slots="text" style="padding: 5px">公司垫费</span>
                         </van-grid-item>
@@ -100,7 +100,7 @@
                 </el-col>
                 <el-col :span="4" style="text-align: center">
                     <van-grid clickable :border="false" :column-num="1">
-                        <van-grid-item>
+                        <van-grid-item @click="showExpOdrList('delivery')">
                             <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.comDelivery}}</span>
                             <span slots="text" style="padding: 5px">网点送货费</span>
                         </van-grid-item>
@@ -165,6 +165,7 @@
         <van-dialog v-model="showDialog" show-cancel-button>
             <ExpensesdetailCard ref="monthCard"></ExpensesdetailCard>
         </van-dialog>
+        <ExporderList v-if="exporderListShow" ref="exporderList"></ExporderList>
     </div>
 
 </template>
@@ -172,6 +173,7 @@
 <script>
     import helper from '@/utils/helper'
     import ExpensesdetailCard from './common/expensesdetail-card'
+    import ExporderList from './common/exporder-list'
     import { Toast } from 'vant';
     export default {
         data () {
@@ -211,12 +213,14 @@
                     }
                 },
                 showDialog:false,
-                onLoading:false
+                onLoading:false,
+                exporderListShow:false
             }
         },
         components: {
             Toast,
-            ExpensesdetailCard
+            ExpensesdetailCard,
+            ExporderList
         },
         created(){
             this.deliverDate = new Date().format('yyyy-MM-dd');
@@ -338,6 +342,16 @@
                 }
                 this.$nextTick(() => {
                     this.$refs.monthCard.init(keyword, type)
+                })
+            },
+            showExpOdrList(type){
+                let value = this.deliverDate
+                if (this.curTab == 1) {
+                    value = this.deliverMonth
+                }
+                this.exporderListShow = true;
+                this.$nextTick(() => {
+                    this.$refs.exporderList.init(value, type)
                 })
             }
         }

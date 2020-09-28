@@ -66,14 +66,19 @@
         <if test="param.sDate!=null and param.sDate!= ''">
             and eo.deliver_date BETWEEN #{param.sDate} and #{param.eDate}
         </if>
-        <if test="param.advance!=null and param.advance!= ''">
-            and eo.advance > 0
-        </if>
-        <if test="param.delivery!=null and param.delivery!= ''">
-            and eo.delivery > 0
-        </if>
-        <if test="param.freight!=null and param.freight!= ''">
-            and eo.freight > 0
+        <if test="param.moneyType!=null and param.moneyType!= ''">
+            and eo.`status` in (0, 1)
+            <choose>
+                <when test="param.moneyType == 'delivery'">
+                    AND eo.delivery > 0
+                </when>
+                <when test="param.moneyType == 'freight'">
+                    AND eo.freight > 0
+                </when>
+                <when test="param.moneyType == 'advance'">
+                    AND eo.advance > 0
+                </when>
+            </choose>
         </if>
     </select>
 

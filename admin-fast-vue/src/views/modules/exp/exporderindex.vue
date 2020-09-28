@@ -57,7 +57,15 @@
         <el-form-item>
           <div class="block">
             <el-select v-model="dataForm.deptId" placeholder="网点" clearable>
-              <el-option v-for="item in deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
+              <el-option v-for="item in orderVo.deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
+            </el-select>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <div class="block">
+            <el-select v-model="dataForm.settleCode" placeholder="请选择结算方式" clearable>
+              <el-option v-for="item in orderVo.settleList" :key="item.settleCode" :label="item.settleName" :value="item.settleCode">
+              </el-option>
             </el-select>
           </div>
         </el-form-item>
@@ -93,10 +101,10 @@
                 label="订单码">
         </el-table-column>
         <el-table-column
-                prop="goodsName"
+                prop="realname"
                 header-align="center"
                 align="center"
-                label="货物">
+                label="录单员">
         </el-table-column>
         <el-table-column
                 prop="settleName"
@@ -177,7 +185,10 @@
             return time.getTime() > Date.now();
           }
         },
-        deptList:[],
+        orderVo:{
+          settleList:[],
+          deptList:[]
+        },
         resumeY:0,
         resumeN:0
       }
@@ -189,11 +200,21 @@
       ExporderCard
     },
     activated () {
-      this.dataForm.status = this.$route.query.status || ''
-      this.dataForm.settleCode = this.$route.query.settleCode || ''
-      this.dataForm.deliverDate = this.$route.query.deliverDate || new Date().format('yyyy-MM-dd')
+      console.log('this.dataForm.deliverDate',this.dataForm.deliverDate)
+      if (this.$route.query.status) {
+        this.dataForm.status = this.$route.query.status
+      }
+      if (this.$route.query.deliverDate) {
+        this.dataForm.deliverDate = this.$route.query.deliverDate
+      }
+      if (!this.dataForm.deliverDate) {
+        this.dataForm.deliverDate = new Date().format('yyyy-MM-dd')
+      }
+      if (this.$route.query.settleCode) {
+        this.dataForm.settleCode = this.$route.query.settleCode
+      }
       this.getDataList()
-      this.getDeptList()
+      this.getOrderVo()
       this.getResume()
     },
     methods: {
@@ -222,16 +243,14 @@
           this.dataListLoading = false
         })
       },
-      getDeptList () {
+      getOrderVo(){
         this.$http({
-          url: this.$http.adornUrl('/exp/expdepartment/all'),
+          url: this.$http.adornUrl(`/exp/exporder/orderVo`),
           method: 'get',
-          params: this.$http.adornParams({})
+          params: this.$http.adornParams()
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.deptList = data.list
-          } else {
-            this.deptList = []
+            this.orderVo = data.orderObjVo
           }
         })
       },
