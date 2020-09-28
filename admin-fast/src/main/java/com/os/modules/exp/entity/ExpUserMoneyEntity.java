@@ -1,5 +1,6 @@
 package com.os.modules.exp.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -49,5 +50,15 @@ public class ExpUserMoneyEntity implements Serializable {
 	 * 结算日期
 	 */
 	private LocalDate deliverDate;
+	/**
+	 * 业务员已提交费用增量
+	 */
+	@TableField(exist = false)
+	private Integer moneyAdd = 0;
+	/**
+	 * 录单员名称
+	 */
+	@TableField(exist = false)
+	private String realname;
 
 }

@@ -69,6 +69,8 @@ import {
   Transfer,
   Container,
   Header,
+  PageHeader,
+  Divider,
   Aside,
   Main,
   Footer,
@@ -138,6 +140,8 @@ Vue.use(ColorPicker)
 Vue.use(Transfer)
 Vue.use(Container)
 Vue.use(Header)
+Vue.use(PageHeader)
+Vue.use(Divider)
 Vue.use(Aside)
 Vue.use(Main)
 Vue.use(Footer)

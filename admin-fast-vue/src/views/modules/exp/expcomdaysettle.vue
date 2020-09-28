@@ -15,17 +15,17 @@
         <div v-if="dataForm.status == 1" v-loading="onLoading">
           <van-grid clickable :column-num="2">
             <van-grid-item @click="clickDayOut">
-              <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: green">￥-{{dataForm.totalExpenses}}</span>
               <span slots="text" style="padding: 5px">日支出金额</span>
             </van-grid-item>
             <van-grid-item @click="clickDayIn">
-              <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: red">￥+{{dataForm.totalIncome}}</span>
               <span slots="text" style="padding: 5px">日收入金额</span>
             </van-grid-item>
           </van-grid>
           <van-grid clickable :column-num="1">
             <van-grid-item>
-              <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">{{dataForm.profit}}</span>
+              <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">￥{{dataForm.profit}}</span>
               <span slots="text" style="padding: 5px">公司日盈利</span>
             </van-grid-item>
           </van-grid>
@@ -59,17 +59,17 @@
         <div v-if="dataForm.status == 1"  v-loading="onLoading">
           <van-grid clickable :column-num="2">
             <van-grid-item @click="clickMonthOut">
-              <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: green">￥-{{dataForm.totalExpenses}}</span>
               <span slots="text" style="padding: 5px">月支出金额</span>
             </van-grid-item>
             <van-grid-item @click="clickMonthIn">
-              <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
+              <span slots="icon" style="font-size: 18px; padding: 5px; color: red">￥+{{dataForm.totalIncome}}</span>
               <span slots="text" style="padding: 5px">月收入金额</span>
             </van-grid-item>
           </van-grid>
           <van-grid clickable :column-num="1">
             <van-grid-item>
-              <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">{{dataForm.profit}}</span>
+              <span slots="icon" style="font-size: 20px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">￥{{dataForm.profit}}</span>
               <span slots="text" style="padding: 5px">公司月盈利</span>
             </van-grid-item>
           </van-grid>

@@ -1,6 +1,7 @@
 package com.os.modules.exp.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,6 +43,17 @@ public class ExpUserMoneyController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 列表
+     */
+    @RequestMapping("/all/{daySettleId}")
+//    @RequiresPermissions("exp:expusermoney:list")
+    public R list(@PathVariable("daySettleId") Integer daySettleId){
+        List<ExpUserMoneyEntity> list = expUserMoneyService.getUserMoneyList(daySettleId);
+
+        return R.ok().put("list", list);
+    }
+
 
     /**
      * 信息
@@ -72,6 +84,17 @@ public class ExpUserMoneyController {
 //    @RequiresPermissions("exp:expusermoney:update")
     public R update(@RequestBody ExpUserMoneyEntity expUserMoney){
 		expUserMoneyService.updateById(expUserMoney);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改用户已交费用
+     */
+    @RequestMapping("/update/money")
+//    @RequiresPermissions("exp:expcomdaysettle:update")
+    public R updateMoney(@RequestBody ExpUserMoneyEntity expUserMoney){
+        expUserMoneyService.updateUserMoney(expUserMoney);
 
         return R.ok();
     }

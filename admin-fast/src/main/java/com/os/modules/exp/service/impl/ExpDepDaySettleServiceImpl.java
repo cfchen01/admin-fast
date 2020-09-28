@@ -2,11 +2,13 @@ package com.os.modules.exp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.os.common.enums.SettleStatusEnum;
+import com.os.common.exception.RRException;
 import com.os.modules.exp.dao.ExpOrderDao;
 import com.os.modules.exp.dao.ExpUserMoneyDao;
 import com.os.modules.exp.dto.SettleDto;
 import com.os.modules.exp.entity.ExpDepartmentEntity;
 import com.os.modules.exp.service.ExpDepartmentService;
+import com.os.modules.exp.vo.OrderResumeVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -18,8 +20,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import com.os.common.utils.MapUtils;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.os.common.utils.PageUtils;
@@ -54,8 +57,8 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
     }
 
     @Override
-    public ExpDepDaySettleEntity getByDeliverDate(LocalDate deliverDate) {
-        return this.lambdaQuery().eq(ExpDepDaySettleEntity::getDeliverDate, deliverDate).one();
+    public ExpDepDaySettleEntity getByDeliverDate(LocalDate deliverDate, Integer deptId) {
+        return this.lambdaQuery().eq(ExpDepDaySettleEntity::getDeliverDate, deliverDate).eq(ExpDepDaySettleEntity::getDeptId, deptId).one();
     }
 
     @Override
@@ -93,13 +96,13 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
                         list.add(expDepDaySettleEntity);
                     } else {
 
+                        //根据日期和网点di获取网点运费
                         SettleDto param = new SettleDto();
                         param.setDeliverDate(settleDto.getDeliverDate());
                         param.setDeptId(x.getId());
-                        Map<String, Object>  map = expOrderDao.getOrderResume(param);
-                        if (org.apache.commons.collections.MapUtils.isNotEmpty(map)) {
-                            Integer freight = MapUtils.mint(map, "freight") == null?0:MapUtils.mint(map, "freight");
-                            expDepDaySettleEntity.setIncome(freight);
+                        OrderResumeVo orderResumeVo = expOrderDao.getOrderResume(param);
+                        if (orderResumeVo != null) {
+                            expDepDaySettleEntity.setIncome(MapUtils.oint(orderResumeVo.getFreight()));
                         }
 
                         expDepDaySettleEntity.setDeptName(x.getDeptName());
@@ -123,14 +126,47 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         return list;
     }
 
-    private ExpDepDaySettleEntity getDeptSetle(SettleDto settleDto){
-        ExpDepDaySettleEntity expDepDaySettleEntity = this.lambdaQuery().eq(ExpDepDaySettleEntity::getDeliverDate, settleDto.getDeliverDate()).one();
+    @Override
+    public Boolean updateComMoneyIn(Map<String, Object> params) {
+
+        String dateStr = MapUtils.mstr(params, "deliverDate");
+        String expDesc = MapUtils.mstr(params, "expDesc");
+        String moneyStr = MapUtils.mstr(params, "money");
+        Integer deptId = MapUtils.mint(params, "deptId");
+        Integer money = 0;
+
+        if (StringUtils.isEmpty(dateStr) || deptId == null) {
+            throw new RRException("输入参数错误");
+        }
+        try {
+            money = Integer.parseInt(moneyStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RRException("输入金额错误");
+        }
+        LocalDate deliverDate = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        ExpDepDaySettleEntity expDepDaySettleEntity = this.getByDeliverDate(deliverDate, deptId);
+        if (SettleStatusEnum.STATUS_PASS.getCode().equals(expDepDaySettleEntity.getStatus())) {
+            throw new RRException("当前日期已结算，不允许修改");
+        }
+
+        Integer count = expDepDaySettleEntity.getComMoneyIn() == null?0:expDepDaySettleEntity.getComMoneyIn();
+        expDepDaySettleEntity.setComMoneyIn(count + money);
+        //TODO 添加明细
+        return this.saveOrUpdate(expDepDaySettleEntity);
+    }
+
+    @Override
+    public ExpDepDaySettleEntity getDeptSettle(SettleDto settleDto) {
+        LocalDate deliverDate = LocalDate.parse(settleDto.getDeliverDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        ExpDepDaySettleEntity expDepDaySettleEntity = this.getByDeliverDate(deliverDate, settleDto.getDeptId());
 
         //获取已付订单总费用
         SettleDto paramYF = new SettleDto();
         BeanUtils.copyProperties(settleDto, paramYF);
         paramYF.setSettleCode("YF");
-        Map<String, Object>  mapYF = expOrderDao.getOrderResume(paramYF);
+        OrderResumeVo  mapYF = expOrderDao.getOrderResume(paramYF);
 
         //获取已付订单已收费用
         Map<String, Object>  mapYFIN = expUserMoneyDao.getUserSettle(settleDto);
@@ -139,13 +175,17 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         SettleDto paramYJ = new SettleDto();
         BeanUtils.copyProperties(settleDto, paramYJ);
         paramYJ.setSettleCode("YJ");
-        Map<String, Object>  mapYj = expOrderDao.getOrderResume(paramYJ);
+        OrderResumeVo  mapYj = expOrderDao.getOrderResume(paramYJ);
 
         //获取提付订单总费用
         SettleDto paramTF = new SettleDto();
         BeanUtils.copyProperties(settleDto, paramTF);
         paramTF.setSettleCode("TF");
-        Map<String, Object>  mapTF = expOrderDao.getOrderResume(paramTF);
+        OrderResumeVo  mapTFAll = expOrderDao.getOrderResume(paramTF);
+
+        //获取提付订单已收费用
+        paramTF.setStatus(1);
+        OrderResumeVo  mapTFIn = expOrderDao.getOrderResume(paramTF);
 
 
         //已付订单总费用(运费加送货费)
@@ -160,25 +200,27 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         Integer monthMoney = 0;
 
 
-        if (org.apache.commons.collections.MapUtils.isNotEmpty(mapYF)) {
-            Integer freight = MapUtils.mint(mapYF, "freight") == null?0:MapUtils.mint(mapYF, "freight");
-            Integer delivery = MapUtils.mint(mapYF, "delivery") == null?0:MapUtils.mint(mapYF, "delivery");
-            paidMoney = freight + delivery;
+        if (Objects.nonNull(mapYF)) {
+            Integer freight = MapUtils.oint(mapYF.getFreight());
+            Integer delivery = MapUtils.oint(mapYF.getDelivery());
+            paidMoney = freight;
         }
         if (org.apache.commons.collections.MapUtils.isNotEmpty(mapYFIN)) {
-            paidMoneyIn = MapUtils.mint(mapYFIN, "moneyIn") == null?0:MapUtils.mint(mapYFIN, "moneyIn");
+            paidMoneyIn = MapUtils.mint(mapYFIN, "moneyIn", 0);
         }
-        if (org.apache.commons.collections.MapUtils.isNotEmpty(mapYj)) {
-            Integer freight = MapUtils.mint(mapYj, "freight") == null?0:MapUtils.mint(mapYj, "freight");
-            Integer delivery = MapUtils.mint(mapYj, "delivery") == null?0:MapUtils.mint(mapYj, "delivery");
-            monthMoney = freight + delivery;
+        if (Objects.nonNull(mapYj)) {
+            Integer freight = MapUtils.oint(mapYj.getFreight());
+            Integer delivery = MapUtils.oint(mapYj.getDelivery());
+            monthMoney = freight;
         }
-        if (org.apache.commons.collections.MapUtils.isNotEmpty(mapTF)) {
-            Integer freight = MapUtils.mint(mapTF, "freight") == null?0:MapUtils.mint(mapTF, "freight");
-            Integer delivery = MapUtils.mint(mapTF, "delivery") == null?0:MapUtils.mint(mapTF, "delivery");
-            Integer advance = MapUtils.mint(mapTF, "advance") == null?0:MapUtils.mint(mapTF, "advance");
-            advanceIn = MapUtils.mint(mapTF, "advanceIn") == null?0:MapUtils.mint(mapTF, "advanceIn");
-            arrivalMoney = freight + delivery + advance;
+        if (Objects.nonNull(mapTFAll)) {
+            Integer freight = MapUtils.oint(mapTFAll.getFreight());
+            Integer delivery = MapUtils.oint(mapTFAll.getDelivery());
+            Integer advance = MapUtils.oint(mapTFAll.getAdvance());
+            arrivalMoney = freight + advance;
+        }
+        if (Objects.nonNull(mapTFIn)) {
+            advanceIn = MapUtils.oint(mapTFIn.getAdvanceIn());
         }
         //提付订单
         expDepDaySettleEntity.setArrivalMoney(arrivalMoney);
@@ -188,6 +230,12 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         //已付订单
         expDepDaySettleEntity.setPaidMoney(paidMoney);
         expDepDaySettleEntity.setPaidMoneyIn(paidMoneyIn);
+
         return expDepDaySettleEntity;
+    }
+
+    @Override
+    public Boolean updateSettle(Integer id) {
+        return null;
     }
 }

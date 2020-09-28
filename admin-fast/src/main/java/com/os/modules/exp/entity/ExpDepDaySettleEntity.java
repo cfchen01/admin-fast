@@ -87,5 +87,10 @@ public class ExpDepDaySettleEntity implements Serializable {
 	 */
 	@TableField(exist = false)
 	private String deptName;
+	/**
+	 * 是否可以核算
+	 */
+	@TableField(exist = false)
+	private Boolean canSubmit;
 
 }

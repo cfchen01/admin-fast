@@ -3,8 +3,10 @@ package com.os.modules.exp.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.os.common.utils.PageUtils;
 import com.os.modules.exp.entity.ExpUserMoneyEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +24,8 @@ public interface ExpUserMoneyService extends IService<ExpUserMoneyEntity> {
      * 修改业务员已付金额
      * @return
      */
-    Boolean updateUserMoney(ExpUserMoneyEntity expUserMoneyEntity);
+    Boolean updateUserMoney(ExpUserMoneyEntity expUserMoney);
+
+    List<ExpUserMoneyEntity> getUserMoneyList(Integer daySettleId);
 }
 

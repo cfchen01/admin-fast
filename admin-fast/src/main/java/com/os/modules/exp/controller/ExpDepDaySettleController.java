@@ -44,7 +44,6 @@ public class ExpDepDaySettleController {
         return R.ok().put("page", page);
     }
 
-
     /**
      * 信息
      */
@@ -52,6 +51,17 @@ public class ExpDepDaySettleController {
 //    @RequiresPermissions("exp:expdepdaysettle:info")
     public R info(@PathVariable("id") Integer id){
 		ExpDepDaySettleEntity expDepDaySettle = expDepDaySettleService.getById(id);
+
+        return R.ok().put("expDepDaySettle", expDepDaySettle);
+    }
+
+    /**
+     * 信息
+     */
+    @RequestMapping("/settle")
+//    @RequiresPermissions("exp:expdepdaysettle:info")
+    public R settle(@RequestBody SettleDto settleDto){
+        ExpDepDaySettleEntity expDepDaySettle = expDepDaySettleService.getDeptSettle(settleDto);
 
         return R.ok().put("expDepDaySettle", expDepDaySettle);
     }
@@ -85,6 +95,28 @@ public class ExpDepDaySettleController {
 //    @RequiresPermissions("exp:expdepdaysettle:update")
     public R update(@RequestBody ExpDepDaySettleEntity expDepDaySettle){
 		expDepDaySettleService.updateById(expDepDaySettle);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改日常支出
+     */
+    @RequestMapping("/update/comIn")
+//    @RequiresPermissions("exp:expcomdaysettle:update")
+    public R updateComIn(@RequestParam Map<String, Object> params){
+        expDepDaySettleService.updateComMoneyIn(params);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改结算状态
+     */
+    @RequestMapping("/update/settle/{id}")
+//    @RequiresPermissions("exp:expcomdaysettle:update")
+    public R updateSettle(@PathVariable("id") Integer id){
+        expDepDaySettleService.updateSettle(id);
 
         return R.ok();
     }

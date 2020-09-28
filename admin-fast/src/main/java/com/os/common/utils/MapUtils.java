@@ -39,4 +39,11 @@ public class MapUtils extends HashMap<String, Object> {
         String val = mstr(param, key);
         return val.equals("") ? dfv : Integer.valueOf(val);
     }
+
+    public static Integer oint(Integer value){
+        if (value == null) {
+            return 0;
+        }
+        return value;
+    }
 }

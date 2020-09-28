@@ -20,8 +20,19 @@ public interface ExpDepDaySettleService extends IService<ExpDepDaySettleEntity> 
 
     PageUtils queryPage(Map<String, Object> params);
 
-    ExpDepDaySettleEntity getByDeliverDate(LocalDate deliverDate);
+    ExpDepDaySettleEntity getByDeliverDate(LocalDate deliverDate, Integer deptId);
+
+    ExpDepDaySettleEntity getDeptSettle(SettleDto settleDto);
 
     List<ExpDepDaySettleEntity> getSettleList(SettleDto settleDto);
+
+    /**
+     * 修改公司日常支出
+     * @param params
+     * @return
+     */
+    Boolean updateComMoneyIn(Map<String, Object> params);
+
+    Boolean updateSettle(Integer id);
 }
 

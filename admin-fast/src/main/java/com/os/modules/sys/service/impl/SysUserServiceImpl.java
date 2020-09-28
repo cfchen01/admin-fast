@@ -123,8 +123,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	}
 
 	@Override
-	public List<SysUserEntity> getUserAll() {
-		return baseMapper.getUserByRole(3L);
+	public List<SysUserEntity> getUserAll(Long roleId) {
+		return baseMapper.getUserByRole(roleId);
 	}
 
 	/**

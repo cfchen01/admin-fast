@@ -13,4 +13,8 @@ public class SettleDto {
     private Integer type;
     //结算类型
     private String settleCode;
+    //订单状态
+    private Integer status;
+    //用户id
+    private Long userId;
 }

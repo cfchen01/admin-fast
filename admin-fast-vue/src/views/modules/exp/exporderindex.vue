@@ -15,15 +15,15 @@
       />
       <van-grid v-if="isAuth('exp:exporder:resume') && dataList.length > 0" clickable :column-num="3">
         <van-grid-item>
-          <span slots="icon" style="color: green">{{resumeN}}</span>
+          <span slots="icon" style="color: green">￥{{resumeN}}</span>
           <span slots="text" style="font-size: 12px">当天未收费用</span>
         </van-grid-item>
         <van-grid-item>
-          <span slots="icon" style="color: red">{{resumeY}}</span>
+          <span slots="icon" style="color: red">￥{{resumeY}}</span>
           <span slots="text" style="font-size: 12px">当天已收费用</span>
         </van-grid-item>
         <van-grid-item>
-          <span slots="icon">{{Number(resumeY)+Number(resumeN)}}</span>
+          <span slots="icon">￥{{Number(resumeY)+Number(resumeN)}}</span>
           <span slots="text" style="font-size: 12px">当天总费用</span>
         </van-grid-item>
       </van-grid>

@@ -60,7 +60,7 @@ public class SysUserController extends AbstractController {
 	@GetMapping("/all")
 //	@RequiresPermissions("sys:user:list")
 	public R all(){
-		List<SysUserEntity> list = sysUserService.getUserAll();
+		List<SysUserEntity> list = sysUserService.getUserAll(5L);
 
 		return R.ok().put("list", list);
 	}

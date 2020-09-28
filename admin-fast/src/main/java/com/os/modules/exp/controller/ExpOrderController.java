@@ -55,7 +55,7 @@ public class ExpOrderController extends AbstractController {
         params.put("status", 0);
         Integer value2 = expOrderService.getResume(params);
 
-        return R.ok().put("value1", value1==null?0:value1).put("value2",value2==null?0:value2);
+        return R.ok().put("value1", value1).put("value2", value2);
     }
 
 

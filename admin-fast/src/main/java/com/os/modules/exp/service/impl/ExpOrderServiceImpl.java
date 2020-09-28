@@ -7,9 +7,11 @@ import com.os.common.exception.RRException;
 import com.os.common.utils.*;
 import com.os.modules.exp.dao.ExpFileDao;
 import com.os.modules.exp.dao.ExpOrderPicDao;
+import com.os.modules.exp.dto.SettleDto;
 import com.os.modules.exp.entity.*;
 import com.os.modules.exp.service.*;
 import com.os.modules.exp.vo.OrderObjVo;
+import com.os.modules.exp.vo.OrderResumeVo;
 import com.os.modules.sys.dao.SysUserDao;
 import com.os.modules.sys.entity.SysUserEntity;
 import org.apache.commons.collections.CollectionUtils;
@@ -137,10 +139,9 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
             throw  new RRException("[" + expOrderEntity.getDeliverDate() + "]财务已结算，不允许修改");
         }
         //当前网点时间已结算不允许修改
-        ExpDepDaySettleEntity expDepDaySettleEntity = expDepDaySettleService.getByDeliverDate(expOrderEntity.getDeliverDate());
-        if (expDepDaySettleEntity != null && SettleStatusEnum.STATUS_PASS.getCode().equals(expDepDaySettleEntity.getStatus())
-        && expDepDaySettleEntity.getDeptId().equals(expOrderEntity.getDeptId())) {
-            throw  new RRException("[" + expOrderEntity.getDeliverDate() + "]网点已结算，不允许修改");
+        ExpDepDaySettleEntity expDepDaySettleEntity = expDepDaySettleService.getByDeliverDate(expOrderEntity.getDeliverDate(), expOrderEntity.getDeptId());
+        if (expDepDaySettleEntity != null && SettleStatusEnum.STATUS_PASS.getCode().equals(expDepDaySettleEntity.getStatus())) {
+            throw  new RRException("[" + expOrderEntity.getDeliverDate() + "]该网点已结算，不允许修改");
         }
         //非未确认订单不允许修改
         if (!OrderStatusEnum.STATUS_NONE.getCode().equals(expOrderEntity.getStatus())) {
@@ -211,6 +212,22 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
         if (StringUtils.isNotEmpty(deliverDate) && deliverDate.length()<10) {
             return 0;
         }
-        return baseMapper.getResume(params);
+        SettleDto settleDto = new SettleDto();
+        settleDto.setDeliverDate(deliverDate);
+        SysUserEntity entity = sysUserDao.queryUserDetail(UserUtils.getUserId());
+        //网点角色只能看到当前网点订单
+        if (3 == entity.getRoleId()) {
+            settleDto.setDeptId(entity.getDeptId());
+        }
+        //业务员只能查看自己的订单
+        if (5 == entity.getRoleId()) {
+            settleDto.setUserId(entity.getUserId());
+        }
+
+        OrderResumeVo vo = baseMapper.getOrderResume(settleDto);
+        if (vo == null) {
+            return 0;
+        }
+        return MapUtils.oint(vo.getAdvance());
     }
 }

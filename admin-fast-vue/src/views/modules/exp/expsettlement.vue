@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div v-if="settlementItemShow">
+        <ExpsettlementItem ref="expsettlementItem" @closeItem="settlementItemShow = false"></ExpsettlementItem>
+    </div>
+    <div v-else>
         <van-tabs @click="handleClick">
             <van-tab title="日查询">
                 <div style="text-align: center;">
@@ -61,7 +64,7 @@
 <!--                        </el-table>-->
                         <van-grid clickable :border="false" :column-num="1">
                             <van-grid-item  @click="clickExpenses">
-                                <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.dailyExpenses}}</span>
+                                <span slots="icon" style="font-size: 18px; padding: 5px; color: green">￥-{{dataForm.dailyExpenses}}</span>
                                 <span slots="text" style="padding: 5px">支出金额</span>
                             </van-grid-item>
                         </van-grid>
@@ -85,7 +88,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid clickable :border="false" :column-num="1">
                         <van-grid-item @click="showExpOdrList('freight')">
-                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.freightIncome}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">￥+{{dataForm.freightIncome}}</span>
                             <span slots="text" style="padding: 5px">公司运费收入</span>
                         </van-grid-item>
                     </van-grid>
@@ -93,7 +96,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid clickable :border="false" :column-num="1">
                         <van-grid-item @click="showExpOdrList('advance')">
-                            <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.comAdvance}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px; color: green">￥-{{dataForm.comAdvance}}</span>
                             <span slots="text" style="padding: 5px">公司垫费</span>
                         </van-grid-item>
                     </van-grid>
@@ -101,7 +104,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid clickable :border="false" :column-num="1">
                         <van-grid-item @click="showExpOdrList('delivery')">
-                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.comDelivery}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">￥+{{dataForm.comDelivery}}</span>
                             <span slots="text" style="padding: 5px">网点送货费</span>
                         </van-grid-item>
                     </van-grid>
@@ -112,9 +115,8 @@
                 <el-row style="margin: 10px 0;" :gutter="20">
                     <el-col :span="24">
                         <van-grid :clickable="curTab == 0" :border="false" :column-num="8">
-                            <van-grid-item v-for="item in deptFreihtList">
-                                <span slots="icon" style="font-size: 18px; padding: 5px; color: red" v-if="curTab == 0">+{{item.income}}</span>
-                                <span slots="icon" style="font-size: 18px; padding: 5px; color: red" v-else-if="item.status == 1">+{{item.income}}</span>
+                            <van-grid-item v-for="item in deptFreihtList" @click="toSettleItem(item)">
+                                <span slots="icon" style="font-size: 18px; padding: 5px; color: red" v-if="curTab == 0 || item.status == 1">￥+{{item.income}}</span>
                                 <span slots="icon" style="font-size: 18px;padding: 5px; color: blue" v-else>0</span>
                                 <span slots="text" style="padding: 5px; text-align: center">
                                     <div>{{item.deptName}}运费收入</div>
@@ -130,7 +132,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid :border="false" :column-num="1">
                         <van-grid-item>
-                            <span slots="icon" style="font-size: 18px; padding: 5px; color: green">-{{dataForm.totalExpenses}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px; color: green">￥-{{dataForm.totalExpenses}}</span>
                             <span slots="text" style="padding: 5px">公司支出</span>
                         </van-grid-item>
                     </van-grid>
@@ -138,7 +140,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid :border="false" :column-num="1">
                         <van-grid-item>
-                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">+{{dataForm.totalIncome}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">￥+{{dataForm.totalIncome}}</span>
                             <span slots="text" style="padding: 5px">公司收入</span>
                         </van-grid-item>
                     </van-grid>
@@ -146,7 +148,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid :border="false" :column-num="1">
                         <van-grid-item>
-                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">{{dataForm.profit}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red" :class="{'cla_green':Number(dataForm.profit)<0}">￥{{dataForm.profit}}</span>
                             <span slots="text" style="padding: 5px">公司盈利</span>
                         </van-grid-item>
                     </van-grid>
@@ -167,13 +169,13 @@
         </van-dialog>
         <ExporderList v-if="exporderListShow" ref="exporderList"></ExporderList>
     </div>
-
 </template>
 
 <script>
     import helper from '@/utils/helper'
     import ExpensesdetailCard from './common/expensesdetail-card'
     import ExporderList from './common/exporder-list'
+    import ExpsettlementItem from './expsettlement-item'
     import { Toast } from 'vant';
     export default {
         data () {
@@ -214,13 +216,15 @@
                 },
                 showDialog:false,
                 onLoading:false,
-                exporderListShow:false
+                exporderListShow:false,
+                settlementItemShow:false
             }
         },
         components: {
             Toast,
             ExpensesdetailCard,
-            ExporderList
+            ExporderList,
+            ExpsettlementItem
         },
         created(){
             this.deliverDate = new Date().format('yyyy-MM-dd');
@@ -352,6 +356,15 @@
                 this.exporderListShow = true;
                 this.$nextTick(() => {
                     this.$refs.exporderList.init(value, type)
+                })
+            },
+            toSettleItem(item){
+                if (this.curTab == 1) {
+                    return;
+                }
+                this.settlementItemShow = true;
+                this.$nextTick(() => {
+                    this.$refs.expsettlementItem.init(this.deliverDate, item.deptId)
                 })
             }
         }

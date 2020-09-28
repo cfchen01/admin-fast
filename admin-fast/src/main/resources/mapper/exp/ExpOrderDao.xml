@@ -82,46 +82,32 @@
         </if>
     </select>
 
-    <select id="getResume" resultType="int">
-        SELECT
-            SUM(t.advance + t.freight + t.delivery)
-        FROM
-            (
-                SELECT
-                    SUM(eo.advance) advance,
-                    SUM(eo.freight) freight,
-                    SUM(delivery) delivery
-                FROM
-                    exp_order eo
-                WHERE
-                    eo.`status` = #{param.status}
-                    and eo.deliver_date = #{param.deliverDate}
-                <if test="param.deptId !=null and param.deptId != ''">
-                    and eo.dept_id = #{param.deptId}
-                </if>
-                <if test="param.userId!=null and param.userId!= ''">
-                    and eo.user_id = #{param.userId}
-                </if>
-                GROUP BY
-                    eo.deliver_date
-            ) t
-    </select>
-
-    <select id="getOrderResume" resultType="map">
+    <select id="getOrderResume" parameterType="com.os.modules.exp.dto.SettleDto" resultType="com.os.modules.exp.vo.OrderResumeVo">
         SELECT
         SUM(eo.freight) freight, SUM(eo.delivery) delivery, SUM(eo.advance) advance, SUM(eo.advance_in) advanceIn
         FROM
         exp_order eo
         WHERE
         eo.deliver_date = #{deliverDate}
-        and eo.`status` in (0, 1)
+        <choose>
+            <when test="status !=null and status != ''">
+                AND eo.`status` = #{status}
+            </when>
+            <otherwise>
+                AND eo.`status` in (0, 1)
+            </otherwise>
+        </choose>
         <if test="deptId !=null and deptId != ''">
             and eo.dept_id = #{deptId}
         </if>
         <if test="settleCode !=null and settleCode != ''">
             and eo.settle_code = #{settleCode}
         </if>
+        <if test="userId!=null and userId!= ''">
+            and eo.user_id = #{userId}
+        </if>
         GROUP BY eo.deliver_date
     </select>
+
 
 </mapper>

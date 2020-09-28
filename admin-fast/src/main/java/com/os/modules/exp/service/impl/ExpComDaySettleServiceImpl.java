@@ -9,6 +9,7 @@ import com.os.modules.exp.dao.ExpOrderDao;
 import com.os.modules.exp.dto.SettleDto;
 import com.os.modules.exp.entity.*;
 import com.os.modules.exp.service.*;
+import com.os.modules.exp.vo.OrderResumeVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import com.os.common.utils.MapUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -214,11 +213,11 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
             throw new RRException("当日订单尚未确认完，不允许结算");
         }
 
-        Map<String, Object> map = expOrderDao.getOrderResume(settleDto);
+        OrderResumeVo map = expOrderDao.getOrderResume(settleDto);
         //垫费
-        Integer advance = MapUtils.mint(map, "advance") == null?0:MapUtils.mint(map, "advance");
+        Integer advance = MapUtils.oint(map.getAdvance());
         //已收垫费
-        Integer advanceIn = MapUtils.mint(map, "advanceIn") == null?0:MapUtils.mint(map, "advanceIn");
+        Integer advanceIn = MapUtils.oint(map.getAdvanceIn());
         if (!advance.equals(advanceIn)) {
             throw new RRException("当日垫费尚未收齐，不允许结算");
         }
@@ -238,7 +237,7 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
      */
     private ExpComDaySettleEntity convertSettle(SettleDto settleDto){
         ExpComDaySettleEntity expComDaySettleEntity = this.lambdaQuery().eq(ExpComDaySettleEntity::getDeliverDate, settleDto.getDeliverDate()).one();
-        Map<String, Object>  map = expOrderDao.getOrderResume(settleDto);
+        OrderResumeVo  map = expOrderDao.getOrderResume(settleDto);
 
         //垫费
         Integer advance = 0;
@@ -252,11 +251,11 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
         Integer delivery = 0;
 
 
-        if (org.apache.commons.collections.MapUtils.isNotEmpty(map)) {
-            freight = MapUtils.mint(map, "freight") == null?0:MapUtils.mint(map, "freight");
-            delivery = MapUtils.mint(map, "delivery") == null?0:MapUtils.mint(map, "delivery");
-            advance = MapUtils.mint(map, "advance") == null?0:MapUtils.mint(map, "advance");
-            advanceIn = MapUtils.mint(map, "advanceIn") == null?0:MapUtils.mint(map, "advanceIn");
+        if (Objects.nonNull(map)) {
+            freight = MapUtils.oint(map.getFreight());
+            delivery = MapUtils.oint(map.getDelivery());
+            advance = MapUtils.oint(map.getAdvance());
+            advanceIn = MapUtils.oint(map.getAdvanceIn());
         }
 
         expComDaySettleEntity.setComDelivery(delivery);
