@@ -3,7 +3,7 @@
         <div>
             <el-form :inline="true">
                 <el-form-item>
-                    <el-button @click="goBack()">返回</el-button>
+                    <el-button @click="goBack()" type="warning">返回</el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-select v-model="deptId" placeholder="网点" @change="getDeptSettle">
@@ -85,7 +85,7 @@
                         align="center"
                         label="操作">
                     <template slot-scope="scope">
-                        <el-button type="text" size="mini" @click="submitUserMoney(scope.row)">增加</el-button>
+                        <el-button type="text" size="mini" @click="checkSubmit(scope.row)">增加</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -235,12 +235,26 @@
                     }
                 })
             },
-            submitUserMoney(row){
+            checkSubmit(row){
                 if (row.moneyAdd === 0) {
                     this.$alert('请输入金额', '系统提示', {
                     });
                     return;
                 }
+                if (Number(row.moneyAdd) + Number(row.moneyIn) > Number(row.moneyAll)) {
+                    this.$confirm(`已交费用大于总费用，是否继续`, '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        this.submitUserMoney(row);
+                    }).catch(() => {
+                    })
+                } else {
+                    this.submitUserMoney(row);
+                }
+            },
+            submitUserMoney(row){
                 this.$http({
                     url: this.$http.adornUrl(`/exp/expusermoney/update/money`),
                     method: 'post',

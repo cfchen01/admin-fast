@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-          title="订单列表"
+          :title="'订单列表 时间：' + this.dataForm.deliverDate"
           width="50%"
           :visible.sync="visible">
     <el-form :inline="true" @keyup.enter.native="getDataList()">
@@ -45,6 +45,12 @@
               header-align="center"
               align="center"
               label="录单员">
+      </el-table-column>
+      <el-table-column
+              prop="deliverDate"
+              header-align="center"
+              align="center"
+              label="时间">
       </el-table-column>
       <el-table-column
               prop="settleName"
