@@ -91,6 +91,6 @@ public class ExpDepDaySettleEntity implements Serializable {
 	 * 是否可以核算
 	 */
 	@TableField(exist = false)
-	private Boolean canSubmit;
+	private Boolean canSubmit = false;
 
 }

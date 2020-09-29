@@ -7,7 +7,9 @@ import com.os.modules.exp.dao.ExpOrderDao;
 import com.os.modules.exp.dao.ExpUserMoneyDao;
 import com.os.modules.exp.dto.SettleDto;
 import com.os.modules.exp.entity.ExpDepartmentEntity;
+import com.os.modules.exp.entity.ExpOrderEntity;
 import com.os.modules.exp.service.ExpDepartmentService;
+import com.os.modules.exp.service.ExpOrderService;
 import com.os.modules.exp.vo.OrderResumeVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -44,6 +46,9 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
 
     @Autowired
     private ExpUserMoneyDao expUserMoneyDao;
+
+    @Autowired
+    private ExpOrderService expOrderService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -175,7 +180,11 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         SettleDto paramYJ = new SettleDto();
         BeanUtils.copyProperties(settleDto, paramYJ);
         paramYJ.setSettleCode("YJ");
-        OrderResumeVo  mapYj = expOrderDao.getOrderResume(paramYJ);
+        OrderResumeVo  mapYjAll = expOrderDao.getOrderResume(paramYJ);
+
+        //获取提付订单已收费用
+        paramYJ.setStatus(1);
+        OrderResumeVo  mapYjIn = expOrderDao.getOrderResume(paramYJ);
 
         //获取提付订单总费用
         SettleDto paramTF = new SettleDto();
@@ -192,13 +201,14 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         Integer paidMoney = 0;
         //已付订单已收费用
         Integer paidMoneyIn = 0;
-        //提付订单总费用(运费加送货费加垫费)
+        //提付订单总费用(运费加垫费)
         Integer arrivalMoney = 0;
-        //提付订单已收费用
+        //提付订单已收费用(已确认的订单总费用)
         Integer advanceIn = 0;
         //月结订单总费用(运费加送货费)
         Integer monthMoney = 0;
-
+        //月结订单已收费用(已确认的订单总费用)
+        Integer monthMoneyIn = 0;
 
         if (Objects.nonNull(mapYF)) {
             Integer freight = MapUtils.oint(mapYF.getFreight());
@@ -208,10 +218,15 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         if (org.apache.commons.collections.MapUtils.isNotEmpty(mapYFIN)) {
             paidMoneyIn = MapUtils.mint(mapYFIN, "moneyIn", 0);
         }
-        if (Objects.nonNull(mapYj)) {
-            Integer freight = MapUtils.oint(mapYj.getFreight());
-            Integer delivery = MapUtils.oint(mapYj.getDelivery());
+        if (Objects.nonNull(mapYjAll)) {
+            Integer freight = MapUtils.oint(mapYjAll.getFreight());
+            Integer delivery = MapUtils.oint(mapYjAll.getDelivery());
             monthMoney = freight;
+        }
+        if (Objects.nonNull(mapYjIn)) {
+            Integer freight = MapUtils.oint(mapYjIn.getFreight());
+            Integer delivery = MapUtils.oint(mapYjIn.getDelivery());
+            monthMoneyIn = freight;
         }
         if (Objects.nonNull(mapTFAll)) {
             Integer freight = MapUtils.oint(mapTFAll.getFreight());
@@ -220,22 +235,77 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
             arrivalMoney = freight + advance;
         }
         if (Objects.nonNull(mapTFIn)) {
-            advanceIn = MapUtils.oint(mapTFIn.getAdvanceIn());
+            Integer freight = MapUtils.oint(mapTFIn.getFreight());
+            Integer delivery = MapUtils.oint(mapTFIn.getDelivery());
+            Integer advance = MapUtils.oint(mapTFIn.getAdvance());
+            advanceIn = MapUtils.oint(freight + advance);
         }
         //提付订单
         expDepDaySettleEntity.setArrivalMoney(arrivalMoney);
         expDepDaySettleEntity.setArrivalMoneyIn(advanceIn);
         //月结订单
         expDepDaySettleEntity.setMonthMoney(monthMoney);
+        expDepDaySettleEntity.setMonthMoneyIn(monthMoneyIn);
         //已付订单
         expDepDaySettleEntity.setPaidMoney(paidMoney);
         expDepDaySettleEntity.setPaidMoneyIn(paidMoneyIn);
+
+        try {
+            expDepDaySettleEntity.setCanSubmit(this.checkSettle(expDepDaySettleEntity.getId()));
+        } catch (Exception e){
+
+        }
 
         return expDepDaySettleEntity;
     }
 
     @Override
     public Boolean updateSettle(Integer id) {
-        return null;
+        if (checkSettle(id)) {
+            ExpDepDaySettleEntity expDepDaySettleEntity = this.getById(id);
+            expDepDaySettleEntity.setStatus(SettleStatusEnum.STATUS_PASS.getCode());
+            this.updateById(expDepDaySettleEntity);
+        }
+        return false;
+    }
+
+    /**
+     * 校验是否可以核算
+     * @param id
+     * @return
+     */
+    private Boolean checkSettle(Integer id){
+
+        ExpDepDaySettleEntity expDepDaySettleEntity = this.getById(id);
+        if (SettleStatusEnum.STATUS_PASS.getCode().equals(expDepDaySettleEntity.getStatus())) {
+            throw new RRException("当日账单已结算");
+        }
+
+        if(!LocalDate.now().isAfter(expDepDaySettleEntity.getDeliverDate())) {
+            throw new RRException("只允许结算今日之前的时间");
+        }
+
+        ExpOrderEntity expOrderEntity = expOrderService.lambdaQuery().eq(ExpOrderEntity::getDeliverDate, expDepDaySettleEntity.getDeliverDate())
+                .eq(ExpOrderEntity::getDeptId, expDepDaySettleEntity.getDeptId()).one();
+
+        if (expOrderEntity != null) {
+            throw new RRException("当日网点订单尚未确认完，不允许结算");
+        }
+
+        SettleDto settleDto = new SettleDto();
+        settleDto.setDeliverDate(expDepDaySettleEntity.getDeliverDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        settleDto.setDeptId(expDepDaySettleEntity.getDeptId());
+
+        expDepDaySettleEntity = this.getDeptSettle(settleDto);
+
+        if (!expDepDaySettleEntity.getPaidMoneyIn().equals(expDepDaySettleEntity.getPaidMoney())) {
+            throw new RRException("当日已付订单费用尚未收齐，不允许结算");
+        }
+
+        if (!expDepDaySettleEntity.getComMoneyIn().equals(expDepDaySettleEntity.getArrivalMoney())) {
+            throw new RRException("当日提付订单费用尚未收齐，不允许结算");
+        }
+
+        return true;
     }
 }

@@ -10,7 +10,6 @@ import com.os.modules.exp.dto.SettleDto;
 import com.os.modules.exp.entity.*;
 import com.os.modules.exp.service.*;
 import com.os.modules.exp.vo.OrderResumeVo;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.os.common.utils.MapUtils;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.os.common.utils.PageUtils;
@@ -115,7 +113,7 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
          */
         expComDaySettleEntity = this.convertSettle(settleDto);
         try {
-            expComDaySettleEntity.setCanSubmit(this.checkSettle(settleDto));
+            expComDaySettleEntity.setCanSubmit(this.checkSettle(expComDaySettleEntity.getId()));
         } catch (Exception e){
             expComDaySettleEntity.setCanSubmit(false);
         }
@@ -178,7 +176,7 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
     @Override
     public Boolean updateSettle(SettleDto settleDto) {
         ExpComDaySettleEntity expComDaySettleEntity = this.convertSettle(settleDto);
-        expComDaySettleEntity.setCanSubmit(this.checkSettle(settleDto));
+        expComDaySettleEntity.setCanSubmit(this.checkSettle(expComDaySettleEntity.getId()));
 
         if (expComDaySettleEntity.getCanSubmit()) {
             expComDaySettleEntity.setStatus(SettleStatusEnum.STATUS_PASS.getCode());
@@ -189,40 +187,35 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
 
     /**
      * 校验是否可以核算
-     * @param settleDto
+     * @param id
      * @return
      */
-    private Boolean checkSettle(SettleDto settleDto){
-        if (StringUtils.isEmpty(settleDto.getDeliverDate())) {
-            throw new RRException("输入参数错误");
-        }
-
-        LocalDate deliverDate = LocalDate.parse(settleDto.getDeliverDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        ExpComDaySettleEntity expComDaySettleEntity = this.lambdaQuery().eq(ExpComDaySettleEntity::getDeliverDate, deliverDate).one();
+    private Boolean checkSettle(Integer id){
+        ExpComDaySettleEntity expComDaySettleEntity = this.getById(id);
         if (SettleStatusEnum.STATUS_PASS.getCode().equals(expComDaySettleEntity.getStatus())) {
             throw new RRException("当日账单已结算");
         }
 
-        if(!LocalDate.now().isAfter(deliverDate)) {
+        if(!LocalDate.now().isAfter(expComDaySettleEntity.getDeliverDate())) {
             throw new RRException("只允许结算今日之前的时间");
         }
 
-        ExpOrderEntity expOrderEntity = expOrderService.lambdaQuery().eq(ExpOrderEntity::getDeliverDate, deliverDate)
+        ExpOrderEntity expOrderEntity = expOrderService.lambdaQuery().eq(ExpOrderEntity::getDeliverDate, expComDaySettleEntity.getDeliverDate())
                 .eq(ExpOrderEntity::getStatus, OrderStatusEnum.STATUS_NONE.getCode()).one();
         if (expOrderEntity != null) {
             throw new RRException("当日订单尚未确认完，不允许结算");
         }
+//
+//        OrderResumeVo map = expOrderDao.getOrderResume(settleDto);
+//        //垫费
+//        Integer advance = MapUtils.oint(map.getAdvance());
+//        //已收垫费
+//        Integer advanceIn = MapUtils.oint(map.getAdvanceIn());
+//        if (!advance.equals(advanceIn)) {
+//            throw new RRException("当日垫费尚未收齐，不允许结算");
+//        }
 
-        OrderResumeVo map = expOrderDao.getOrderResume(settleDto);
-        //垫费
-        Integer advance = MapUtils.oint(map.getAdvance());
-        //已收垫费
-        Integer advanceIn = MapUtils.oint(map.getAdvanceIn());
-        if (!advance.equals(advanceIn)) {
-            throw new RRException("当日垫费尚未收齐，不允许结算");
-        }
-
-        ExpDepDaySettleEntity expDepDaySettleEntity = expDepDaySettleService.lambdaQuery().eq(ExpDepDaySettleEntity::getDeliverDate, deliverDate)
+        ExpDepDaySettleEntity expDepDaySettleEntity = expDepDaySettleService.lambdaQuery().eq(ExpDepDaySettleEntity::getDeliverDate, expComDaySettleEntity.getDeliverDate())
                 .eq(ExpDepDaySettleEntity::getStatus, SettleStatusEnum.STATUS_NONE.getCode()).one();
         if (expDepDaySettleEntity != null ) {
             throw new RRException("当日网点尚未结算完，不允许结算");

@@ -85,10 +85,92 @@
                         align="center"
                         label="操作">
                     <template slot-scope="scope">
-                        <el-button type="text" size="mini" @click="checkSubmit(scope.row)">增加</el-button>
+                        <el-button type="text" size="mini" @click="checkUserSubmit(scope.row)">增加</el-button>
                     </template>
                 </el-table-column>
             </el-table>
+        </el-row>
+        <el-divider content-position="left">提付订单</el-divider>
+        <el-row style="margin: 10px 0;" :gutter="20">
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoney}}</span>
+                        <span slots="text" style="padding: 5px">提付订单总费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
+                        <span slots="text" style="padding: 5px">提付订单已收费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
+                        <span slots="text" style="padding: 5px">提付订单未收费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
+        </el-row>
+        <el-row style="margin: 10px 0;" :gutter="20">
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.comMoneyIn}}</span>
+                        <span slots="text" style="padding: 5px">公司已收费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoneyIn)-Number(dataForm.comMoneyIn)}}</span>
+                        <span slots="text" style="padding: 5px">公司未收费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
+            <el-col :span="14" v-if="dataForm.status == 0">
+                <el-form :inline="true" :model="formInline" class="demo-form-inline" style="margin-top: 30px">
+                    <el-form-item label="收到金额">
+                        <el-input-number v-model="formInline.money" :controls="false" :maxlength="8" style="width: 80px"></el-input-number>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" :disabled="formInline.money == 0" @click="checkComSubmit">确定</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+        </el-row>
+        <el-divider content-position="left">月结订单</el-divider>
+        <el-row style="margin: 10px 0;" :gutter="20">
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.monthMoney}}</span>
+                        <span slots="text" style="padding: 5px">月结订单总费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
+                        <span slots="text" style="padding: 5px">月结订单已收费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
+            <el-col :span="4" style="text-align: center">
+                <van-grid :border="false" :column-num="1">
+                    <van-grid-item>
+                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
+                        <span slots="text" style="padding: 5px">月结订单未收费用</span>
+                    </van-grid-item>
+                </van-grid>
+            </el-col>
         </el-row>
         <el-row style="margin: 20px;text-align: center" v-if="dataForm.status == 0">
             <el-button type="danger" :disabled="!dataForm.canSubmit" @click="dataFormSubmit">结算提交</el-button>
@@ -203,12 +285,22 @@
                     }
                 })
             },
-            submitComIn(){
-                if (this.formInline.money === 0) {
-                    this.$alert('请输入金额', '系统提示', {
-                    });
-                    return;
+            checkComSubmit(){
+                if (Number(this.formInline.money) + Number(this.dataForm.comMoneyIn) > Number(this.dataForm.arrivalMoneyIn)) {
+                    this.$confirm(`已交费用应收费用，是否继续`, '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        this.submitComIn();
+                    }).catch(() => {
+                    })
+                } else {
+                    this.submitComIn();
                 }
+            },
+            submitComIn(){
+
                 this.$http({
                     url: this.$http.adornUrl(`/exp/expdepdaysettle/update/comIn`),
                     method: 'post',
@@ -235,7 +327,7 @@
                     }
                 })
             },
-            checkSubmit(row){
+            checkUserSubmit(row){
                 if (row.moneyAdd === 0) {
                     this.$alert('请输入金额', '系统提示', {
                     });
