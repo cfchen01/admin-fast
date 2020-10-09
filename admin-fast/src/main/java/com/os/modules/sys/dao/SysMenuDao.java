@@ -5,6 +5,7 @@ package com.os.modules.sys.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.os.modules.sys.entity.SysMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author Mark sunlightcs@gmail.com
  */
+@Repository
 @Mapper
 public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
 
@@ -26,5 +28,7 @@ public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
 	 * 获取不包含按钮的菜单列表
 	 */
 	List<SysMenuEntity> queryNotButtonList();
+
+	Boolean clearMenu();
 
 }

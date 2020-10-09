@@ -11,4 +11,8 @@
 		select * from sys_menu where type != 2 order by order_num asc
 	</select>
 
+	<delete id="clearMenu">
+		DELETE from sys_menu
+	</delete>
+
 </mapper>

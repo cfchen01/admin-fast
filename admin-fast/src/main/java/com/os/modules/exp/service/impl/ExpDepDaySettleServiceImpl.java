@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import com.os.common.utils.MapUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -166,6 +163,15 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
     public ExpDepDaySettleEntity getDeptSettle(SettleDto settleDto) {
         LocalDate deliverDate = LocalDate.parse(settleDto.getDeliverDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         ExpDepDaySettleEntity expDepDaySettleEntity = this.getByDeliverDate(deliverDate, settleDto.getDeptId());
+
+        List<ExpOrderEntity> list = expOrderService.lambdaQuery().eq(ExpOrderEntity::getDeliverDate, settleDto.getDeliverDate())
+                .eq(ExpOrderEntity::getDeptId, settleDto.getDeptId())
+                .in(ExpOrderEntity::getStatus, Arrays.asList(0, 1)).list();
+
+        if (CollectionUtils.isEmpty(list)) {
+            expDepDaySettleEntity.setIsNull(true);
+            return expDepDaySettleEntity;
+        }
 
         //获取已付订单总费用
         SettleDto paramYF = new SettleDto();

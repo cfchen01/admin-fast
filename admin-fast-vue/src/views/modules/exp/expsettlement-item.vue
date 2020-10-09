@@ -27,157 +27,162 @@
                 </el-form-item>
             </el-form>
         </div>
-        <el-divider content-position="left">已付订单</el-divider>
-        <el-row style="margin: 10px 0;" :gutter="20">
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.paidMoney}}</span>
-                        <span slots="text" style="padding: 5px">已付订单总费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.paidMoneyIn}}</span>
-                        <span slots="text" style="padding: 5px">已付订单已收费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-table
-                    :data="dataList"
-                    border
-                    size="mini"
-                    style="width: 90%;">
-                <el-table-column
-                        prop="realname"
-                        header-align="center"
-                        align="center"
-                        label="录单员">
-                </el-table-column>
-                <el-table-column
-                        prop="moneyAll"
-                        header-align="center"
-                        align="center"
-                        label="应交费用">
-                </el-table-column>
-                <el-table-column
-                        prop="moneyIn"
-                        header-align="center"
-                        align="center"
-                        label="已交费用">
-                </el-table-column>
-                <el-table-column
-                        prop="moneyAdd"
-                        header-align="center"
-                        align="center"
-                        label="新增费用">
-                    <template slot-scope="scope">
-                        <el-input-number size="mini" v-model="scope.row.moneyAdd" :controls="false" :maxlength="8" style="width: 80px"></el-input-number>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        prop="status"
-                        header-align="center"
-                        align="center"
-                        label="操作">
-                    <template slot-scope="scope">
-                        <el-button type="text" size="mini" @click="checkUserSubmit(scope.row)">增加</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </el-row>
-        <el-divider content-position="left">提付订单</el-divider>
-        <el-row style="margin: 10px 0;" :gutter="20">
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoney}}</span>
-                        <span slots="text" style="padding: 5px">提付订单总费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
-                        <span slots="text" style="padding: 5px">提付订单已收费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
-                        <span slots="text" style="padding: 5px">提付订单未收费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-        </el-row>
-        <el-row style="margin: 10px 0;" :gutter="20">
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.comMoneyIn}}</span>
-                        <span slots="text" style="padding: 5px">公司已收费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoneyIn)-Number(dataForm.comMoneyIn)}}</span>
-                        <span slots="text" style="padding: 5px">公司未收费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-            <el-col :span="14" v-if="dataForm.status == 0">
-                <el-form :inline="true" :model="formInline" class="demo-form-inline" style="margin-top: 30px">
-                    <el-form-item label="收到金额">
-                        <el-input-number v-model="formInline.money" :controls="false" :maxlength="8" style="width: 80px"></el-input-number>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" :disabled="formInline.money == 0" @click="checkComSubmit">确定</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-row>
-        <el-divider content-position="left">月结订单</el-divider>
-        <el-row style="margin: 10px 0;" :gutter="20">
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.monthMoney}}</span>
-                        <span slots="text" style="padding: 5px">月结订单总费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
-                        <span slots="text" style="padding: 5px">月结订单已收费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-            <el-col :span="4" style="text-align: center">
-                <van-grid :border="false" :column-num="1">
-                    <van-grid-item>
-                        <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
-                        <span slots="text" style="padding: 5px">月结订单未收费用</span>
-                    </van-grid-item>
-                </van-grid>
-            </el-col>
-        </el-row>
-        <el-row style="margin: 20px;text-align: center" v-if="dataForm.status == 0">
-            <el-button type="danger" :disabled="!dataForm.canSubmit" @click="dataFormSubmit">结算提交</el-button>
-        </el-row>
-        <el-row  style="margin: 20px;text-align: center" v-else>
-            <el-button type="success" disabled @click="dataFormSubmit">账单已结算</el-button>
-        </el-row>
+        <div v-if="!dataForm.isNull">
+            <el-divider content-position="left">已付订单</el-divider>
+            <el-row style="margin: 10px 0;" :gutter="20">
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.paidMoney}}</span>
+                            <span slots="text" style="padding: 5px">已付订单总费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.paidMoneyIn}}</span>
+                            <span slots="text" style="padding: 5px">已付订单已收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-table
+                        :data="dataList"
+                        border
+                        size="mini"
+                        style="width: 90%;">
+                    <el-table-column
+                            prop="realname"
+                            header-align="center"
+                            align="center"
+                            label="录单员">
+                    </el-table-column>
+                    <el-table-column
+                            prop="moneyAll"
+                            header-align="center"
+                            align="center"
+                            label="应交费用">
+                    </el-table-column>
+                    <el-table-column
+                            prop="moneyIn"
+                            header-align="center"
+                            align="center"
+                            label="已交费用">
+                    </el-table-column>
+                    <el-table-column
+                            prop="moneyAdd"
+                            header-align="center"
+                            align="center"
+                            label="新增费用">
+                        <template slot-scope="scope">
+                            <el-input-number size="mini" v-model="scope.row.moneyAdd" :controls="false" :maxlength="8" style="width: 80px"></el-input-number>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            prop="status"
+                            header-align="center"
+                            align="center"
+                            label="操作">
+                        <template slot-scope="scope">
+                            <el-button type="text" size="mini" @click="checkUserSubmit(scope.row)">增加</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-row>
+            <el-divider content-position="left">提付订单</el-divider>
+            <el-row style="margin: 10px 0;" :gutter="20">
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoney}}</span>
+                            <span slots="text" style="padding: 5px">提付订单总费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
+                            <span slots="text" style="padding: 5px">提付订单已收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
+                            <span slots="text" style="padding: 5px">提付订单未收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+            </el-row>
+            <el-row style="margin: 10px 0;" :gutter="20">
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.comMoneyIn}}</span>
+                            <span slots="text" style="padding: 5px">公司已收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoneyIn)-Number(dataForm.comMoneyIn)}}</span>
+                            <span slots="text" style="padding: 5px">公司未收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="14" v-if="dataForm.status == 0">
+                    <el-form :inline="true" :model="formInline" class="demo-form-inline" style="margin-top: 30px">
+                        <el-form-item label="收到金额">
+                            <el-input-number v-model="formInline.money" :controls="false" :maxlength="8" style="width: 80px"></el-input-number>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" :disabled="formInline.money == 0" @click="checkComSubmit">确定</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
+            </el-row>
+            <el-divider content-position="left">月结订单</el-divider>
+            <el-row style="margin: 10px 0;" :gutter="20">
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.monthMoney}}</span>
+                            <span slots="text" style="padding: 5px">月结订单总费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
+                            <span slots="text" style="padding: 5px">月结订单已收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid :border="false" :column-num="1">
+                        <van-grid-item>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
+                            <span slots="text" style="padding: 5px">月结订单未收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+            </el-row>
+            <el-row style="margin: 20px;text-align: center" v-if="dataForm.status == 0">
+                <el-button type="danger" :disabled="!dataForm.canSubmit" @click="dataFormSubmit">结算提交</el-button>
+            </el-row>
+            <el-row  style="margin: 20px;text-align: center" v-else>
+                <el-button type="success" disabled @click="dataFormSubmit">账单已结算</el-button>
+            </el-row>
+        </div>
+        <div style="margin-top: 60px" v-else>
+            <van-empty image="error" description="当前无订单" />
+        </div>
     </div>
 </template>
 
@@ -200,7 +205,9 @@
                     monthMoneyIn: '',
                     income: '',
                     userId: '',
-                    status: ''
+                    status: '',
+                    canSubmit:false,
+                    isNull:false
                 },
                 deliverDate: new Date().format('yyyy-MM-dd'),
                 deptId:'',
@@ -254,6 +261,8 @@
                         this.dataForm.income = data.expDepDaySettle.income
                         this.dataForm.userId = data.expDepDaySettle.userId
                         this.dataForm.status = data.expDepDaySettle.status
+                        this.dataForm.canSubmit = data.expDepDaySettle.canSubmit
+                        this.dataForm.isNull = data.expDepDaySettle.isNull
 
                         this.getUserMoneyList(this.dataForm.id);
                     }

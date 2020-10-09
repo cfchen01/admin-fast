@@ -93,4 +93,10 @@ public class ExpDepDaySettleEntity implements Serializable {
 	@TableField(exist = false)
 	private Boolean canSubmit = false;
 
+	/**
+	 * 当日订单是否为空
+	 */
+	@TableField(exist = false)
+	private Boolean isNull = false;
+
 }
