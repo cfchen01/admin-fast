@@ -75,7 +75,7 @@
                             prop="moneyAdd"
                             header-align="center"
                             align="center"
-                            label="新增费用">
+                            label="收到费用">
                         <template slot-scope="scope">
                             <el-input-number size="mini" v-model="scope.row.moneyAdd" :controls="false" :maxlength="8" style="width: 80px"></el-input-number>
                         </template>
@@ -130,7 +130,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid :border="false" :column-num="1">
                         <van-grid-item>
-                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoneyIn)-Number(dataForm.comMoneyIn)}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.comMoneyIn)}}</span>
                             <span slots="text" style="padding: 5px">公司未收费用</span>
                         </van-grid-item>
                     </van-grid>
@@ -159,7 +159,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid :border="false" :column-num="1">
                         <van-grid-item>
-                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.monthMoneyIn}}</span>
                             <span slots="text" style="padding: 5px">月结订单已收费用</span>
                         </van-grid-item>
                     </van-grid>
@@ -167,7 +167,7 @@
                 <el-col :span="4" style="text-align: center">
                     <van-grid :border="false" :column-num="1">
                         <van-grid-item>
-                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.monthMoney)-Number(dataForm.monthMoneyIn)}}</span>
                             <span slots="text" style="padding: 5px">月结订单未收费用</span>
                         </van-grid-item>
                     </van-grid>

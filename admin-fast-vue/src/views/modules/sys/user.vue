@@ -13,17 +13,22 @@
             <van-button type="info" @click="addOrUpdateHandle()" size="small" style="margin-left: 10px">新增</van-button>
           </template>
         </van-search>
-        <van-cell v-for="item in dataList" @click="clickItem(item)">
-          <!-- 使用 title 插槽来自定义标题 -->
-          <template #title>
-            <span style="margin-right: 20px">{{item.realname}}</span>
+        <van-swipe-cell v-for="item in dataList">
+          <van-cell >
+            <!-- 使用 title 插槽来自定义标题 -->
+            <template #title>
+              <span style="margin-right: 20px">{{item.realname}}</span>
+            </template>
+            <template #extra>
+              <span style="margin-right: 20px">{{item.username}}</span>
+              <van-tag v-if="item.status == 0" type="danger">禁用</van-tag>
+              <van-tag v-else type="success">正常</van-tag>
+            </template>
+          </van-cell>
+          <template #right>
+            <van-button square text="修改" type="info" class="delete-button" @click="addOrUpdateHandle(item.userId)"/>
           </template>
-          <template #extra>
-            <span style="margin-right: 20px">{{item.username}}</span>
-            <van-tag v-if="item.status == 0" type="danger">禁用</van-tag>
-            <van-tag v-else type="success">正常</van-tag>
-          </template>
-        </van-cell>
+        </van-swipe-cell>
         <van-action-sheet
                 v-model="isShow"
                 :title="userItem.username"
@@ -51,7 +56,7 @@
           <el-form-item>
             <el-button @click="getDataList()">查询</el-button>
             <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
-            <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+<!--            <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
           </el-form-item>
         </el-form>
         <el-table
@@ -121,7 +126,7 @@
                   label="操作">
             <template slot-scope="scope">
               <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.userId)">修改</el-button>
-              <el-button type="text" size="small" @click="deleteHandle(scope.row.userId)">删除</el-button>
+<!--              <el-button type="text" size="small" @click="deleteHandle(scope.row.userId)">删除</el-button>-->
             </template>
           </el-table-column>
         </el-table>
@@ -157,7 +162,7 @@
         isShow:false,
         actions: [
           { name: '修改', color: '#3d3eee' },
-          { name: '删除', color: '#ee0a24' },
+          // { name: '删除', color: '#ee0a24' },
         ],
         userItem:{},
         showMain:true

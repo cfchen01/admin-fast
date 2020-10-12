@@ -90,7 +90,7 @@
         WHERE
         eo.deliver_date = #{deliverDate}
         <choose>
-            <when test="status !=null and status != ''">
+            <when test="status !=null">
                 AND eo.`status` = #{status}
             </when>
             <otherwise>

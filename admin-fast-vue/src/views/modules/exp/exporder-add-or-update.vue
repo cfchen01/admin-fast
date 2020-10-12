@@ -7,9 +7,15 @@
                  @click-left="onClickLeft"
     />
     <van-form validate-first @submit="dataFormSubmit">
-      <van-cell-group title="录单人">
-        <van-field v-if="!isView" readonly :value="realName"></van-field>
-        <van-field v-else readonly :value="dataForm.realname"></van-field>
+      <van-field v-if="!isView" readonly :value="realName" label="录单人"></van-field>
+      <van-field v-else readonly :value="dataForm.realname" label="录单人"></van-field>
+      <van-cell-group title="托运方">
+        <van-field v-model="dataForm.shipper" label="托运方" placeholder="托运方（选填）" :maxlength="50" :readonly="isView"/>
+        <van-field v-model="dataForm.shipperTel" label="电话" type="digit" placeholder="电话（选填）" :maxlength="11" :readonly="isView"/>
+      </van-cell-group>
+      <van-cell-group title="收件方">
+        <van-field v-model="dataForm.receiver" label="收件人" placeholder="收件人（选填）" :maxlength="50" :readonly="isView"/>
+        <van-field v-model="dataForm.receiverTel" label="电话" type="digit" required placeholder="电话（必填）" :rules="[{ required: true, message: '请填写收货人电话' }]" :maxlength="11" :readonly="isView"/>
       </van-cell-group>
       <van-field readonly name="calendar" :value="dataForm.deliverDate" required label="发货日期" placeholder="点击选择日期" @click="selectDate"/>
       <van-calendar v-model="showCalendar" @confirm="onConfirm" :show-confirm="false" :min-date="minDate" :disabled="isView"/>
@@ -69,14 +75,6 @@
       <van-field v-model="dataForm.advance" label="垫付" type="digit" placeholder="垫付（选填）" :maxlength="8" :readonly="isView" :disabled="dataForm.settleCode != 'TF'"/>
       <van-field v-model="dataForm.delivery" label="送货费" type="digit" placeholder="送货费（选填）" :maxlength="8" :readonly="isView"/>
       <van-field readonly label="总费用" :value="totalMoney"/>
-      <van-cell-group title="托运方">
-        <van-field v-model="dataForm.shipper" label="托运方" placeholder="托运方（选填）" :maxlength="50" :readonly="isView"/>
-        <van-field v-model="dataForm.shipperTel" label="电话" type="digit" placeholder="电话（选填）" :maxlength="11" :readonly="isView"/>
-      </van-cell-group>
-      <van-cell-group title="收件方">
-        <van-field v-model="dataForm.receiver" label="收件人" placeholder="收件人（选填）" :maxlength="50" :readonly="isView"/>
-        <van-field v-model="dataForm.receiverTel" label="电话" type="digit" placeholder="电话（选填）" :maxlength="11" :readonly="isView"/>
-      </van-cell-group>
       <van-cell-group title="备注信息">
         <van-field v-model="dataForm.remark" label="备注" placeholder="备注（选填）" type="textarea" :maxlength="255" :readonly="isView"/>
         <van-field name="uploader" label="图片" >

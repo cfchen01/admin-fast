@@ -13,6 +13,16 @@
             <span style="float: right">{{item.receiver + '/' + item.receiverTel}}</span>
           </div>
         </template>
+        <template #num>
+          <div>
+            <span>{{item.goodsName}} x{{item.ordNum}}</span>
+          </div>
+        </template>
+        <template #price>
+          <div>
+            <span>总费用￥{{Number(item.advance)+Number(item.freight)+Number(item.delivery)}} 其中运费￥{{Number(item.delivery)}}</span>
+          </div>
+        </template>
         <template #tags>
           <div>
               <span>

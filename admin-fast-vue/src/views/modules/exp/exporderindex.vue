@@ -200,8 +200,7 @@
       ExporderCard
     },
     activated () {
-      console.log('this.dataForm.deliverDate',this.dataForm.deliverDate)
-      if (this.$route.query.status) {
+      if (this.$route.query.status != null) {
         this.dataForm.status = this.$route.query.status
       }
       if (this.$route.query.deliverDate) {
@@ -360,7 +359,7 @@
         if (status == 1) {
           return '已确认'
         }
-        if (status == 0) {
+        if (status == 2) {
           return '返单'
         }
         if (status == 3) {

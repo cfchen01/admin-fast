@@ -214,6 +214,7 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
         }
         SettleDto settleDto = new SettleDto();
         settleDto.setDeliverDate(deliverDate);
+        settleDto.setStatus(MapUtils.mint(params, "status"));
         SysUserEntity entity = sysUserDao.queryUserDetail(UserUtils.getUserId());
         //网点角色只能看到当前网点订单
         if (3 == entity.getRoleId()) {
@@ -228,6 +229,6 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
         if (vo == null) {
             return 0;
         }
-        return MapUtils.oint(vo.getAdvance());
+        return MapUtils.oint(vo.getAdvance()) + MapUtils.oint(vo.getFreight());
     }
 }
