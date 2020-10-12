@@ -74,3 +74,8 @@
     }
   }
 </script>
+<style>
+  .van-card__content{
+    min-height:0!important;
+  }
+</style>

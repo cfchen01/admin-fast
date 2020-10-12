@@ -99,12 +99,19 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
     }
 
     @Override
-    public ExpOrderEntity getDetailById(Integer id) {
-        ExpOrderEntity expOrderEntity = this.getById(id);
-        List<ExpFileEntity> list = expFileDao.selectPicByOrder(id);
+    public ExpOrderEntity getDetailById(String id) {
+        ExpOrderEntity expOrderEntity = this.lambdaQuery()
+                .eq(ExpOrderEntity::getId, id).or()
+                .eq(ExpOrderEntity::getReceiverTel, id)
+                .last("limit 1")
+                .one();
+        if (expOrderEntity == null) {
+            return null;
+        }
+        List<ExpFileEntity> list = expFileDao.selectPicByOrder(expOrderEntity.getId());
         SysUserEntity sysUserEntity = sysUserDao.selectById(expOrderEntity.getUserId());
         expOrderEntity.setFileList(list);
-        expOrderEntity.setRealname(sysUserEntity.getRealname());
+        expOrderEntity.setRealname(sysUserEntity==null?"/":sysUserEntity.getRealname());
         return expOrderEntity;
     }
 

@@ -20,7 +20,7 @@ public interface ExpOrderService extends IService<ExpOrderEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    ExpOrderEntity getDetailById(Integer id);
+    ExpOrderEntity getDetailById(String id);
 
     Boolean saveOrder(ExpOrderEntity expOrderEntity);
 

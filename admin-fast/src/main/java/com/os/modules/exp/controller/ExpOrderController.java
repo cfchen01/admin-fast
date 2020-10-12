@@ -64,7 +64,7 @@ public class ExpOrderController extends AbstractController {
      */
     @RequestMapping("/info/{id}")
 //    @RequiresPermissions("exp:exporder:info")
-    public R info(@PathVariable("id") Integer id){
+    public R info(@PathVariable("id") String id){
 		ExpOrderEntity expOrder = expOrderService.getDetailById(id);
 
         return R.ok().put("expOrder", expOrder);

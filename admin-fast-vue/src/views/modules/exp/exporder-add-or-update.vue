@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-page-header v-if="!_isMobile()" @back="onClickLeft" :content="menuActiveName"></el-page-header>
-    <van-form validate-first @submit="dataFormSubmit">
+    <van-form v-if="dataForm" validate-first @submit="dataFormSubmit">
       <van-field v-if="!isView" readonly :value="realName" label="录单人"></van-field>
       <van-field v-else readonly :value="dataForm.realname" label="录单人"></van-field>
       <van-cell-group title="托运方">
@@ -92,6 +92,9 @@
         </van-button>
       </div>
     </van-form>
+    <div style="margin-top: 60px" v-else>
+      <van-empty image="error" description="订单不存在" />
+    </div>
   </div>
 </template>
 
@@ -186,8 +189,9 @@
           }).then(({data}) => {
             if (data && data.code === 0) {
               this.dataForm = data.expOrder
-
-              this.converImage()
+              if (this.dataForm) {
+                this.converImage()
+              }
             }
           })
         }
