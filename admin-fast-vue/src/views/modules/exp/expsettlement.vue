@@ -355,7 +355,7 @@
                 }
                 this.exporderListShow = true;
                 this.$nextTick(() => {
-                    this.$refs.exporderList.init(value, type)
+                    this.$refs.exporderList.init({deliverDate:value, moneyType:type})
                 })
             },
             toSettleItem(item){

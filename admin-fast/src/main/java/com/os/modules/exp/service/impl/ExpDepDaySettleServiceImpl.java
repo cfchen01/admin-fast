@@ -169,6 +169,7 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
                 .in(ExpOrderEntity::getStatus, Arrays.asList(0, 1)).list();
 
         if (CollectionUtils.isEmpty(list)) {
+            expDepDaySettleEntity = new ExpDepDaySettleEntity();
             expDepDaySettleEntity.setIsNull(true);
             return expDepDaySettleEntity;
         }

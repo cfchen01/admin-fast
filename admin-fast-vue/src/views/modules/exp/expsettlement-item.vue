@@ -57,7 +57,11 @@
                             prop="realname"
                             header-align="center"
                             align="center"
+                            @cell-click="cellClick"
                             label="录单员">
+                        <template slot-scope="scope">
+                            <el-button type="text" size="mini" @click="showExpOdrList('YF', null, scope.row.userId)">{{scope.row.realname}}</el-button>
+                        </template>
                     </el-table-column>
                     <el-table-column
                             prop="moneyAll"
@@ -94,24 +98,24 @@
             <el-divider content-position="left">提付订单</el-divider>
             <el-row style="margin: 10px 0;" :gutter="20">
                 <el-col :span="4" style="text-align: center">
-                    <van-grid :border="false" :column-num="1">
-                        <van-grid-item>
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item @click="showExpOdrList('TF')">
                             <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoney}}</span>
                             <span slots="text" style="padding: 5px">提付订单总费用</span>
                         </van-grid-item>
                     </van-grid>
                 </el-col>
                 <el-col :span="4" style="text-align: center">
-                    <van-grid :border="false" :column-num="1">
-                        <van-grid-item>
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item  @click="showExpOdrList('TF', 1)">
                             <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.arrivalMoneyIn}}</span>
                             <span slots="text" style="padding: 5px">提付订单已收费用</span>
                         </van-grid-item>
                     </van-grid>
                 </el-col>
                 <el-col :span="4" style="text-align: center">
-                    <van-grid :border="false" :column-num="1">
-                        <van-grid-item>
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item  @click="showExpOdrList('TF', 0)">
                             <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.arrivalMoney)-Number(dataForm.arrivalMoneyIn)}}</span>
                             <span slots="text" style="padding: 5px">提付订单未收费用</span>
                         </van-grid-item>
@@ -149,24 +153,24 @@
             <el-divider content-position="left">月结订单</el-divider>
             <el-row style="margin: 10px 0;" :gutter="20">
                 <el-col :span="4" style="text-align: center">
-                    <van-grid :border="false" :column-num="1">
-                        <van-grid-item>
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item  @click="showExpOdrList('YJ')">
                             <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.monthMoney}}</span>
                             <span slots="text" style="padding: 5px">月结订单总费用</span>
                         </van-grid-item>
                     </van-grid>
                 </el-col>
                 <el-col :span="4" style="text-align: center">
-                    <van-grid :border="false" :column-num="1">
-                        <van-grid-item>
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item @click="showExpOdrList('YJ', 1)">
                             <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.monthMoneyIn}}</span>
                             <span slots="text" style="padding: 5px">月结订单已收费用</span>
                         </van-grid-item>
                     </van-grid>
                 </el-col>
                 <el-col :span="4" style="text-align: center">
-                    <van-grid :border="false" :column-num="1">
-                        <van-grid-item>
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item @click="showExpOdrList('YJ', 0)">
                             <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.monthMoney)-Number(dataForm.monthMoneyIn)}}</span>
                             <span slots="text" style="padding: 5px">月结订单未收费用</span>
                         </van-grid-item>
@@ -183,11 +187,13 @@
         <div style="margin-top: 60px" v-else>
             <van-empty image="error" description="当前无订单" />
         </div>
+        <ExporderList v-if="exporderListShow" ref="exporderList"></ExporderList>
     </div>
 </template>
 
 <script>
     import helper from '@/utils/helper'
+    import ExporderList from './common/exporder-list'
     export default {
         data () {
             return {
@@ -227,8 +233,12 @@
                     money:0,
                     expDesc:''
                 },
-                dataList:[]
+                dataList:[],
+                exporderListShow:false
             }
+        },
+        components: {
+            ExporderList,
         },
         created(){
             this.getDeptList();
@@ -264,7 +274,9 @@
                         this.dataForm.canSubmit = data.expDepDaySettle.canSubmit
                         this.dataForm.isNull = data.expDepDaySettle.isNull
 
-                        this.getUserMoneyList(this.dataForm.id);
+                        if (!this.dataForm.isNull) {
+                            this.getUserMoneyList(this.dataForm.id);
+                        }
                     }
                 })
             },
@@ -402,6 +414,25 @@
                     })
                 }).catch(() => {})
 
+            },
+            cellClick(row, column, cell, event){
+                this.showExpOdrList('YF', null, row.userId);
+            },
+            showExpOdrList(settleCode, status, userId){
+                let value = this.deliverDate
+                if (this.curTab == 1) {
+                    value = this.deliverMonth
+                }
+                let param = {}
+                param.deliverDate = this.dataForm.deliverDate
+                param.deptId = this.dataForm.deptId
+                param.settleCode = settleCode
+                param.status = status
+                param.userId = userId
+                this.exporderListShow = true;
+                this.$nextTick(() => {
+                    this.$refs.exporderList.init(param)
+                })
             },
             goBack(){
                 this.$emit('closeItem')

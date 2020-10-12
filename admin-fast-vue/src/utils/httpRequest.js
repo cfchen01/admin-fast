@@ -41,7 +41,7 @@ http.interceptors.response.use(response => {
               Vue.prototype.$message.error(resMsg)
             }
         }
-    } esl
+    }
 
     return response
 }, error => {

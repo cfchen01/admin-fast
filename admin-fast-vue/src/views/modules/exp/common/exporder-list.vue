@@ -1,7 +1,7 @@
 <template>
   <el-dialog
           :title="'订单列表 时间：' + this.dataForm.deliverDate"
-          width="50%"
+          width="60%"
           :visible.sync="visible">
     <el-form :inline="true" @keyup.enter.native="getDataList()">
       <el-form-item>
@@ -59,14 +59,14 @@
               label="结算方式">
       </el-table-column>
       <el-table-column
-              v-if="dataForm.moneyType == 'freight'"
+              v-if="dataForm.moneyType == null || dataForm.moneyType == 'freight'"
               prop="freight"
               header-align="center"
               align="center"
               label="运费">
       </el-table-column>
       <el-table-column
-              v-if="dataForm.moneyType == 'advance'"
+              v-if="dataForm.moneyType == null || dataForm.moneyType == 'advance'"
               prop="advance"
               header-align="center"
               align="center"
@@ -86,7 +86,11 @@
               align="center"
               label="订单状态">
         <template slot-scope="scope">
-          <span>{{showStatus(scope.row.status)}}</span>
+<!--          <span>{{showStatus(scope.row.status)}}</span>-->
+          <el-tag v-if="scope.row.status == 0">未确认</el-tag>
+          <el-tag v-else-if="scope.row.status == 1" type="success">已确认</el-tag>
+          <el-tag v-else-if="scope.row.status == 2" type="danger">返单</el-tag>
+          <el-tag v-else-if="scope.row.status == 3" type="warning">作废</el-tag>
         </template>
       </el-table-column>
     </el-table>
@@ -110,6 +114,8 @@
           deliverDate: '',
           moneyType: '',
           deptId: '',
+          settleCode: '',
+          status: '',
           userId:''
         },
         dataList: [],
@@ -127,12 +133,14 @@
         this.getUserList();
     },
     methods: {
-      init(value, type){
+      init(param){
         this.visible = true
-        this.dataForm.deliverDate = value
-        this.dataForm.moneyType = type
-        this.dataForm.userId = ''
-        this.dataForm.deptId = ''
+        this.dataForm.deliverDate = param.deliverDate
+        this.dataForm.moneyType = param.moneyType
+        this.dataForm.userId = param.userId
+        this.dataForm.deptId = param.deptId
+        this.dataForm.settleCode = param.settleCode
+        this.dataForm.status = param.status
         this.pageIndex = 1;
         this.pageSize = 10;
         this.totalPage = 0;
@@ -150,6 +158,8 @@
             'deptId': this.dataForm.deptId,
             'deliverDate': this.dataForm.deliverDate,
             'userId': this.dataForm.userId,
+            'settleCode': this.dataForm.settleCode,
+            'status': this.dataForm.status,
             'moneyType': this.dataForm.moneyType
           })
         }).then(({data}) => {
