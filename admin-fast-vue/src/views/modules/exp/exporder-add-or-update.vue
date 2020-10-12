@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-page-header @back="onClickLeft" :content="menuActiveName"></el-page-header>
+    <el-page-header v-if="!_isMobile()" @back="onClickLeft" :content="menuActiveName"></el-page-header>
     <van-form validate-first @submit="dataFormSubmit">
       <van-field v-if="!isView" readonly :value="realName" label="录单人"></van-field>
       <van-field v-else readonly :value="dataForm.realname" label="录单人"></van-field>

@@ -7,11 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f5c9952-1c62-4ef8-8687-f7507b1402dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#17B3A3/fonts/element-icons.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#17B3A3/fonts/element-icons.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#17B3A3/fonts/element-icons.woff" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#17B3A3/fonts/element-icons.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#17B3A3/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#17B3A3/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettlement-item.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettlement-item.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/admin-fast-vue/node_modules/" />
     <ignored path="$PROJECT_DIR$/renren-generator/target/" />
@@ -58,12 +54,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettlement-item.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="67" selection-start-line="3" selection-start-column="67" selection-end-line="3" selection-end-column="67" />
+            <state relative-caret-position="36">
+              <caret line="2" column="59" selection-start-line="2" selection-end-line="3" />
               <folding>
+                <element signature="n#style#0;n#el-form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="e#9973#10008#0" expanded="true" />
               </folding>
@@ -92,11 +89,23 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="9" selection-start-column="9" selection-end-column="9" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#van-form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#0BB2D4/index.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="64">
-              <caret column="94805" lean-forward="true" selection-start-column="94805" selection-end-column="94805" />
+              <caret column="94805" selection-start-column="94805" selection-end-column="94805" />
               <folding>
                 <element signature="e#162162#162301#2" expanded="true" />
                 <element signature="e#164584#164723#2" expanded="true" />
@@ -110,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -237,7 +246,6 @@
         <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder.vue" />
         <option value="$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/service/impl/ExpOrderServiceImpl.java" />
         <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/common/exporder-card.vue" />
-        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue" />
         <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporderindex.vue" />
         <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/sys/user.vue" />
         <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettlement.vue" />
@@ -245,6 +253,7 @@
         <option value="$PROJECT_DIR$/admin-fast-vue/src/utils/httpRequest.js" />
         <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/common/exporder-list.vue" />
         <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettlement-item.vue" />
+        <option value="$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue" />
       </list>
     </option>
   </component>
@@ -837,12 +846,12 @@
       <workItem from="1601951209741" duration="1272000" />
       <workItem from="1602207324938" duration="1494000" />
       <workItem from="1602392678146" duration="8337000" />
-      <workItem from="1602504472205" duration="4376000" />
+      <workItem from="1602504472205" duration="4626000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="254233000" />
+    <option name="totallyTimeSpent" value="254483000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1310" height="784" extended-state="6" />
@@ -1207,16 +1216,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#van-form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin-fast/src/main/java/com/os/modules/exp/controller/ExpUserMoneyController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
@@ -1333,7 +1332,7 @@
     <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -1343,7 +1342,7 @@
     <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/element-ui-theme/element-#0BB2D4/index.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
-          <caret column="94805" lean-forward="true" selection-start-column="94805" selection-end-column="94805" />
+          <caret column="94805" selection-start-column="94805" selection-end-column="94805" />
           <folding>
             <element signature="e#162162#162301#2" expanded="true" />
             <element signature="e#164584#164723#2" expanded="true" />
@@ -1364,11 +1363,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/expsettlement-item.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="67" selection-start-line="3" selection-start-column="67" selection-end-line="3" selection-end-column="67" />
+        <state relative-caret-position="36">
+          <caret line="2" column="59" selection-start-line="2" selection-end-line="3" />
           <folding>
+            <element signature="n#style#0;n#el-form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#9973#10008#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-fast-vue/src/views/modules/exp/exporder-add-or-update.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#van-form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
