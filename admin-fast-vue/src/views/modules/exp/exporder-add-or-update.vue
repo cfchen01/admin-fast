@@ -1,11 +1,6 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <div>
-    <van-nav-bar v-if="!_isMobile()"
-                 :title="menuActiveName"
-                 left-text="返回"
-                 left-arrow
-                 @click-left="onClickLeft"
-    />
+    <el-page-header @back="onClickLeft" :content="menuActiveName"></el-page-header>
     <van-form validate-first @submit="dataFormSubmit">
       <van-field v-if="!isView" readonly :value="realName" label="录单人"></van-field>
       <van-field v-else readonly :value="dataForm.realname" label="录单人"></van-field>

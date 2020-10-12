@@ -1,32 +1,13 @@
 <template>
     <div>
-        <div>
-            <el-form :inline="true">
-                <el-form-item>
-                    <el-button @click="goBack()" type="warning">返回</el-button>
-                </el-form-item>
-                <el-form-item>
-                    <el-select v-model="deptId" placeholder="网点" @change="getDeptSettle">
-                        <el-option v-for="item in deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item>
-                    <div class="block">
-                        <el-date-picker
-                                v-model="deliverDate"
-                                align="right"
-                                type="date"
-                                placeholder="选择日期"
-                                value-format="yyyy-MM-dd"
-                                :clearable="false"
-                                @change="getDeptSettle"
-                                :default-value="deliverDate"
-                                :picker-options="pickerOptions">
-                        </el-date-picker>
-                    </div>
-                </el-form-item>
-            </el-form>
-        </div>
+        <el-page-header @back="goBack" :content="deliverDate+' 网点详情'"></el-page-header>
+        <el-form :inline="true" style="margin-top: 20px">
+            <el-form-item>
+                <el-select v-model="deptId" placeholder="网点" @change="getDeptSettle">
+                    <el-option v-for="item in deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
         <div v-if="!dataForm.isNull">
             <el-divider content-position="left">已付订单</el-divider>
             <el-row style="margin: 10px 0;" :gutter="20">
