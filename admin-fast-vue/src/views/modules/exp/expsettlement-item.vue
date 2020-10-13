@@ -288,7 +288,7 @@
                 })
             },
             checkComSubmit(){
-                if (Number(this.formInline.money) + Number(this.dataForm.comMoneyIn) > Number(this.dataForm.arrivalMoneyIn)) {
+                if (Number(this.formInline.money) + Number(this.dataForm.comMoneyIn) > Number(this.dataForm.arrivalMoney)) {
                     this.$confirm(`已交费用应收费用，是否继续`, '提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',

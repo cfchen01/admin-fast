@@ -1,7 +1,7 @@
 <template>
   <div class="ord-index">
     <div v-if="_isMobile()">
-      <van-cell :value="dataForm.deliverDate" />
+      <van-cell :value="dataForm.phone" />
       <ExporderCard :dataList="dataList" @updateStatus="updateStatus" @addOrUpdateHandle="addOrUpdateHandle" @viewHandle="viewHandle"></ExporderCard>
       <van-empty v-if="dataList.length == 0" description="暂无记录"></van-empty>
       <van-pagination
@@ -13,68 +13,8 @@
               force-ellipses
               @change="currentChangeHandle"
       />
-      <van-grid v-if="isAuth('exp:exporder:resume') && dataList.length > 0" clickable :column-num="3">
-        <van-grid-item>
-          <span slots="icon" style="color: green">￥{{resumeN}}</span>
-          <span slots="text" style="font-size: 12px">当天未收费用</span>
-        </van-grid-item>
-        <van-grid-item>
-          <span slots="icon" style="color: red">￥{{resumeY}}</span>
-          <span slots="text" style="font-size: 12px">当天已收费用</span>
-        </van-grid-item>
-        <van-grid-item>
-          <span slots="icon">￥{{Number(resumeY)+Number(resumeN)}}</span>
-          <span slots="text" style="font-size: 12px">当天总费用</span>
-        </van-grid-item>
-      </van-grid>
     </div>
     <div v-else class="mod-config">
-      <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
-        <el-form-item>
-          <div class="block">
-            <el-date-picker
-                    v-model="dataForm.deliverDate"
-                    align="right"
-                    type="date"
-                    placeholder="选择日期"
-                    value-format="yyyy-MM-dd"
-                    :clearable="false"
-                    :default-value="dataForm.deliverDate"
-                    :picker-options="pickerOptions">
-            </el-date-picker>
-          </div>
-        </el-form-item>
-        <el-form-item>
-          <div class="block">
-            <el-select v-model="dataForm.status" placeholder="订单状态" clearable>
-              <el-option label="未确认" :value="0">未确认</el-option>
-              <el-option label="已确认" :value="1">已确认</el-option>
-              <el-option label="返单" :value="2">返单</el-option>
-              <el-option label="作废" :value="3">作废</el-option>
-            </el-select>
-          </div>
-        </el-form-item>
-        <el-form-item>
-          <div class="block">
-            <el-select v-model="dataForm.deptId" placeholder="网点" clearable>
-              <el-option v-for="item in orderVo.deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
-            </el-select>
-          </div>
-        </el-form-item>
-        <el-form-item>
-          <div class="block">
-            <el-select v-model="dataForm.settleCode" placeholder="请选择结算方式" clearable>
-              <el-option v-for="item in orderVo.settleList" :key="item.settleCode" :label="item.settleName" :value="item.settleCode">
-              </el-option>
-            </el-select>
-          </div>
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="getDataList()">查询</el-button>
-          <el-button type="primary" @click="addOrUpdateHandle()" v-if="isAuth('exp:exporder:edit')">新增</el-button>
-<!--          <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
-        </el-form-item>
-      </el-form>
       <el-table
               :data="dataList"
               border
@@ -128,6 +68,12 @@
                 label="发货日期">
         </el-table-column>
         <el-table-column
+                prop="receiverTel"
+                header-align="center"
+                align="center"
+                label="收件人手机">
+        </el-table-column>
+        <el-table-column
                 header-align="center"
                 align="center"
                 width="180"
@@ -150,15 +96,12 @@
               :total="totalPage"
               layout="total, sizes, prev, pager, next, jumper">
       </el-pagination>
-      <!-- 弹窗, 新增 / 修改 -->
-      <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
     </div>
   </div>
 
 </template>
 
 <script>
-  import AddOrUpdate from './exporder-add-or-update'
   import ExporderCard from './common/exporder-card'
   import helper from '@/utils/helper'
   import { Dialog } from 'vant'
@@ -167,10 +110,7 @@
     data () {
       return {
         dataForm: {
-          status: '',
-          settleCode:'',
-          deliverDate: '',
-          deptId: ''
+          phone:''
         },
         dataList: [],
         pageIndex: 1,
@@ -178,43 +118,18 @@
         totalPage: 0,
         dataListLoading: false,
         dataListSelections: [],
-        addOrUpdateVisible: false,
-        pickerOptions: {
-          disabledDate(time)
-          {
-            return time.getTime() > Date.now();
-          }
-        },
-        orderVo:{
-          settleList:[],
-          deptList:[]
-        },
-        resumeY:0,
-        resumeN:0
       }
     },
     components: {
-      AddOrUpdate,
       Toast,
       Dialog,
       ExporderCard
     },
     activated () {
-      if (this.$route.query.status != null) {
-        this.dataForm.status = this.$route.query.status
-      }
-      if (this.$route.query.deliverDate) {
-        this.dataForm.deliverDate = this.$route.query.deliverDate
-      }
-      if (!this.dataForm.deliverDate) {
-        this.dataForm.deliverDate = new Date().format('yyyy-MM-dd')
-      }
-      if (this.$route.query.settleCode) {
-        this.dataForm.settleCode = this.$route.query.settleCode
+      if (this.$route.query.phone != null) {
+        this.dataForm.phone = this.$route.query.phone
       }
       this.getDataList()
-      this.getOrderVo()
-      this.getResume()
     },
     methods: {
       // 获取数据列表
@@ -226,10 +141,7 @@
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'status': this.dataForm.status,
-            'deptId': this.dataForm.deptId,
-            'settleCode': this.dataForm.settleCode,
-            'deliverDate': this.dataForm.deliverDate
+            'phone': this.dataForm.phone
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
@@ -240,29 +152,6 @@
             this.totalPage = 0
           }
           this.dataListLoading = false
-        })
-      },
-      getOrderVo(){
-        this.$http({
-          url: this.$http.adornUrl(`/exp/exporder/orderVo`),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 0) {
-            this.orderVo = data.orderObjVo
-          }
-        })
-      },
-      getResume () {
-        this.$http({
-          url: this.$http.adornUrl('/exp/exporder/resume'),
-          method: 'get',
-          params: this.$http.adornParams({'deliverDate': this.dataForm.deliverDate})
-        }).then(({data}) => {
-          if (data && data.code === 0) {
-            this.resumeY = data.value1
-            this.resumeN = data.value2
-          }
         })
       },
       updateStatus(id, status){

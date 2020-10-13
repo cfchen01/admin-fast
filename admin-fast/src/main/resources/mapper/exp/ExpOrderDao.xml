@@ -63,6 +63,9 @@
         <if test="param.userId!=null and param.userId!= ''">
             and eo.user_id = #{param.userId}
         </if>
+        <if test="param.phone!=null and param.phone!= ''">
+            and eo.receiver_tel = #{param.phone}
+        </if>
         <if test="param.sDate!=null and param.sDate!= ''">
             and eo.deliver_date BETWEEN #{param.sDate} and #{param.eDate}
         </if>

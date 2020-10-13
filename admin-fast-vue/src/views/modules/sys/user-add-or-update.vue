@@ -2,7 +2,7 @@
   <div>
     <div v-if="_isMobile()">
       <van-form validate-first @submit="doSubmit">
-        <van-field required v-model="dataForm.userName" label="用户名" :readonly="this.dataForm.id != 0" name="validatorName" placeholder="用户名" :rules="[{ required: true, message: '请填写用户名' }]" />
+        <van-field required v-model="dataForm.userName" label="用户名" :readonly="dataForm.id != 0" name="validatorName" placeholder="用户名" :rules="[{ required: true, message: '请填写用户名' }]" />
         <van-field v-model="dataForm.password" label="密码" name="validator" type="password" placeholder="密码" :rules="[{ validator: passwordValidator, message: '请填写密码' }]" />
         <van-field v-model="dataForm.comfirmPassword" label="确认密码" name="asyncValidator" type="password" placeholder="确认密码" :rules="[{ validator: asyncValidator, message: '两次输入密码不一致' }]"/>
         <van-field v-model="dataForm.realname" label="真实姓名" placeholder="真实姓名" :rules="[{ required: true, message: '请填写真实姓名' }]"/>
@@ -10,7 +10,7 @@
         <van-field v-model="dataForm.mobile" label="手机号" placeholder="手机号"/>
         <van-field name="div"  label="角色" placeholder="角色">
           <template #input>
-            <el-select v-model="dataForm.roleId" placeholder="请选择" size="mini" @change="onChange">
+            <el-select v-model="dataForm.roleId" placeholder="请选择" size="mini" @change="onChange" :disabled="dataForm.id != 0">
               <el-option
                       v-for="item in roleList"
                       :key="item.roleId"
@@ -22,7 +22,7 @@
         </van-field>
         <van-field name="div"  label="网点" placeholder="网点" v-if="dataForm.roleId == 3">
           <template #input>
-            <el-select v-model="dataForm.deptId" placeholder="请选择" size="mini">
+            <el-select v-model="dataForm.deptId" placeholder="请选择" size="mini" :disabled="dataForm.id != 0">
               <el-option
                       v-for="item in deptList"
                       :key="item.id"

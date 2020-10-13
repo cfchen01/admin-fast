@@ -10,6 +10,7 @@
         <template #title>
           <div>
             <span>订单号：{{item.id}}</span>
+            <span style="margin-left: 20px">{{item.settleName}}</span>
             <span style="float: right">{{item.receiver + '/' + item.receiverTel}}</span>
           </div>
         </template>
@@ -20,7 +21,7 @@
         </template>
         <template #price>
           <div>
-            <span>总费用￥{{Number(item.advance)+Number(item.freight)+Number(item.delivery)}} 其中运费￥{{Number(item.delivery)}}</span>
+            <span>总费用￥{{Number(item.advance)+Number(item.freight)+Number(item.delivery)}} 其中送货费￥{{Number(item.delivery)}}</span>
           </div>
         </template>
         <template #tags>

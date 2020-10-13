@@ -8,12 +8,23 @@
               placeholder="请输入订单号"
               @search="onSearch"
       />
+      <van-search
+              v-model="phone"
+              shape="round"
+              background="#17B3A3"
+              placeholder="请输入手机号号"
+              @search="onSubmit"
+      />
       <van-cell v-for="item in menuList" :title="item.name" is-link @click="clickLink(item)" />
     </div>
-    <el-input v-else placeholder="请输入订单号" v-model="ordCode">
-      <el-button slot="append" @click="onSearch" icon="el-icon-search"></el-button>
-    </el-input>
-
+    <div v-else>
+      <el-input placeholder="请输入订单号" v-model="ordCode">
+        <el-button slot="append" @click="onSearch" icon="el-icon-search"></el-button>
+      </el-input>
+      <el-input placeholder="请输入手机号" v-model="phone" style="margin-top: 10px">
+        <el-button slot="append" @click="onSubmit" icon="el-icon-search"></el-button>
+      </el-input>
+    </div>
   </div>
 </template>
 
@@ -21,7 +32,8 @@
   export default {
     data(){
       return{
-        ordCode:''
+        ordCode:'',
+        phone:''
       }
     },
     computed: {
@@ -43,6 +55,9 @@
     methods:{
       onSearch(){
         this.$router.push({path: '/order-add-update',query: {isView:'true',id:this.ordCode}})
+      },
+      onSubmit(){
+        this.$router.push({path: '/order-phone',query: {phone: this.phone}})
       },
       clickLink(item){
         if (item == null || item.url == null) {

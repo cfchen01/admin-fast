@@ -102,6 +102,7 @@
   import helper from '@/utils/helper'
   import Vue from 'vue'
   import { Toast } from 'vant';
+  import { Dialog } from 'vant'
   import axios from 'axios'
   export default {
     data () {
@@ -121,7 +122,8 @@
       }
     },
     components: {
-      Toast
+      Toast,
+      Dialog
     },
     computed: {
       realName: {
@@ -163,10 +165,10 @@
           goodsId: '',
           ordNum: '',
           packingId: '',
-          freight: 0,
-          advance: 0,
+          freight: '',
+          advance: '',
           settleCode: '',
-          delivery: 0,
+          delivery: '',
           remark: '',
           userId: '',
           shipper: '',
@@ -233,18 +235,28 @@
       },
       // 表单提交
       dataFormSubmit () {
-        this.$http({
-          url: this.$http.adornUrl(`/exp/exporder/${!this.dataForm.id ? 'save' : 'update'}`),
-          method: 'post',
-          data: this.$http.adornData(this.dataForm)
-        }).then(({data}) => {
-          if (data && data.code === 0) {
-            Toast('操作成功');
-            this.$router.go(-1)
-          } else {
-            this.$message.error(data.msg)
-          }
+        Dialog.confirm({
+          title: '系统提示',
+          message: `请确认收货人手机号【${this.dataForm.receiverTel}】是否正确？`,
         })
+        .then(() => {
+          this.$http({
+            url: this.$http.adornUrl(`/exp/exporder/${!this.dataForm.id ? 'save' : 'update'}`),
+            method: 'post',
+            data: this.$http.adornData(this.dataForm)
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              Toast('操作成功');
+              this.$router.go(-1)
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
+        })
+        .catch(() => {
+          // on cancel
+        });
+
       },
       selectDate(){
         if (!this.isView) {
