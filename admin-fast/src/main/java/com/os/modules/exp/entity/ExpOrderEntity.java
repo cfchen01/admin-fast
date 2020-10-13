@@ -116,7 +116,6 @@ public class ExpOrderEntity implements Serializable {
 	/**
 	 * 货物名称
 	 */
-	@TableField(exist = false)
 	private String goodsName;
 	/**
 	 * 网点名称

@@ -159,7 +159,7 @@
                 </el-col>
             </el-row>
             <el-row style="margin: 20px;text-align: center" v-if="dataForm.status == 0">
-                <el-button type="danger" :disabled="!dataForm.canSubmit" @click="dataFormSubmit">结算提交</el-button>
+                <el-button type="danger" @click="dataFormSubmit">结算提交</el-button>
             </el-row>
             <el-row  style="margin: 20px;text-align: center" v-else>
                 <el-button type="success" disabled @click="dataFormSubmit">账单已结算</el-button>

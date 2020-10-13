@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +25,8 @@ import java.util.Map;
 public interface ExpOrderDao extends BaseMapper<ExpOrderEntity> {
 
     IPage<ExpOrderEntity> selectOrderPage(Page pager, @Param("param") Map<String, Object> param);
+
+    List<ExpOrderEntity> selectOrderPage(@Param("param") Map<String, Object> param);
 
     /**
      * 订单费用

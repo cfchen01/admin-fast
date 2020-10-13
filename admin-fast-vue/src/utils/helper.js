@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import $http from '@/utils/httpRequest'
+import {Loading} from 'element-ui'
 Vue.prototype.openDialog = function(key){
   this[key] = true
 }
@@ -43,4 +45,56 @@ String.prototype.parseDate = function() {
   let year = parseInt(dt[0]), month = parseInt(dt[1]), day = parseInt(dt[2]);
   let hour = parseInt(tm[0]), minute = parseInt(tm[1]), second = parseInt(tm[2]);
   return new Date(year, month - 1, day, hour, minute, second);
+}
+
+Vue.prototype.$download = function (parm){
+  let load = Loading.service({
+    text:'正在进行导出，请耐心等待........'
+  })
+  parm = parm || {url:'',data:{}}
+  if(parm.url) parm.url = this.$http.adornUrl(parm.url);
+  var contentType = 'application/octet-stream; charset=utf-8';
+
+  if(parm.data){
+    if (isObject(parm.data)) {
+      contentType  = 'application/json;charset=utf-8';
+    }
+    parm.data = isObject(parm.data) ? this.$http.adornData(parm.data) : JSON.stringify(parm.data)
+  }
+  let opt = merge({}, parm, {
+    method: 'post',
+    responseType: 'blob',
+    headers: {
+      'Content-Type': contentType
+    }
+  })
+  return this.$http(opt).then(
+      res => { // 处理返回的文件流
+        let fileName = res.headers['content-disposition'] ? decodeURIComponent(res.headers['content-disposition'].split('=')[1]) : (parm.file || "导出文件") + ".xlsx"
+        const blob = new Blob([res.data])
+        const elink = document.createElement('a')
+        elink.download = fileName
+        elink.style.display = 'none'
+        elink.href = URL.createObjectURL(blob)
+        document.body.appendChild(elink)
+        elink.click()
+        URL.revokeObjectURL(elink.href) // 释放URL 对象
+        document.body.removeChild(elink)
+        load.close()
+      })
+}
+
+export function merge(a){
+  let o = isObject(a) ? {} : []
+  for(let i = 0; i < arguments.length; i++){
+    for(let key in arguments[i]){
+      o[key] = arguments[i][key]
+    }
+  }
+  return JSON.parse(JSON.stringify(o))
+}
+
+export function isObject(value) {
+  const type = typeof value
+  return value != null && (type == 'object' || type == 'function')
 }

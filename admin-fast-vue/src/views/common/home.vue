@@ -12,7 +12,7 @@
               v-model="phone"
               shape="round"
               background="#17B3A3"
-              placeholder="请输入手机号号"
+              placeholder="请输入手机号"
               @search="onSubmit"
       />
       <van-cell v-for="item in menuList" :title="item.name" is-link @click="clickLink(item)" />

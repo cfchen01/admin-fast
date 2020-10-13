@@ -9,6 +9,7 @@
         <result property="deptId" column="dept_id"/>
         <result property="ordCode" column="ord_code"/>
         <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
         <result property="ordNum" column="ord_num"/>
         <result property="packingId" column="packing_id"/>
         <result property="freight" column="freight"/>
@@ -26,23 +27,21 @@
         <result property="status" column="status"/>
         <result property="deliverDate" column="deliver_date"/>
         <result property="createTime" column="create_time"/>
-        <result property="goods_name" column="goodsName"/>
-        <result property="dept_name" column="deptName"/>
-        <result property="settle_name" column="settleName"/>
-        <result property="packing_name" column="packingName"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="settleName" column="settle_name"/>
+        <result property="packingName" column="packing_name"/>
         <result property="realname" column="realname"/>
     </resultMap>
 
     <select id="selectOrderPage" resultMap="expOrderMap">
         SELECT
-            eo.*, eg.goods_name,
+            eo.*,
             ed.dept_name,
             es.settle_name,
             ep.packing_name,
             su.realname
         FROM
             exp_order eo
-        LEFT JOIN exp_goods eg ON eo.goods_id = eg.id
         LEFT JOIN exp_packing ep ON eo.packing_id = ep.id
         LEFT JOIN exp_department ed ON eo.dept_id = ed.id
         LEFT JOIN exp_settle es ON eo.settle_code = es.settle_code

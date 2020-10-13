@@ -19,16 +19,19 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.os.modules.exp.dao.ExpOrderDao;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static java.util.stream.Collectors.toList;
 
 
 @Service("expOrderService")
@@ -89,6 +92,75 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
         }
         IPage<ExpOrderEntity> page = baseMapper.selectOrderPage(getPager(params), params);
         return new PageUtils(page);
+    }
+
+    @Override
+    public void download(HttpServletRequest request, HttpServletResponse response){
+        String status = request.getParameter("status");
+        String deptId = request.getParameter("deptId");
+        String settleCode = (String) request.getParameter("settleCode");
+        String deliverDate = (String) request.getParameter("deliverDate");
+        if (StringUtils.isEmpty(deliverDate)) {
+            throw  new RRException("日期参数错误");
+        }
+        ExpDepartmentEntity expDepartmentEntity = null;
+        if (!StringUtils.isEmpty(deptId)) {
+            expDepartmentEntity = expDepartmentService.getById(deptId);
+        }
+
+        List<String> heads = new ArrayList<String>();
+        heads.add("订单号");
+        heads.add("收货人");
+        heads.add("收货人电话");
+        heads.add("货物名称");
+        heads.add("件数");
+        heads.add("包装");
+        heads.add("订单类型");
+        heads.add("订单状态");
+        heads.add("运费");
+        heads.add("垫费");
+        heads.add("送货费");
+        heads.add("备注");
+        String condition = "";
+        String name = "["+deliverDate+"]-货物订单";
+        if (expDepartmentEntity != null) {
+            condition = "网点：" + expDepartmentEntity.getDeptName() + "；\n";
+        }
+        condition = condition + "制表人：" + UserUtils.getUser().getRealname();
+
+        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("status", status);
+        param.put("deptId", deptId);
+        param.put("settleCode", settleCode);
+        param.put("deliverDate", deliverDate);
+        List<ExpOrderEntity> expOrderEntityList = baseMapper.selectOrderPage(param);
+        if (!CollectionUtils.isEmpty(expOrderEntityList)) {
+            list = expOrderEntityList.stream().map(x -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("订单号", x.getId());
+                map.put("收货人", x.getReceiver());
+                map.put("收货人电话", x.getReceiverTel());
+                map.put("货物名称", x.getGoodsName());
+                map.put("件数", x.getOrdNum());
+                map.put("包装", x.getPackingName());
+                map.put("订单类型", x.getSettleName());
+                map.put("订单状态", convertStatus(x.getStatus()));
+                map.put("运费", x.getFreight());
+                map.put("垫费", x.getAdvance());
+                map.put("送货费", x.getDelivery());
+                map.put("备注", x.getRemark());
+                return map;
+            }).collect(toList());
+        }
+
+        try {
+            ExportExcel.download(request, response,list,heads,name,condition, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw  new RRException("订单导出失败");
+        }
     }
 
     private Page getPager(Map<String, Object> params){
@@ -237,5 +309,21 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
             return 0;
         }
         return MapUtils.oint(vo.getAdvance()) + MapUtils.oint(vo.getFreight());
+    }
+
+    private String convertStatus(Integer status){
+        if (0 == status) {
+            return "未确认";
+        }
+        if (1 == status) {
+            return "已确认";
+        }
+        if (2 == status) {
+            return "返回";
+        }
+        if (3 == status) {
+            return "作废";
+        }
+        return "";
     }
 }

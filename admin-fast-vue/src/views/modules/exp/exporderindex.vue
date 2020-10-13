@@ -72,6 +72,7 @@
         <el-form-item>
           <el-button @click="getDataList()">查询</el-button>
           <el-button type="primary" @click="addOrUpdateHandle()" v-if="isAuth('exp:exporder:edit')">新增</el-button>
+          <el-button type="warning" @click="doExport()" v-if="isAuth('exp:exporder:print')">打印</el-button>
 <!--          <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
         </el-form-item>
       </el-form>
@@ -241,6 +242,9 @@
           }
           this.dataListLoading = false
         })
+      },
+      doExport(){
+        window.open(this.$http.adornUrl(`/exp/exporder/download?deliverDate=`+this.dataForm.deliverDate+'&status='+this.dataForm.status+'&deptId='+this.dataForm.deptId+'&settleCode='+this.dataForm.settleCode))
       },
       getOrderVo(){
         this.$http({

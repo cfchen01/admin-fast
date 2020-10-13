@@ -18,6 +18,8 @@ import com.os.modules.exp.service.ExpOrderService;
 import com.os.common.utils.PageUtils;
 import com.os.common.utils.R;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -42,6 +44,15 @@ public class ExpOrderController extends AbstractController {
         PageUtils page = expOrderService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 导出列表
+     */
+    @RequestMapping("/download")
+//    @RequiresPermissions("exp:exporder:list")
+    public void download(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        expOrderService.download(request, response);
     }
 
     /**

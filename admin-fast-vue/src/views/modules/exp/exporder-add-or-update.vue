@@ -16,9 +16,9 @@
       <van-calendar v-model="showCalendar" @confirm="onConfirm" :show-confirm="false" :min-date="minDate" :disabled="isView"/>
       <van-field v-model="dataForm.ordCode" label="订单码" placeholder="订单码（选填）" :maxlength="11" :readonly="isView"/>
       <van-cell-group title="货物信息">
-        <van-field name="div"  label="发货地址" placeholder="发货地点" required :rules="[{ validator: deptValidator, message: '请选择发货地址' }]">
+        <van-field name="div"  label="收货地址" placeholder="发货地点" required :rules="[{ validator: deptValidator, message: '请选择发货地址' }]">
           <template #input>
-            <el-select v-model="dataForm.deptId" placeholder="请选择发货地点" size="mini" :disabled="isView">
+            <el-select v-model="dataForm.deptId" placeholder="请选择收货地点" size="mini" :disabled="isView">
               <el-option
                       v-for="item in orderVo.deptList"
                       :key="item.id"
@@ -28,18 +28,7 @@
             </el-select>
           </template>
         </van-field>
-        <van-field name="div"  label="货物名称" placeholder="货物名称" required :rules="[{ validator: goodsValidator, message: '请选择货物名称' }]">
-          <template #input>
-            <el-select v-model="dataForm.goodsId" placeholder="请选择货物名称" size="mini" :disabled="isView">
-              <el-option
-                      v-for="item in orderVo.goodsList"
-                      :key="item.id"
-                      :label="item.goodsName"
-                      :value="item.id">
-              </el-option>
-            </el-select>
-          </template>
-        </van-field>
+        <van-field v-model="dataForm.goodsName" label="货物名称" required :rules="[{ required: true, message: '请填写货物名称' }]" placeholder="货物名称（必填）" :maxlength="50" :readonly="isView"/>
         <van-field name="div"  label="包装" placeholder="包装" required :rules="[{ validator: packingValidator, message: '请选择包装' }]">
           <template #input>
             <el-select v-model="dataForm.packingId" placeholder="请选择包装" size="mini" :disabled="isView">
@@ -162,7 +151,7 @@
           id: 0,
           deptId: '',
           ordCode: '',
-          goodsId: '',
+          goodsName: '',
           ordNum: '',
           packingId: '',
           freight: '',
@@ -211,12 +200,6 @@
       },
       deptValidator(value){
         if (this.dataForm.deptId) {
-          return true
-        }
-        return false
-      },
-      goodsValidator(value){
-        if (this.dataForm.goodsId) {
           return true
         }
         return false

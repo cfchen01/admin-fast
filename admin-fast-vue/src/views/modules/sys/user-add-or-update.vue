@@ -68,12 +68,12 @@
           <el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
         </el-form-item>
         <el-form-item label="角色" size="mini" prop="roleIdList">
-          <el-radio-group v-model="dataForm.roleId" @change="onChange">
+          <el-radio-group v-model="dataForm.roleId" @change="onChange" :disabled="this.dataForm.id != 0">
             <el-radio :label="item.roleId" v-for="item in roleList">{{ item.roleName }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="网点" size="mini" prop="deptList" v-if="dataForm.roleId == 3">
-          <el-radio-group v-model="dataForm.deptId">
+          <el-radio-group v-model="dataForm.deptId" :disabled="this.dataForm.id != 0">
             <el-radio :label="item.id" v-for="item in deptList">{{ item.deptName }}</el-radio>
           </el-radio-group>
         </el-form-item>

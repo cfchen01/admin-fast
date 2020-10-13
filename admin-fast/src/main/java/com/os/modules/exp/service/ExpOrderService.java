@@ -7,6 +7,8 @@ import com.os.modules.exp.entity.ExpUserMoneyEntity;
 import com.os.modules.exp.vo.OrderObjVo;
 import io.swagger.models.auth.In;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -19,6 +21,8 @@ import java.util.Map;
 public interface ExpOrderService extends IService<ExpOrderEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void download(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
     ExpOrderEntity getDetailById(String id);
 
