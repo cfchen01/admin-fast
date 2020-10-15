@@ -62,6 +62,7 @@ public class ExpOrderController extends AbstractController {
 //    @RequiresPermissions("exp:exporder:list")
     public R resume(@RequestParam Map<String, Object> params){
         params.put("status", 1);
+        params.put("settleCode", "TF");
         Integer value1 = expOrderService.getResume(params);
         params.put("status", 0);
         Integer value2 = expOrderService.getResume(params);

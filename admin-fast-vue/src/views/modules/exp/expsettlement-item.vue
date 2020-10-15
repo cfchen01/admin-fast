@@ -158,15 +158,17 @@
                     </van-grid>
                 </el-col>
             </el-row>
-            <el-row style="margin: 20px;text-align: center" v-if="dataForm.status == 0">
-                <el-button type="danger" @click="dataFormSubmit">结算提交</el-button>
-            </el-row>
-            <el-row  style="margin: 20px;text-align: center" v-else>
-                <el-button type="success" disabled @click="dataFormSubmit">账单已结算</el-button>
-            </el-row>
         </div>
         <div style="margin-top: 60px" v-else>
             <van-empty image="error" description="当前无订单" />
+        </div>
+        <div>
+            <el-row  style="margin: 20px;text-align: center" v-if="dataForm.status == 1">
+                <el-button type="success" disabled @click="dataFormSubmit">账单已结算</el-button>
+            </el-row>
+            <el-row style="margin: 20px;text-align: center" v-else>
+                <el-button type="danger" @click="dataFormSubmit">结算提交</el-button>
+            </el-row>
         </div>
         <ExporderList v-if="exporderListShow" ref="exporderList"></ExporderList>
     </div>
@@ -203,7 +205,7 @@
                         if (time.getTime() > Date.now()) {
                             return  true
                         }
-                        if (time.getTime() < new Date('2020-09-01').getTime()) {
+                        if (time.getTime() < new Date('2020-10-01').getTime()) {
                             return  true
                         }
                         return false
@@ -390,7 +392,7 @@
                                 }
                             })
                         } else {
-                            this.$message.error(data.msg)
+                            this.$alert(data.msg, '系统提示', {});
                         }
                     })
                 }).catch(() => {})

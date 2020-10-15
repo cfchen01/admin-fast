@@ -35,4 +35,6 @@ public interface ExpOrderDao extends BaseMapper<ExpOrderEntity> {
      */
     OrderResumeVo getOrderResume(SettleDto settleDto);
 
+    List<ExpOrderEntity> checkDeptOrd(@Param("deliverDate") String deliverDate);
+
 }

@@ -1,6 +1,6 @@
 <template>
     <div v-if="settlementItemShow">
-        <ExpsettlementItem ref="expsettlementItem" @closeItem="settlementItemShow = false"></ExpsettlementItem>
+        <ExpsettlementItem ref="expsettlementItem" @closeItem="closeItem"></ExpsettlementItem>
     </div>
     <div v-else>
         <van-tabs @click="handleClick">
@@ -208,7 +208,7 @@
                         if (time.getTime() > Date.now()) {
                             return  true
                         }
-                        if (time.getTime() < new Date('2020-09-01').getTime()) {
+                        if (time.getTime() < new Date('2020-10-01').getTime()) {
                             return  true
                         }
                         return false
@@ -233,7 +233,7 @@
         },
         methods: {
             getComSettle(){
-                this.onLoading = true
+
                 var keyword = this.deliverDate
                 if (this.curTab) {
                     keyword = this.deliverMonth
@@ -253,6 +253,7 @@
                 this.getDeptSettle();
             },
             getDeptSettle(){
+                this.onLoading = true
                 var keyword = this.deliverDate
                 if (this.curTab) {
                     keyword = this.deliverMonth
@@ -295,7 +296,7 @@
                                 }
                             })
                         } else {
-                            this.$message.error(data.msg)
+                            this.$alert(data.msg, '系统提示', {});
                         }
                     })
                 }).catch(() => {})
@@ -366,6 +367,10 @@
                 this.$nextTick(() => {
                     this.$refs.expsettlementItem.init(this.deliverDate, item.deptId)
                 })
+            },
+            closeItem(){
+                this.settlementItemShow = false;
+                this.getDeptSettle();
             }
         }
     }

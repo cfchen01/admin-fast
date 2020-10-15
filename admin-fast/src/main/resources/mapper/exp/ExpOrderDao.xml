@@ -111,5 +111,24 @@
         GROUP BY eo.deliver_date
     </select>
 
+    <select id="checkDeptOrd" resultMap="expOrderMap">
+        SELECT
+            *
+        FROM
+            exp_order eo
+        WHERE
+            eo.deliver_date = #{deliverDate}
+        AND eo.`status` IN (0, 1)
+        AND eo.dept_id IN (
+            SELECT
+                edd.dept_id
+            FROM
+                exp_dep_day_settle edd
+            WHERE
+                edd.deliver_date = #{deliverDate}
+            AND edd.`status` = 0
+            )
+    </select>
+
 
 </mapper>

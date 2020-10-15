@@ -1,6 +1,7 @@
 package com.os.modules.exp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.os.common.enums.OrderStatusEnum;
 import com.os.common.enums.SettleStatusEnum;
 import com.os.common.exception.RRException;
 import com.os.modules.exp.dao.ExpOrderDao;
@@ -169,7 +170,6 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
                 .in(ExpOrderEntity::getStatus, Arrays.asList(0, 1)).list();
 
         if (CollectionUtils.isEmpty(list)) {
-            expDepDaySettleEntity = new ExpDepDaySettleEntity();
             expDepDaySettleEntity.setIsNull(true);
             return expDepDaySettleEntity;
         }
@@ -257,12 +257,6 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         expDepDaySettleEntity.setPaidMoney(paidMoney);
         expDepDaySettleEntity.setPaidMoneyIn(paidMoneyIn);
 
-        try {
-            expDepDaySettleEntity.setCanSubmit(this.checkSettle(expDepDaySettleEntity.getId()));
-        } catch (Exception e){
-
-        }
-
         return expDepDaySettleEntity;
     }
 
@@ -271,6 +265,14 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         if (checkSettle(id)) {
             ExpDepDaySettleEntity expDepDaySettleEntity = this.getById(id);
             expDepDaySettleEntity.setStatus(SettleStatusEnum.STATUS_PASS.getCode());
+            //根据日期和网点di获取网点运费
+            SettleDto param = new SettleDto();
+            param.setDeliverDate(expDepDaySettleEntity.getDeliverDate().toString());
+            param.setDeptId(expDepDaySettleEntity.getDeptId());
+            OrderResumeVo orderResumeVo = expOrderDao.getOrderResume(param);
+            if (orderResumeVo != null) {
+                expDepDaySettleEntity.setIncome(MapUtils.oint(orderResumeVo.getFreight()));
+            }
             this.updateById(expDepDaySettleEntity);
         }
         return false;
@@ -292,10 +294,12 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
             throw new RRException("只允许结算今日之前的时间");
         }
 
-        ExpOrderEntity expOrderEntity = expOrderService.lambdaQuery().eq(ExpOrderEntity::getDeliverDate, expDepDaySettleEntity.getDeliverDate())
-                .eq(ExpOrderEntity::getDeptId, expDepDaySettleEntity.getDeptId()).one();
+        List<ExpOrderEntity> entityList = expOrderService.lambdaQuery()
+                .eq(ExpOrderEntity::getDeliverDate, expDepDaySettleEntity.getDeliverDate())
+                .eq(ExpOrderEntity::getDeptId, expDepDaySettleEntity.getDeptId())
+                .eq(ExpOrderEntity::getStatus, OrderStatusEnum.STATUS_NONE.getCode()).list();
 
-        if (expOrderEntity != null) {
+        if (!CollectionUtils.isEmpty(entityList)) {
             throw new RRException("当日网点订单尚未确认完，不允许结算");
         }
 

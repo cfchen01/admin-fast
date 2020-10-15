@@ -97,8 +97,8 @@
         showMonthPicker:false,
         deliverMonth: new Date().format('yyyy-MM'),
         deliverDate: new Date().format('yyyy-MM-dd'),
-        minDate: new Date('2020-09-01'),
-        minDateMonth: new Date('2020-09-01'),
+        minDate: new Date('2020-10-01'),
+        minDateMonth: new Date('2020-10-01'),
         maxDate: new Date(),
         maxDateMonth: new Date(),
         dataForm: {

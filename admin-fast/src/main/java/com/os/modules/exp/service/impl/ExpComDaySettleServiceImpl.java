@@ -10,6 +10,7 @@ import com.os.modules.exp.dto.SettleDto;
 import com.os.modules.exp.entity.*;
 import com.os.modules.exp.service.*;
 import com.os.modules.exp.vo.OrderResumeVo;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -215,9 +216,12 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
 //            throw new RRException("当日垫费尚未收齐，不允许结算");
 //        }
 
-        ExpDepDaySettleEntity expDepDaySettleEntity = expDepDaySettleService.lambdaQuery().eq(ExpDepDaySettleEntity::getDeliverDate, expComDaySettleEntity.getDeliverDate())
-                .eq(ExpDepDaySettleEntity::getStatus, SettleStatusEnum.STATUS_NONE.getCode()).one();
-        if (expDepDaySettleEntity != null ) {
+//        List<ExpOrderEntity> entityList = expOrderDao.checkDeptOrd(expComDaySettleEntity.getDeliverDate().toString());
+
+
+        List<ExpDepDaySettleEntity> entityList = expDepDaySettleService.lambdaQuery().eq(ExpDepDaySettleEntity::getDeliverDate, expComDaySettleEntity.getDeliverDate())
+                .eq(ExpDepDaySettleEntity::getStatus, SettleStatusEnum.STATUS_NONE.getCode()).list();
+        if (!CollectionUtils.isEmpty(entityList)) {
             throw new RRException("当日网点尚未结算完，不允许结算");
         }
         return true;

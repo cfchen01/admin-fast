@@ -34,8 +34,8 @@
                 <van-tag plain v-else="item.status == 3" type="danger">作废</van-tag>
               </span>
             <span style="float: right" v-if="isAuth('exp:exporder:status')">
-                <van-button size="mini" type="danger" :disabled="item.status != 0" @click="updateStatus(item.id, 2)">返单</van-button>
-                <van-button size="mini" type="info" :disabled="item.status != 0" @click="updateStatus(item.id, 1)">确认</van-button>
+                <van-button size="mini" type="danger" :disabled="item.status != 0" style="margin-right: 10px" @click="updateStatus(item.id, 2)">返单</van-button>
+                <van-button size="small" type="info" :disabled="item.status != 0" @click="updateStatus(item.id, 1)">确认</van-button>
               </span>
           </div>
         </template>

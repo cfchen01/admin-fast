@@ -66,7 +66,7 @@
             <span>无</span>
           </template>
           <template v-else #input>
-            <van-uploader v-model="uploader" :max-count="3"
+            <van-uploader v-model="uploader"
                           :after-read="uploadImg"
                           :before-delete="beforeDelete"
                           :max-size="2 * 1024 * 1024"
