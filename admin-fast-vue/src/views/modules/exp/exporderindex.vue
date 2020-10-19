@@ -1,7 +1,8 @@
 <template>
   <div class="ord-index">
     <div v-if="_isMobile()">
-      <van-cell :value="dataForm.deliverDate" />
+      <van-cell v-if="dataList.length > 0 && dataForm.deliverDate.length == 10" :title="dataForm.deliverDate" :value="'网总：￥'+resumeTotal"/>
+      <van-cell v-else :title="dataForm.deliverDate"/>
       <ExporderCard :dataList="dataList" @updateStatus="updateStatus" @addOrUpdateHandle="addOrUpdateHandle" @viewHandle="viewHandle"></ExporderCard>
       <van-empty v-if="dataList.length == 0" description="暂无记录"></van-empty>
       <van-pagination
@@ -13,7 +14,7 @@
               force-ellipses
               @change="currentChangeHandle"
       />
-      <van-grid v-if="isAuth('exp:exporder:resume') && dataList.length > 0" clickable :column-num="3">
+      <van-grid v-if="isAuth('exp:exporder:resume') && dataList.length > 0 && dataForm.deliverDate.length == 10" clickable :column-num="3">
         <van-grid-item>
           <span slots="icon" style="color: green">￥{{resumeN}}</span>
           <span slots="text" style="font-size: 12px">当天未收费用</span>
@@ -191,7 +192,8 @@
           deptList:[]
         },
         resumeY:0,
-        resumeN:0
+        resumeN:0,
+        resumeTotal:0
       }
     },
     components: {
@@ -266,6 +268,7 @@
           if (data && data.code === 0) {
             this.resumeY = data.value1
             this.resumeN = data.value2
+            this.resumeTotal = data.total
           }
         })
       },
