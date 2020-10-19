@@ -3,7 +3,9 @@ package com.os.modules.exp.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.os.common.utils.MapUtils;
 import com.os.modules.exp.vo.OrderObjVo;
+import com.os.modules.exp.vo.OrderResumeVo;
 import com.os.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +63,28 @@ public class ExpOrderController extends AbstractController {
     @RequestMapping("/resume")
 //    @RequiresPermissions("exp:exporder:list")
     public R resume(@RequestParam Map<String, Object> params){
+        OrderResumeVo orderResumeVo = expOrderService.getResume(params);
+
         params.put("status", 1);
         params.put("settleCode", "TF");
-        Integer value1 = expOrderService.getResume(params);
+        OrderResumeVo orderResumeVo1 = expOrderService.getResume(params);
         params.put("status", 0);
-        Integer value2 = expOrderService.getResume(params);
+        OrderResumeVo orderResumeVo2 = expOrderService.getResume(params);
+        Integer total = 0;
+        Integer value1 = 0;
+        Integer value2 = 0;
 
-        return R.ok().put("value1", value1).put("value2", value2);
+        if (orderResumeVo != null) {
+            total = MapUtils.oint(orderResumeVo.getFreight());
+        }
+        if (orderResumeVo1 != null) {
+            value1 = MapUtils.oint(orderResumeVo1.getAdvance()) + MapUtils.oint(orderResumeVo1.getFreight());
+        }
+        if (orderResumeVo2 != null) {
+            value2 = MapUtils.oint(orderResumeVo2.getAdvance()) + MapUtils.oint(orderResumeVo2.getFreight());
+        }
+
+        return R.ok().put("total", total).put("value1", value1).put("value2", value2);
     }
 
 

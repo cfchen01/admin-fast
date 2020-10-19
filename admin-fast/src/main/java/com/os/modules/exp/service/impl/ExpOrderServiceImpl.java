@@ -285,11 +285,11 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
     }
 
     @Override
-    public Integer getResume(Map<String, Object> params) {
+    public OrderResumeVo getResume(Map<String, Object> params) {
         String deliverDate = MapUtils.mstr(params, "deliverDate");
         //日期是月不查询
         if (StringUtils.isNotEmpty(deliverDate) && deliverDate.length()<10) {
-            return 0;
+            return null;
         }
         SettleDto settleDto = new SettleDto();
         settleDto.setDeliverDate(deliverDate);
@@ -306,10 +306,7 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
         }
 
         OrderResumeVo vo = baseMapper.getOrderResume(settleDto);
-        if (vo == null) {
-            return 0;
-        }
-        return MapUtils.oint(vo.getAdvance()) + MapUtils.oint(vo.getFreight());
+        return vo;
     }
 
     private String convertStatus(Integer status){

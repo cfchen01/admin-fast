@@ -11,7 +11,7 @@
           <div>
             <span>订单号：{{item.id}}</span>
             <span style="margin-left: 20px">{{item.settleName}}</span>
-            <span style="float: right">{{item.receiver + '/' + item.receiverTel}}</span>
+            <span style="float: right">{{item.ordCode + '/' + item.receiverTel}}</span>
           </div>
         </template>
         <template #num>
@@ -33,7 +33,7 @@
                 <van-tag plain v-else-if="item.status == 2" type="danger">返单</van-tag>
                 <van-tag plain v-else="item.status == 3" type="danger">作废</van-tag>
               </span>
-            <span style="margin-left: 10px;">{{item.ordCode || '无'}}</span>
+            <span style="margin-left: 10px;">{{item.receiver}}</span>
             <span style="float: right" v-if="isAuth('exp:exporder:status')">
                 <van-button size="mini" type="danger" :disabled="item.status != 0" style="margin-right: 10px" @click="updateStatus(item.id, 2)">返单</van-button>
                 <van-button size="small" type="info" :disabled="item.status != 0" @click="updateStatus(item.id, 1)">确认</van-button>

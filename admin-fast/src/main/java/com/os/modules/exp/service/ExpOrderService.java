@@ -5,6 +5,7 @@ import com.os.common.utils.PageUtils;
 import com.os.modules.exp.entity.ExpOrderEntity;
 import com.os.modules.exp.entity.ExpUserMoneyEntity;
 import com.os.modules.exp.vo.OrderObjVo;
+import com.os.modules.exp.vo.OrderResumeVo;
 import io.swagger.models.auth.In;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public interface ExpOrderService extends IService<ExpOrderEntity> {
 
     Boolean updateStatus(Map<String, Object> params);
 
-    Integer getResume(Map<String, Object> params);
+    OrderResumeVo getResume(Map<String, Object> params);
 
 
 }
