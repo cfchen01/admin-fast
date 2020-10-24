@@ -255,12 +255,24 @@ public class ExpComDaySettleServiceImpl extends ServiceImpl<ExpComDaySettleDao, 
             advanceIn = MapUtils.oint(map.getAdvanceIn());
         }
 
+        settleDto.setSettleCode("HD");
+        OrderResumeVo hd = expOrderDao.getOrderResume(settleDto);
+        Integer receipt = 0;
+        if (Objects.nonNull(hd)) {
+            receipt = MapUtils.oint(hd.getFreight());
+        }
+
         expComDaySettleEntity.setComDelivery(delivery);
         expComDaySettleEntity.setComAdvance(advance);
         expComDaySettleEntity.setFreightIncome(freight);
         expComDaySettleEntity.setTotalExpenses(expComDaySettleEntity.getDailyExpenses() + advanceNot);
         expComDaySettleEntity.setTotalIncome(freight + advanceIn);
         expComDaySettleEntity.setProfit(expComDaySettleEntity.getTotalIncome() - expComDaySettleEntity.getTotalExpenses());
+
+
+
+        expComDaySettleEntity.setComReceipt(receipt);
+
         return expComDaySettleEntity;
     }
 }

@@ -158,6 +158,33 @@
                     </van-grid>
                 </el-col>
             </el-row>
+            <el-divider content-position="left">回单订单</el-divider>
+            <el-row style="margin: 10px 0;" :gutter="20">
+                <el-col :span="4" style="text-align: center">
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item  @click="showExpOdrList('HD')">
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.receiptMoney}}</span>
+                            <span slots="text" style="padding: 5px">回单订单总费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item @click="showExpOdrList('HD', 1)">
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{dataForm.receiptMoneyIn}}</span>
+                            <span slots="text" style="padding: 5px">回单订单已收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item @click="showExpOdrList('HD', 0)">
+                            <span slots="icon" style="font-size: 18px; padding: 5px;">￥{{Number(dataForm.receiptMoney)-Number(dataForm.receiptMoneyIn)}}</span>
+                            <span slots="text" style="padding: 5px">回单订单未收费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
+            </el-row>
         </div>
         <div style="margin-top: 60px" v-else>
             <van-empty image="error" description="当前无订单" />
@@ -192,6 +219,8 @@
                     deliverDate: '',
                     monthMoney: '',
                     monthMoneyIn: '',
+                    receiptMoney: '',
+                    receiptMoneyIn: '',
                     income: '',
                     userId: '',
                     status: '',
@@ -251,6 +280,8 @@
                         this.dataForm.deliverDate = data.expDepDaySettle.deliverDate
                         this.dataForm.monthMoney = data.expDepDaySettle.monthMoney
                         this.dataForm.monthMoneyIn = data.expDepDaySettle.monthMoneyIn
+                        this.dataForm.receiptMoney = data.expDepDaySettle.receiptMoney
+                        this.dataForm.receiptMoneyIn = data.expDepDaySettle.receiptMoneyIn
                         this.dataForm.income = data.expDepDaySettle.income
                         this.dataForm.userId = data.expDepDaySettle.userId
                         this.dataForm.status = data.expDepDaySettle.status

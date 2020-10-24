@@ -73,6 +73,8 @@ public class ExpDepDaySettleEntity implements Serializable {
 	/**
 	 * 网点收入(运费)
 	 */
+	private Integer receiptMoney;
+	private Integer receiptMoneyIn;
 	private Integer income;
 	/**
 	 * 结算人

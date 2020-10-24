@@ -10,6 +10,7 @@
         <result property="freightIncome" column="freight_income"/>
         <result property="comAdvance" column="com_advance"/>
         <result property="comDelivery" column="com_delivery"/>
+        <result property="comReceipt" column="com_receipt"/>
         <result property="totalExpenses" column="total_expenses"/>
         <result property="totalIncome" column="total_income"/>
         <result property="profit" column="profit"/>
@@ -26,6 +27,7 @@
             SUM(ecd.com_delivery) com_delivery ,
             SUM(ecd.total_expenses) total_expenses,
             SUM(ecd.total_income) total_income,
+            SUM(ecd.com_receipt) com_receipt,
             SUM(ecd.profit) profit,
             ecd.status,
             ecd.deliver_month

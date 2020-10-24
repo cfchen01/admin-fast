@@ -42,6 +42,7 @@ public class ExpComDaySettleEntity implements Serializable {
 	 * 公司送货费
 	 */
 	private Integer comDelivery;
+	private Integer comReceipt;
 	/**
 	 * 总支出
 	 */

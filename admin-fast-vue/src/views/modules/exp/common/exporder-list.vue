@@ -1,13 +1,14 @@
 <template>
   <el-dialog
-          :title="'订单列表 时间：' + this.dataForm.deliverDate"
+          :title="'订单列表 时间：' + dataForm.deliverDate + '   费用合计：'+ totalMoney"
           width="60%"
           :visible.sync="visible">
-    <el-form :inline="true" @keyup.enter.native="getDataList()">
+    <el-form :inline="true" @keyup.enter.native="queryList">
       <el-form-item>
         <div class="block">
-          <el-select v-model="dataForm.deptId" placeholder="网点" clearable>
-            <el-option v-for="item in deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
+          <el-select v-model="dataForm.settleCode" placeholder="请选择结算方式" clearable>
+            <el-option v-for="item in orderVo.settleList" :key="item.settleCode" :label="item.settleName" :value="item.settleCode">
+            </el-option>
           </el-select>
         </div>
       </el-form-item>
@@ -19,7 +20,14 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button @click="getDataList()">查询</el-button>
+        <div class="block">
+          <el-select v-model="dataForm.deptId" placeholder="网点" clearable>
+            <el-option v-for="item in orderVo.deptList" :label="item.deptName" :value="item.id">{{item.deptName}}</el-option>
+          </el-select>
+        </div>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="queryList()">查询</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -123,13 +131,17 @@
         pageSize: 10,
         totalPage: 0,
         dataListLoading: false,
-        deptList:[],
+        orderVo:{
+          settleList:[],
+          deptList:[]
+        },
         userList:[],
-        visible:false
+        visible:false,
+        totalMoney:0
       }
     },
     created(){
-        this.getDeptList();
+        this.getOrderVo();
         this.getUserList();
     },
     methods: {
@@ -145,6 +157,11 @@
         this.pageSize = 10;
         this.totalPage = 0;
         this.getDataList();
+        this.getSubResume();
+      },
+      queryList(){
+        this.getDataList();
+        this.getSubResume();
       },
       // 获取数据列表
       getDataList () {
@@ -173,16 +190,34 @@
           this.dataListLoading = false
         })
       },
-      getDeptList () {
+      getSubResume () {
         this.$http({
-          url: this.$http.adornUrl('/exp/expdepartment/all'),
+          url: this.$http.adornUrl('/exp/exporder/sub/resume'),
           method: 'get',
-          params: this.$http.adornParams({})
+          params: this.$http.adornParams({
+            'deptId': this.dataForm.deptId,
+            'deliverDate': this.dataForm.deliverDate,
+            'userId': this.dataForm.userId,
+            'settleCode': this.dataForm.settleCode,
+            'status': this.dataForm.status,
+            'moneyType': this.dataForm.moneyType
+          })
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.deptList = data.list
+            this.totalMoney = data.total
           } else {
-            this.deptList = []
+            this.totalMoney = 0
+          }
+        })
+      },
+      getOrderVo(){
+        this.$http({
+          url: this.$http.adornUrl(`/exp/exporder/orderVo`),
+          method: 'get',
+          params: this.$http.adornParams()
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+            this.orderVo = data.orderObjVo
           }
         })
       },

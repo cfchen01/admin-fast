@@ -109,6 +109,14 @@
                         </van-grid-item>
                     </van-grid>
                 </el-col>
+                <el-col :span="4" style="text-align: center">
+                    <van-grid clickable :border="false" :column-num="1">
+                        <van-grid-item @click="showExpOdrList('freight')">
+                            <span slots="icon" style="font-size: 18px; padding: 5px; color: red">￥+{{dataForm.comReceipt}}</span>
+                            <span slots="text" style="padding: 5px">回单费用</span>
+                        </van-grid-item>
+                    </van-grid>
+                </el-col>
             </el-row>
             <div v-if="deptFreihtList.length > 0">
                 <el-row><span style="margin-left: 20px; color: #cccccc">网点运费收入</span></el-row>
@@ -188,6 +196,7 @@
                     freightIncome: '',
                     comAdvance: '',
                     comDelivery: '',
+                    comReceipt: '',
                     totalExpenses: '',
                     totalIncome: '',
                     profit: '',

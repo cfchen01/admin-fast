@@ -87,6 +87,29 @@ public class ExpOrderController extends AbstractController {
         return R.ok().put("total", total).put("value1", value1).put("value2", value2);
     }
 
+    /**
+     * 列表
+     */
+    @RequestMapping("/sub/resume")
+//    @RequiresPermissions("exp:exporder:list")
+    public R subResume(@RequestParam Map<String, Object> params){
+        OrderResumeVo orderResumeVo = expOrderService.getResume(params);
+
+        Integer total = 0;
+        String moneyType = MapUtils.mstr(params, "moneyType");
+        if (orderResumeVo != null) {
+            if ("freight".equals(moneyType)) {
+                total = MapUtils.oint(orderResumeVo.getFreight());
+            } else if ("advance".equals(moneyType)) {
+                total = MapUtils.oint(orderResumeVo.getAdvance());
+            } else if ("delivery".equals(moneyType)) {
+                total = MapUtils.oint(orderResumeVo.getDelivery());
+            }
+
+        }
+        return R.ok().put("total", total);
+    }
+
 
     /**
      * 信息

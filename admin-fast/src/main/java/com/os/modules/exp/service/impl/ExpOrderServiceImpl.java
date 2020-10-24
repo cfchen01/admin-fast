@@ -110,17 +110,17 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
 
         List<String> heads = new ArrayList<String>();
         heads.add("订单号");
-        heads.add("收货人");
+        heads.add("订单码");
         heads.add("收货人电话");
         heads.add("货物名称");
         heads.add("件数");
         heads.add("包装");
         heads.add("订单类型");
-        heads.add("订单状态");
         heads.add("运费");
         heads.add("垫费");
         heads.add("送货费");
         heads.add("备注");
+        heads.add("客户签名");
         String condition = "";
         String name = "["+deliverDate+"]-货物订单";
         if (expDepartmentEntity != null) {
@@ -140,17 +140,17 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
             list = expOrderEntityList.stream().map(x -> {
                 Map<String, Object> map = new HashMap<>();
                 map.put("订单号", x.getId());
-                map.put("收货人", x.getReceiver());
+                map.put("订单码", x.getOrdCode());
                 map.put("收货人电话", x.getReceiverTel());
                 map.put("货物名称", x.getGoodsName());
                 map.put("件数", x.getOrdNum());
                 map.put("包装", x.getPackingName());
                 map.put("订单类型", x.getSettleName());
-                map.put("订单状态", convertStatus(x.getStatus()));
                 map.put("运费", x.getFreight());
                 map.put("垫费", x.getAdvance());
                 map.put("送货费", x.getDelivery());
                 map.put("备注", x.getRemark());
+                map.put("客户签名", "");
                 return map;
             }).collect(toList());
         }
@@ -303,6 +303,12 @@ public class ExpOrderServiceImpl extends ServiceImpl<ExpOrderDao, ExpOrderEntity
         //业务员只能查看自己的订单
         if (5 == entity.getRoleId()) {
             settleDto.setUserId(entity.getUserId());
+        }
+        if (4 == entity.getRoleId()) {
+            String userId = MapUtils.mstr(params, "userId");
+            if (!StringUtils.isEmpty(userId)) {
+                settleDto.setUserId(Long.parseLong(userId));
+            }
         }
 
         OrderResumeVo vo = baseMapper.getOrderResume(settleDto);

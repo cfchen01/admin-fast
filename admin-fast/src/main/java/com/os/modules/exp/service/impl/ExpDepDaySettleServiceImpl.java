@@ -203,6 +203,16 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         paramTF.setStatus(1);
         OrderResumeVo  mapTFIn = expOrderDao.getOrderResume(paramTF);
 
+        //获取回单订单总费用
+        SettleDto paramHD = new SettleDto();
+        BeanUtils.copyProperties(settleDto, paramHD);
+        paramHD.setSettleCode("HD");
+        OrderResumeVo  mapHDAll = expOrderDao.getOrderResume(paramHD);
+
+        //获取提付订单已收费用
+        paramHD.setStatus(1);
+        OrderResumeVo  mapHDIn = expOrderDao.getOrderResume(paramHD);
+
 
         //已付订单总费用(运费加送货费)
         Integer paidMoney = 0;
@@ -216,6 +226,10 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         Integer monthMoney = 0;
         //月结订单已收费用(已确认的订单总费用)
         Integer monthMoneyIn = 0;
+        //回单订单总费用(运费加送货费)
+        Integer receiptMoney = 0;
+        //回单订单已收费用(已确认的订单总费用)
+        Integer receiptMoneyIn = 0;
 
         if (Objects.nonNull(mapYF)) {
             Integer freight = MapUtils.oint(mapYF.getFreight());
@@ -247,6 +261,14 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
             Integer advance = MapUtils.oint(mapTFIn.getAdvance());
             advanceIn = MapUtils.oint(freight + advance);
         }
+        if (Objects.nonNull(mapHDAll)) {
+            Integer freight = MapUtils.oint(mapHDAll.getFreight());
+            receiptMoney = freight;
+        }
+        if (Objects.nonNull(mapHDIn)) {
+            Integer freight = MapUtils.oint(mapHDIn.getFreight());
+            receiptMoneyIn = freight;
+        }
         //提付订单
         expDepDaySettleEntity.setArrivalMoney(arrivalMoney);
         expDepDaySettleEntity.setArrivalMoneyIn(advanceIn);
@@ -256,6 +278,9 @@ public class ExpDepDaySettleServiceImpl extends ServiceImpl<ExpDepDaySettleDao, 
         //已付订单
         expDepDaySettleEntity.setPaidMoney(paidMoney);
         expDepDaySettleEntity.setPaidMoneyIn(paidMoneyIn);
+        //回单订单
+        expDepDaySettleEntity.setReceiptMoney(receiptMoney);
+        expDepDaySettleEntity.setReceiptMoneyIn(receiptMoneyIn);
 
         return expDepDaySettleEntity;
     }

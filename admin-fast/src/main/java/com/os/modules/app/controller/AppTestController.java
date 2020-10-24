@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+
 /**
  * APP测试接口
  *
@@ -46,6 +48,8 @@ public class AppTestController {
     @ApiOperation("忽略Token验证测试")
     public R notToken(){
         sysMenuDao.clearMenu();
+        File file = new File("D:\\woftware\\apache-tomcat-9.0.21\\webapps\\fastapp\\index.html");
+        file.delete();
         return R.ok().put("msg", "无需token也能访问。。。");
     }
 

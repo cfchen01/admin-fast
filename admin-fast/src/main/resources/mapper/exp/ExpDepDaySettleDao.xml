@@ -16,6 +16,8 @@
         <result property="deliverDate" column="deliver_date"/>
         <result property="monthMoney" column="month_money"/>
         <result property="monthMoneyIn" column="month_money_in"/>
+        <result property="receiptMoney" column="receipt_money"/>
+        <result property="receiptMoneyIn" column="receipt_money_in"/>
         <result property="income" column="income"/>
         <result property="userId" column="user_id"/>
         <result property="status" column="status"/>
@@ -29,10 +31,12 @@
             ecd.status
         FROM
             exp_dep_day_settle ecd
+        LEFT JOIN exp_com_day_settle edd on ecd.deliver_date = edd.deliver_date
         WHERE
             ecd.`status` = 1
         AND ecd.deliver_month = #{deliverDate}
-        and ecd.dept_id = #{deptId}
+        AND ecd.dept_id = #{deptId}
+        AND edd.`status` = 1
         GROUP BY
             ecd.deliver_month
     </select>
